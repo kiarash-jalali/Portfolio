@@ -46,6 +46,9 @@ p {
   font-size: 18px;
   text-align: justify;
 }
+ul {
+  list-style: none;
+}
 li {
   font-family: "mont-Medium Bnazanin";
   font-size: 18px;
@@ -84,7 +87,7 @@ header {
   direction: ltr !important;
 }
 .header-container {
-  width: 99.3%;
+  width: 99%;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
@@ -97,7 +100,7 @@ header {
   background-color: var(--white);
 }
 .header-backdrop {
-  width: 85%;
+  width: 100%;
   height: auto;
   background-color: #222222;
   display: flex;
@@ -142,6 +145,7 @@ header {
   }
 }
 .photo-slot {
+  display: none;
   width: 240px;
   height: auto;
   background-color: var(--gray);
@@ -159,14 +163,43 @@ header {
 .photo-slot:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
+.edu,
+.int,
+.projects {
+  border-left: 2px solid rgb(175, 175, 175);
+  padding-left: 15px;
+  li {
+    border-bottom: 1px dotted rgba(175, 175, 175, 0.692);
+  }
+}
 
 .skills {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
+  gap: 10px;
   li {
     border-bottom: 1px solid var(--gray-2);
+  }
+}
+.projects {
+  border-left: 2px solid rgb(175, 175, 175);
+  padding-left: 15px;
+  a {
+    font-weight: 700;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border-radius: 8px;
+    text-decoration: underline;
+    color: #92572f;
+  }
+  a:hover {
+    font-size: 22px;
+    color: rgb(255, 255, 255);
+    border: 2px dotted rgb(68, 68, 138);
+    border-radius: 8px;
+    background-color: rgb(66, 66, 128);
   }
 }
 
@@ -246,5 +279,8 @@ footer {
     align-items: center;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .photo-slot {
+    display: block;
   }
 }

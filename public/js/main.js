@@ -15,43 +15,125 @@ document.querySelectorAll(".card").forEach((card) => {
 
 const translations = {
   en: {
-    "header-title": "Lorem Ipsum",
-    "header-text":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euturpis molestie, dictum est a, mattis tellus.",
+    "header-title": "Kiarash Jalali",
+    "header-text": "Junior Frontend Developer.",
+    "info-header": "Contact",
+    "info-txt-1": `phone:
+              <a href="tel:+989218089883" target="_blank">+989218089883</a>`,
+    "info-txt-2": `Email:
+              <a href="mailto:kiarash11.kj@gmail.com" target="_blank"
+                >kiarash11.kj@gmail.com</a
+              >`,
+    "info-txt-3": `Telegram:
+              <a href="https://t.me/Kiarash_jal" target="_blank"
+                >@Kiarash_jal</a
+              >`,
+    "info-txt-4": `GitHub:
+              <a href="https://github.com/kiarash-jalali" target="_blank"
+                >Kiarash-jalali</a
+              >`,
     "education-title": "Education",
-    "education-txt-1": "Lorem University - B.S. in Computer Science (2020)",
-    "education-txt-2": "Ipsum College - Frontend Bootcamp (2022)",
+    "education-txt-1":
+      "Associate of Science in Chemical Engineering. AmirKabir University of Technology. (2023)",
+    "education-txt-2": " Web Development at Tehran Technical Complex.",
     "interests-title": "Interests",
-    "interests-txt-1": "Coding",
-    "interests-txt-2": "UI/UX Design",
-    "interests-txt-3": "Gaming",
-    "interests-txt-4": "Photography",
+    "interests-txt-1": "Coding.",
+    "interests-txt-2": "Gaming.",
+    "interests-txt-3": "Profesional cooking. (im a chef!)",
+    "interests-txt-4": "Writing fictional stories.",
+    "skills-title": "Skills",
+    "skills-txt-1": "HTML & CSS",
+    "skills-txt-2": "Java Script",
+    "skills-txt-3": "Git & Github",
+    "skills-txt-4": "Tailwind & bootstrap",
+    "skills-txt-5": "Learning React",
+    "skills-txt-6": "Sass",
+    "skills-txt-7": "C & Python",
+    "skills-txt-8": "Matlab & DWSim",
     "projects-title": "Projects",
-    "projects-txt-1":
-      " Project One - Lorem ipsum dolor sit amet, consectetur adipiscingelit.",
-    "projects-txt-2":
-      " Project Two - Duis aute irure dolor in reprehenderit in voluptate velit.",
-    "projects-txt-3":
-      " Project Three - Excepteur sint occaecat cupidatat non proident.",
-    copyright: "&copy; 2025 Lorem Ipsum. All rights reserved.",
+    "projects-txt-1": `<b>Golestan company</b> first page website clone: (HTML , CSS)
+              <a
+                href="https://kiarashi-coder.github.io/Golestan/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Golestan</a
+              >`,
+    "projects-txt-2": `<b>Digikala company</b> landing page clone: (HTML , CSS)
+              <a
+                href="https://kiarash-jalali.github.io/digikala/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Digikala</a
+              >`,
+    "projects-txt-3": `A <b>Color Pallet</b> generator:
+              <a
+                href="https://kiarash-jalali.github.io/color-pallet/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Color Pallet</a
+              >`,
+    "projects-txt-4": "New projects will be added here...",
+    copyright: `&copy; 2025 Kiarash Jalali.`,
   },
   فارسی: {
-    "header-title": "سلیدسبلد",
-    "header-text":
-      "ثتقا رذصخقعر دخصتثذرهصاخیذرم تیذرخصتیذ رخعصارحصدیمرتذصخعی ذرمحصیذدر مصاذتذ",
-    "education-title": "هصابذمتص دب",
-    "education-txt-1": "نتذختدحصقهبدرذخصایذزمرتصدکینئئرصیر",
-    "education-txt-2": "سثبهذحسهبیاذهتد",
-    "interests-title": "ثقتثقلت",
-    "interests-txt-1": "فتلت",
-    "interests-txt-2": "ثبشدلن",
-    "interests-txt-3": "قغسلفاشبشذ",
-    "interests-txt-4": "صقلدسلبذصفا",
-    "projects-title": "ص4ثفاسلبدقغدغد",
-    "projects-txt-1": " ثمانبقذرصهابثذصحبرذضثبجخردصبحخهغذارصخبهاحذحصثبتدذصثفقذ",
-    "projects-txt-2": " صثبکهذاصثبخعراذصحثبراضذحثقرهاضتربضثقض",
-    "projects-txt-3": " سبذهصاذرضخعثقذرحضاتردحضختیصنزد",
-    copyright: "&copy; 2025 صقدفصهاذصثبرنتصثذ",
+    "header-title": "کیارش جلالی",
+    "header-text": "Junior Frontend Developer.",
+    "info-header": "تماس",
+    "info-txt-1": `تلفن:
+              <a href="tel:+989218089883" target="_blank">+989218089883</a>`,
+    "info-txt-2": `ایمیل:
+              <a href="mailto:kiarash11.kj@gmail.com" target="_blank"
+                >kiarash11.kj@gmail.com</a
+              >`,
+    "info-txt-3": `تلگرام:
+              <a href="https://t.me/Kiarash_jal" target="_blank"
+                >@Kiarash_jal</a
+              >`,
+    "info-txt-4": `GitHub:
+              <a href="https://github.com/kiarash-jalali" target="_blank"
+                >Kiarash-jalali</a
+              >`,
+    "education-title": "تحصیلات",
+    "education-txt-1": "کاردانی مهندسی شیمی از دانشگاه صنعتی امیرکبیر تهران",
+    "education-txt-2": "دوره web development از مجتمع فنی تهران",
+    "interests-title": "علاقه مندی ها",
+    "interests-txt-1": "برنامه نوسی.",
+    "interests-txt-2": "Gaming.",
+    "interests-txt-3": "آشپزی حرفه ای",
+    "interests-txt-4": "نویسندگی و مطالعه",
+    "skills-title": "توانایی ها",
+    "skills-txt-1": "HTML & CSS",
+    "skills-txt-2": "Java Script",
+    "skills-txt-3": "Git & Github",
+    "skills-txt-4": "Tailwind & bootstrap",
+    "skills-txt-5": "Learning React",
+    "skills-txt-6": "Sass",
+    "skills-txt-7": "C & Python",
+    "skills-txt-8": "Matlab & DWSim",
+    "projects-title": "پروژه ها",
+    "projects-txt-1": `صفحه اول سایت شرکت گلستان: (HTML , CSS)
+              <a
+                href="https://kiarashi-coder.github.io/Golestan/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Golestan</a
+              >`,
+    "projects-txt-2": `صفحه اول شرکت و سایت دیجیکالا: (HTML , CSS)
+              <a
+                href="https://kiarash-jalali.github.io/digikala/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Digikala</a
+              >`,
+    "projects-txt-3": `یک سایت مخصوص تولید پلت های رنگ:
+              <a
+                href="https://kiarash-jalali.github.io/color-pallet/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Color Pallet</a
+              >`,
+    "projects-txt-4": "پروژه های بعدی قرار داده خواهد شد...",
+    copyright: `&copy; 2025 Kiarash Jalali.`,
   },
 };
 
@@ -62,16 +144,15 @@ document.getElementById("langToggle").addEventListener("click", () => {
   document.querySelector("body,html").classList.toggle("direction");
   currentLang = currentLang === "en" ? "فارسی" : "en";
   updateLanguage();
-  document.getElementById("langToggle").textContent = currentLang.toUpperCase();
-  updateLanguage();
+  document.getElementById("langToggle").innerHTML = currentLang.toUpperCase();
 });
 
 function updateLanguage() {
-  document.querySelectorAll("[data-tr]").forEach((el) => {
-    const key = el.getAttribute("data-tr");
+  document.querySelectorAll("[data-tr]").forEach((item) => {
+    const key = item.getAttribute("data-tr");
     const translation = translations[currentLang][key];
     if (translation) {
-      el.textContent = translation;
+      item.innerHTML = translation;
     }
   });
 }
