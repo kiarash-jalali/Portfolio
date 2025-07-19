@@ -49,14 +49,14 @@
             tabindex="0"
             class="menu menu-sm dropdown-content bg-black border-2 border-amber-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li><a>Me</a></li>
+            <li><a href="#info">Me</a></li>
             <li>
               <a>GO to</a>
               <ul class="p-2">
-                <li><a>Education</a></li>
-                <li><a>Interests</a></li>
-                <li><a>Skills</a></li>
-                <li><a>Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
               </ul>
             </li>
           </ul>
@@ -65,15 +65,15 @@
       </div>
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
-          <li><a>Me</a></li>
+          <li><a href="#info">Me</a></li>
           <li>
             <details>
               <summary>Go to</summary>
               <ul class="p-2 bg-black border-2 border-amber-100">
-                <li><a>Education</a></li>
-                <li><a>Interests</a></li>
-                <li><a>Skills</a></li>
-                <li><a>Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
               </ul>
             </details>
           </li>
@@ -96,7 +96,7 @@
     <header>
       <div class="header-backdrop">
         <div class="header-container">
-          <div class="intro">
+          <div class="intro" id="info">
             <h2 data-tr="header-title">HI, im Kiarash</h2>
             <p data-tr="header-text">Junior Frontend Developer.</p>
           </div>
@@ -134,7 +134,7 @@
 
     <main>
       <div class="grid md:grid-cols-2 gap-4">
-        <section class="card">
+        <section class="card" id="education">
           <h2 data-tr="education-title">Education</h2>
           <ul class="education edu">
             <li data-tr="education-txt-1">
@@ -147,7 +147,7 @@
           </ul>
         </section>
 
-        <section class="card">
+        <section class="card" id="interests">
           <h2 data-tr="interests-title">Interests</h2>
           <ul class="interests int">
             <li data-tr="interests-txt-1">Coding.</li>
@@ -158,7 +158,7 @@
         </section>
       </div>
 
-      <section class="card">
+      <section class="card" id="skills">
         <h2 data-tr="skills-title">Skills</h2>
         <ul class="skills">
           <li data-tr="skills-txt-1">HTML & CSS</li>
@@ -172,7 +172,7 @@
         </ul>
       </section>
 
-      <section>
+      <section id="projects">
         <h2 data-tr="projects-title">Projects</h2>
         <div class="projects-container grid grid-cols-2 gap-4">
           <ul class="projects">

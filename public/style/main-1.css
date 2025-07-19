@@ -43,6 +43,7 @@
 body,
 html {
   perspective: 1000px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -56,7 +57,7 @@ header {
   padding: 20px 15px;
   margin: 10 auto;
   display: flex;
-  flex-direction: row nowrap;
+  flex-flow: row nowrap;
   align-items: flex-start;
   gap: 20px;
   direction: ltr !important;
@@ -348,5 +349,15 @@ section h2 {
   }
   .photo-slot {
     display: block;
+  }
+  h2,
+  h3,
+  h4 {
+    font-family: "urban-b", "rubick-b";
+    font-weight: 800;
+    font-size: calc(2vw + 2vh + 2vmin);
+    white-space: nowrap;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--black);
   }
 }
