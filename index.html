@@ -26,11 +26,78 @@
     <link rel="manifest" href="./public/media/favicon/site.webmanifest" />
   </head>
   <body>
+    <div class="navbar shadow-sm">
+      <div class="navbar-start">
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content bg-black border-2 border-amber-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+            <li><a>Me</a></li>
+            <li>
+              <a>GO to</a>
+              <ul class="p-2">
+                <li><a>Education</a></li>
+                <li><a>Interests</a></li>
+                <li><a>Skills</a></li>
+                <li><a>Projects</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <a class="btn btn-ghost text-xl">Kiarash.J</a>
+      </div>
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1">
+          <li><a>Me</a></li>
+          <li>
+            <details>
+              <summary>Go to</summary>
+              <ul class="p-2 bg-black border-2 border-amber-100">
+                <li><a>Education</a></li>
+                <li><a>Interests</a></li>
+                <li><a>Skills</a></li>
+                <li><a>Projects</a></li>
+              </ul>
+            </details>
+          </li>
+          <li><a>Projects</a></li>
+        </ul>
+      </div>
+      <button
+        id="langToggle"
+        class="btn btn-1 btn-md btn-neutral btn-outline self-end"
+        className="btn btn-neutral btn-outline"
+      >
+        EN
+      </button>
+    </div>
+    <div class="landing">
+      <div class="landing-container">
+        <h1 class="header-text">KIARASH JALALI</h1>
+      </div>
+    </div>
     <header>
       <div class="header-backdrop">
         <div class="header-container">
           <div class="intro">
-            <h1 data-tr="header-title">Kiarash Jalali</h1>
+            <h2 data-tr="header-title">HI, im Kiarash</h2>
             <p data-tr="header-text">Junior Frontend Developer.</p>
           </div>
           <div class="info card">
@@ -58,13 +125,6 @@
               >
             </p>
           </div>
-          <button
-            id="langToggle"
-            class="btn btn-1 btn-md btn-neutral btn-outline self-end"
-            className="btn btn-neutral btn-outline"
-          >
-            EN
-          </button>
         </div>
       </div>
       <div class="photo-slot">
@@ -152,7 +212,7 @@
     </main>
 
     <footer>
-      <p data-tr="copyright">&copy; 2025 Kiarash Jalali.</p>
+      <p data-tr="copyright">&copy; 2025 Kiarash Jalali</p>
     </footer>
 
     <script src="./public/js/main.js"></script>

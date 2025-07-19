@@ -1,29 +1,40 @@
 @font-face {
-  font-family: "Bnazanin";
-  src: url("../font/B_NAZANIN/BNazanin.eot");
-  src: url("../font/B_NAZANIN/BNazanin.ttf");
-  src: url("../font/B_NAZANIN/BNazanin.woff");
-  src: url("../font/B_NAZANIN/BNazanin.woff2");
+  font-family: "bitcount";
+  src: url("../font/Bitcount/static/Bitcount-Light.ttf");
+  src: url("../font/Bitcount/static/Bitcount-Regular.ttf");
 }
-
 @font-face {
-  font-family: "mont-Bold";
-  src: url("../font/Montserrat/Montserrat-Bold.ttf");
+  font-family: "urban-l";
+  src: url("../font/Urbanist/static/Urbanist-Light.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "urban-b";
+  src: url("../font/Urbanist/static/Urbanist-ExtraBold.ttf");
   font-weight: 800;
 }
 @font-face {
-  font-family: "mont-Medium";
-  src: url("../font/Montserrat/Montserrat-Medium.ttf");
+  font-family: "rubick-m";
+  src: url("../font/Rubik/static/Rubik-Medium.ttf");
+  src: url("../font/Rubik/static/Rubik-Regular.ttf");
 }
 @font-face {
-  font-family: "mont-Regular";
-  src: url("../font/Montserrat/Montserrat-Regular.ttf");
+  font-family: "rubick-b";
+  src: url("../font/Rubik/static/Rubik-ExtraBold.ttf");
 }
-@font-face {
-  font-family: "mont-Thin";
-  src: url("../font/Montserrat/Montserrat-Thin.ttf");
+:root {
+  --white: #ffffff;
+  --content-backgournd: #000000;
+  --body-background: radial-gradient(
+    circle farthest-corner at 6.3% 21.8%,
+    rgba(236, 6, 117, 1) 0%,
+    rgba(13, 32, 67, 1) 90%
+  );
+  --gray: #f4f4f4;
+  --gray-2: #bdbdbd;
+  --black: #222222;
+  --header: white;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,14 +46,27 @@ html {
 }
 
 body {
-  font-family: "mont-Medium Bnazanin";
-  background-image: var(--body-background);
-  color: var(--black);
+  font-family: "urban-l ", "rubick-m";
+  background-color: white;
+  color: var(--white);
   line-height: 1.6;
-  padding: 20px;
+  position: relative;
+}
+header {
+  padding: 20px 15px;
+  margin: 10 auto;
+  display: flex;
+  flex-direction: row nowrap;
+  align-items: flex-start;
+  gap: 20px;
+  direction: ltr !important;
+}
+main {
+  padding: 20px 15px;
+  margin: 10 auto;
 }
 p {
-  font-family: "mont-Medium Bnazanin";
+  font-family: "urban-l", "rubick-m";
   font-size: 18px;
   text-align: justify;
 }
@@ -50,41 +74,76 @@ ul {
   list-style: none;
 }
 li {
-  font-family: "mont-Medium Bnazanin";
+  font-family: "urban-l", "rubick-m";
   font-size: 18px;
   text-align: justify;
+  padding: 10px;
 }
-
-h1,
+h1 {
+  color: rgb(224, 224, 224);
+  text-shadow: 0px 0px 2px #ffffff;
+  text-shadow: 0px 0px -4px #f9ffac;
+  text-shadow: 0px 0px 8px #161616;
+  font-family: "bitcount";
+  font-size: calc(4vw + 3vh + 4vmin);
+  z-index: 30;
+}
 h2,
 h3,
 h4 {
-  font-family: "mont-Bold Bnazanin";
-  font-weight: 700;
+  font-family: "urban-b", "rubick-b";
+  font-weight: 800;
+  font-size: calc(3vw + 2vh + 3vmin);
   white-space: nowrap;
   margin-bottom: 10px;
   border-bottom: 2px solid var(--black);
 }
-a {
-  font-family: "mont-Regular Bnazanin";
-}
-
-:root {
-  --white: #ffffff;
-  --body-background: linear-gradient(to right, #c5e2d3, #bdcddb);
-  --gray: #f4f4f4;
-  --gray-2: #bdbdbd;
-  --black: #222222;
-  --header: #333c4d;
-}
-
-header {
+footer {
   display: flex;
-  flex-direction: row nowrap;
-  align-items: flex-start;
-  gap: 20px;
-  padding-bottom: 20px;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  text-align: center;
+  font-size: 0.9em;
+  border-top: 2px solid black;
+  padding-top: 20px;
+  p {
+    color: black;
+  }
+}
+.navbar {
+  font-family: "urban-l";
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0px 10px;
+  gap: 15px;
+  background-color: black;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   direction: ltr !important;
+}
+
+.landing {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(172, 172, 172);
+  background-image: url("../media/landing.jpg");
+  background-size: cover;
+  background-position: top;
+}
+.landing-container {
+  background-color: hwb(0 67% 33% / 0.247);
+  backdrop-filter: blur(4px);
+  padding: 0px 30px;
+  margin-bottom: 300px;
+  z-index: 20;
+  h1 {
+    text-align: center;
+  }
 }
 .header-container {
   width: 99%;
@@ -97,7 +156,7 @@ header {
   padding: 30px;
   border-radius: 8px;
   box-shadow: 5px 5px 0px rgba(255, 255, 255, 0.651);
-  background-color: var(--white);
+  background-color: var(--content-background);
 }
 .header-backdrop {
   width: 100%;
@@ -116,12 +175,6 @@ header {
 }
 .intro-rtl {
   direction: rtl !important;
-}
-
-.intro h1 {
-  color: black;
-  font-size: 3em;
-  margin-bottom: 10px;
 }
 
 .info {
@@ -148,7 +201,7 @@ header {
   display: none;
   width: 240px;
   height: auto;
-  background-color: var(--gray);
+  background-color: var(--content-backgournd);
   border-radius: 6px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   object-fit: cover;
@@ -192,7 +245,7 @@ header {
     padding: 5px;
     border-radius: 8px;
     text-decoration: underline;
-    color: #92572f;
+    color: #f58236;
   }
   a:hover {
     font-size: 22px;
@@ -206,7 +259,7 @@ header {
 section {
   margin-bottom: 60px;
   padding: 20px;
-  background-color: var(--gray);
+  background-color: var(--content-backgournd);
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -231,30 +284,43 @@ section h2 {
   margin-bottom: 10px;
 }
 
-footer {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  margin-top: 60px;
-  text-align: center;
-  font-size: 0.9em;
-  border-top: 2px solid var(--header);
-  padding-top: 20px;
-}
-
 .direction {
   direction: rtl;
 }
 
 .btn-1 {
+  color: black;
   padding: 5px 10px;
+  background-color: white;
+  justify-self: center;
+  align-self: center;
 }
 @media (min-width: 768px) {
+  .landing {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  .landing-container {
+    background-color: hwb(0 8% 92% / 0.582);
+    border-radius: 12px;
+    padding: 0px 30px;
+    margin-bottom: 300px;
+    z-index: 20;
+  }
   header {
+    margin: 0 auto;
+    max-width: 1600px;
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
+  }
+  main {
+    max-width: 1600px;
+    margin: 0 auto;
   }
   .header-container {
     width: 99.3%;
@@ -267,7 +333,7 @@ footer {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 5px 5px 0px rgba(255, 255, 255, 0.651);
-    background-color: var(--white);
+    background-color: var(--content-background);
   }
   .header-backdrop {
     width: 100%;

@@ -15,7 +15,7 @@ document.querySelectorAll(".card").forEach((card) => {
 
 const translations = {
   en: {
-    "header-title": "Kiarash Jalali",
+    "header-title": "HI, im Kiarash",
     "header-text": "Junior Frontend Developer.",
     "info-header": "Contact",
     "info-txt-1": `phone:
@@ -76,8 +76,8 @@ const translations = {
     copyright: `&copy; 2025 Kiarash Jalali.`,
   },
   فارسی: {
-    "header-title": "کیارش جلالی",
-    "header-text": "Junior Frontend Developer.",
+    "header-title": "سلام، من کیارش هستم",
+    "header-text": "برنامه نویس فرانت اند",
     "info-header": "تماس",
     "info-txt-1": `تلفن:
               <a href="tel:+989218089883" target="_blank">+989218089883</a>`,
