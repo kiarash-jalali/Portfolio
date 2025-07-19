@@ -23,17 +23,16 @@
   src: url("../font/Rubik/static/Rubik-ExtraBold.ttf");
 }
 :root {
-  --white: #ffffff;
-  --content-backgournd: #000000;
-  --body-background: radial-gradient(
-    circle farthest-corner at 6.3% 21.8%,
-    rgba(236, 6, 117, 1) 0%,
-    rgba(13, 32, 67, 1) 90%
-  );
+  --text-color: #2c2c2c;
+  --body-bg: #f6f6f6;
+  --content-bg: #ffffff;
+  --header: #264653;
+  --links: #0d9488;
+  --link-hover: #38bdf8;
   --gray: #f4f4f4;
+  --white: #ffffff;
   --gray-2: #bdbdbd;
   --black: #222222;
-  --header: white;
 }
 * {
   box-sizing: border-box;
@@ -48,10 +47,13 @@ html {
 
 body {
   font-family: "urban-l ", "rubick-m";
-  background-color: white;
-  color: var(--white);
+  font-size: 18px;
+  background-color: var(--body-bg);
+  color: var(--text-color);
   line-height: 1.6;
   position: relative;
+  line-height: 1.6;
+  text-align: justify;
 }
 header {
   padding: 20px 15px;
@@ -69,7 +71,6 @@ main {
 p {
   font-family: "urban-l", "rubick-m";
   font-size: 18px;
-  text-align: justify;
 }
 ul {
   list-style: none;
@@ -79,6 +80,11 @@ li {
   font-size: 18px;
   text-align: justify;
   padding: 10px;
+}
+span {
+  color: var(--header);
+  font-size: 24px;
+  font-family: "urban-b", "rubick-b";
 }
 h1 {
   color: rgb(202, 130, 48);
@@ -92,6 +98,7 @@ h1 {
 h2,
 h3,
 h4 {
+  color: var(--header);
   font-family: "urban-b", "rubick-b";
   font-weight: 800;
   font-size: calc(3vw + 2vh + 1vmin);
@@ -106,7 +113,7 @@ footer {
   align-items: center;
   margin-top: 60px;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 18px;
   border-top: 2px solid black;
   padding-top: 20px;
   p {
@@ -121,11 +128,15 @@ footer {
   align-items: center;
   padding: 0px 10px;
   gap: 15px;
-  background-color: black;
+  background-color: var(--content-bg);
   position: sticky;
   top: 0;
   z-index: 1000;
   direction: ltr !important;
+  color: var(--text-color);
+}
+.cl {
+  background-color: var(--content-bg);
 }
 
 .landing {
@@ -137,7 +148,7 @@ footer {
   background-position: top;
 }
 .landing-container {
-  background-color: hwb(0 67% 33% / 0.247);
+  background-color: rgba(0, 0, 0, 0.308);
   backdrop-filter: blur(4px);
   padding: 0px 30px;
   margin-bottom: 300px;
@@ -162,7 +173,7 @@ footer {
 .header-backdrop {
   width: 100%;
   height: auto;
-  background-color: #222222;
+  background-color: var(--content-bg);
   display: flex;
   flex-direction: row nowrap;
   justify-content: space-between;
@@ -191,18 +202,17 @@ footer {
     color: var(--header);
     display: inline-block;
     padding: 4px;
-    font-size: 1.5em;
     place-self: center;
   }
   a:hover {
-    color: red;
+    color: var(--link-hover);
   }
 }
 .photo-slot {
   display: none;
   width: 240px;
   height: auto;
-  background-color: var(--content-backgournd);
+  background-color: var(--content-bg);
   border-radius: 6px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   object-fit: cover;
@@ -218,13 +228,9 @@ footer {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 .edu,
-.int,
-.projects {
+.int {
   border-left: 2px solid rgb(175, 175, 175);
   padding-left: 15px;
-  li {
-    border-bottom: 1px dotted rgba(175, 175, 175, 0.692);
-  }
 }
 
 .skills {
@@ -237,30 +243,51 @@ footer {
     border-bottom: 1px solid var(--gray-2);
   }
 }
+.projects-container {
+  justify-items: center;
+}
 .projects {
-  border-left: 2px solid rgb(175, 175, 175);
-  padding-left: 15px;
+  padding: 10px;
+  max-width: 600px;
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform-style: preserve-3d;
+  background-color: var(--content-bg);
   a {
     font-weight: 700;
     transition: all 0.3s ease;
     padding: 5px;
     border-radius: 8px;
     text-decoration: underline;
-    color: #f58236;
+    color: var(--links);
   }
   a:hover {
-    font-size: 22px;
-    color: rgb(255, 255, 255);
-    border: 2px dotted rgb(68, 68, 138);
+    color: var(--link-hover);
     border-radius: 8px;
-    background-color: rgb(66, 66, 128);
+    background-color: var(--text-color);
   }
+  img {
+    width: 100%;
+    border-radius: 16px 16px 0px 0px;
+    padding-bottom: 15px;
+  }
+}
+.projects:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.438);
 }
 
 section {
   margin-bottom: 60px;
   padding: 20px;
-  background-color: var(--content-backgournd);
+  background-color: var(--content-bg);
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -270,13 +297,8 @@ section {
 section:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.438);
 }
-
-section h2 {
-  color: var(--header);
-  margin-bottom: 15px;
-  display: inline-block;
-  padding-bottom: 4px;
-  font-size: 1.5em;
+.h-p {
+  place-self: center;
 }
 
 .education li,
@@ -290,9 +312,9 @@ section h2 {
 }
 
 .btn-1 {
-  color: black;
+  color: var(--text-color);
   padding: 5px 10px;
-  background-color: white;
+  background-color: var(--content-bg);
   justify-self: center;
   align-self: center;
   font-family: "urban-l", "rubick-m";
@@ -307,7 +329,7 @@ section h2 {
     height: 100vh;
   }
   .landing-container {
-    background-color: hwb(0 8% 92% / 0.582);
+    background-color: rgba(0, 0, 0, 0.308);
     border-radius: 12px;
     padding: 0px 30px;
     margin-bottom: 300px;
@@ -347,6 +369,7 @@ section h2 {
     align-items: center;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--content-bg);
   }
   .photo-slot {
     display: block;
@@ -358,7 +381,16 @@ section h2 {
     font-weight: 800;
     font-size: calc(1vw + 2vh + 1vmin);
     white-space: nowrap;
-    margin-bottom: 10px;
     border-bottom: 2px solid var(--black);
+  }
+  .projects {
+    padding: 10px;
+    max-width: 400px;
+    height: auto;
+    img {
+      width: 100%;
+      border-radius: 16px 16px 0px 0px;
+      padding-bottom: 15px;
+    }
   }
 }
