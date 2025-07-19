@@ -81,10 +81,10 @@ li {
   padding: 10px;
 }
 h1 {
-  color: rgb(224, 224, 224);
-  text-shadow: 0px 0px 2px #ffffff;
-  text-shadow: 0px 0px -4px #f9ffac;
-  text-shadow: 0px 0px 8px #161616;
+  color: rgb(202, 130, 48);
+  text-shadow: 0px 0px 6px #ffffff;
+  text-shadow: 0px 0px -4px #d89a26;
+  text-shadow: 0px 0px 8px #ffffff;
   font-family: "bitcount";
   font-size: calc(4vw + 3vh + 4vmin);
   z-index: 30;
@@ -94,7 +94,7 @@ h3,
 h4 {
   font-family: "urban-b", "rubick-b";
   font-weight: 800;
-  font-size: calc(3vw + 2vh + 3vmin);
+  font-size: calc(3vw + 2vh + 1vmin);
   white-space: nowrap;
   margin-bottom: 10px;
   border-bottom: 2px solid var(--black);
@@ -295,6 +295,7 @@ section h2 {
   background-color: white;
   justify-self: center;
   align-self: center;
+  font-family: "urban-l", "rubick-m";
 }
 @media (min-width: 768px) {
   .landing {
@@ -355,7 +356,7 @@ section h2 {
   h4 {
     font-family: "urban-b", "rubick-b";
     font-weight: 800;
-    font-size: calc(2vw + 2vh + 2vmin);
+    font-size: calc(1vw + 2vh + 1vmin);
     white-space: nowrap;
     margin-bottom: 10px;
     border-bottom: 2px solid var(--black);

@@ -141,6 +141,7 @@ let currentLang = "en";
 
 document.getElementById("langToggle").addEventListener("click", () => {
   document.querySelector(".intro").classList.toggle("intro-rtl");
+  document.querySelector(".header-container").classList.toggle("intro-rtl");
   document.querySelector("body,html").classList.toggle("direction");
   currentLang = currentLang === "en" ? "فارسی" : "en";
   updateLanguage();
