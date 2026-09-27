@@ -83,9 +83,9 @@ export const content = {
       title: "Small things, because small things matter.",
       subtitle: "A short interaction playground — the Rauno-ish corner of the site. Tiny experiments, no giant framework required.",
       magnetTitle: "Magnetic target",
-      magnetBody: "Move anywhere in this card. The whole area acts as the magnetic field.",
+      magnetBody: "Desktop: move anywhere in the card to pull the target. Touch: grab the ball, throw it and let it bounce.",
       trailTitle: "Springy switches",
-      trailBody: "A 10×10 field of switches. Touch one and the spring travels horizontally, vertically and diagonally through the grid."
+      trailBody: "Choose one of 100 cells. The active state flows to the new cell while the grid ripples around it."
     },
     contact: {
       kicker: "CONTACT",
@@ -185,9 +185,9 @@ export const content = {
       title: "جزئیات کوچک، چون جزئیات مهم‌اند.",
       subtitle: "یک گوشه‌ی کوتاه برای بازی با تعامل‌ها — بخش کمی Rauno-طور سایت. آزمایش‌های کوچک، بدون فریم‌ورک غول‌پیکر.",
       magnetTitle: "هدف مغناطیسی",
-      magnetBody: "هر جای این کارت حرکت کن. تمام سطح کارت میدان مغناطیسی هدف است.",
+      magnetBody: "در دسکتاپ، نشانگر را در کارت حرکت بده تا هدف جذب شود. روی صفحه لمسی، توپ را بگیر، پرتاب کن و برخوردش با دیواره‌ها را ببین.",
       trailTitle: "سوییچ‌های فنری",
-      trailBody: "یک شبکه ۱۰×۱۰ از سوییچ‌ها؛ یکی را لمس کن تا موج فنری افقی، عمودی و مورب در کل شبکه حرکت کند."
+      trailBody: "یکی از ۱۰۰ خانه را انتخاب کن. حالت فعال با حرکتی روان به خانه جدید می‌رود و موج فنری در شبکه پخش می‌شود."
     },
     contact: {
       kicker: "ارتباط",
