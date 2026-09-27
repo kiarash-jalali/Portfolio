@@ -1,233 +1,356 @@
-const touchLike = matchMedia("(hover: none), (pointer: coarse)");
-
 export function initLab() {
-  initMagneticExperiment();
+  initMatterBall();
   initSpringGrid();
 }
 
-function initMagneticExperiment() {
-  const card = document.querySelector("#magnetLab");
+function initMatterBall() {
   const stage = document.querySelector("#magnetStage");
-  const target = document.querySelector("#magnetTarget");
+  const ballElement = document.querySelector("#physicsBall");
+  const ballVisual = ballElement?.querySelector(".goo-ball-visual");
+  const Matter = window.Matter;
 
-  if (!card || !stage || !target || card.dataset.labBound) return;
-  card.dataset.labBound = "1";
+  if (!stage || !ballElement || !ballVisual || stage.dataset.physicsBound) return;
+  stage.dataset.physicsBound = "1";
 
-  if (touchLike.matches) {
-    initThrowBall(card, stage, target);
+  if (!Matter) {
+    console.warn("Matter.js did not load, so the physics Lab experiment is unavailable.");
+    ballElement.disabled = true;
     return;
   }
 
-  initDesktopMagnet(card, target);
-}
+  const { Body, Bodies, Composite, Engine, Events, Sleeping } = Matter;
+  const engine = Engine.create({ enableSleeping: true });
 
-function initDesktopMagnet(card, target) {
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  engine.world.gravity.y = 1;
+  engine.world.gravity.scale = .00105;
 
-  card.addEventListener("pointermove", (event) => {
-    const rect = card.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    const y = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+  const wallThickness = 70;
+  const fixedStep = 1000 / 60;
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    target.style.transform =
-      `translate3d(${x * 58}px, ${y * 42}px, 0) rotate(${x * 6}deg)`;
-  });
-
-  card.addEventListener("pointerleave", () => {
-    target.style.transform = "";
-  });
-}
-
-function initThrowBall(card, stage, ball) {
-  card.classList.add("physics-mode");
-  stage.classList.add("physics-stage");
-  ball.classList.add("physics-ball");
-
-  let x = 0;
-  let y = 0;
-  let vx = 0;
-  let vy = 0;
-  let raf = 0;
-  let lastFrame = 0;
+  let radius = Math.max(30, ballElement.offsetWidth / 2);
+  let walls = [];
   let dragging = false;
-  let dragPointerId = null;
-  let lastDragX = 0;
-  let lastDragY = 0;
-  let lastDragTime = 0;
+  let activePointer = null;
+  let grabOffset = { x: 0, y: 0 };
+  let pointerVelocity = { x: 0, y: 0 };
+  let previousPointer = { x: 0, y: 0, time: 0 };
 
-  const gravity = 900;
-  const bounce = .78;
-  const air = .992;
-  const maxThrow = 1900;
+  let squash = 0;
+  let squashVelocity = 0;
+  let squashAngle = 0;
+  let dragPress = 0;
+  let dragPressAngle = 0;
 
-  const bounds = () => ({
-    maxX: Math.max(0, stage.clientWidth - ball.offsetWidth),
-    maxY: Math.max(0, stage.clientHeight - ball.offsetHeight)
+  const size = () => ({
+    width: stage.clientWidth,
+    height: stage.clientHeight
   });
 
-  const paint = () => {
-    ball.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-  };
+  const ballBody = Bodies.circle(
+    Math.max(radius, stage.clientWidth * .5),
+    Math.max(radius, stage.clientHeight * .3),
+    radius,
+    {
+      label: "goo-ball",
+      restitution: .82,
+      friction: .015,
+      frictionStatic: .02,
+      frictionAir: .009,
+      density: .0017,
+      sleepThreshold: 85
+    }
+  );
 
-  const impact = () => {
-    ball.classList.remove("impact");
-    void ball.offsetWidth;
-    ball.classList.add("impact");
-  };
+  Composite.add(engine.world, ballBody);
 
-  const stopPhysics = () => {
-    cancelAnimationFrame(raf);
-    raf = 0;
-    lastFrame = 0;
-  };
+  function rebuildWalls() {
+    if (walls.length) Composite.remove(engine.world, walls);
 
-  const physics = (time) => {
-    if (dragging) return;
+    const { width, height } = size();
 
-    if (!lastFrame) lastFrame = time;
-    const dt = Math.min((time - lastFrame) / 1000, .032);
-    lastFrame = time;
+    walls = [
+      Bodies.rectangle(
+        width / 2,
+        -wallThickness / 2,
+        width + wallThickness * 2,
+        wallThickness,
+        { isStatic: true, label: "wall-top" }
+      ),
+      Bodies.rectangle(
+        width / 2,
+        height + wallThickness / 2,
+        width + wallThickness * 2,
+        wallThickness,
+        { isStatic: true, label: "wall-bottom" }
+      ),
+      Bodies.rectangle(
+        -wallThickness / 2,
+        height / 2,
+        wallThickness,
+        height + wallThickness * 2,
+        { isStatic: true, label: "wall-left" }
+      ),
+      Bodies.rectangle(
+        width + wallThickness / 2,
+        height / 2,
+        wallThickness,
+        height + wallThickness * 2,
+        { isStatic: true, label: "wall-right" }
+      )
+    ];
 
-    const { maxX, maxY } = bounds();
+    Composite.add(engine.world, walls);
 
-    vy += gravity * dt;
-    x += vx * dt;
-    y += vy * dt;
+    const clampedX = clamp(ballBody.position.x, radius, Math.max(radius, width - radius));
+    const clampedY = clamp(ballBody.position.y, radius, Math.max(radius, height - radius));
 
-    vx *= Math.pow(air, dt * 60);
+    Body.setPosition(ballBody, { x: clampedX, y: clampedY });
+  }
 
-    let collided = false;
+  function resizeBallAndWalls() {
+    const nextRadius = Math.max(30, ballElement.offsetWidth / 2);
 
-    if (x <= 0) {
-      x = 0;
-      vx = Math.abs(vx) * bounce;
-      collided = true;
-    } else if (x >= maxX) {
-      x = maxX;
-      vx = -Math.abs(vx) * bounce;
-      collided = true;
+    if (Math.abs(nextRadius - radius) > .5) {
+      const ratio = nextRadius / radius;
+      Body.scale(ballBody, ratio, ratio);
+      radius = nextRadius;
     }
 
-    if (y <= 0) {
-      y = 0;
-      vy = Math.abs(vy) * bounce;
-      collided = true;
-    } else if (y >= maxY) {
-      y = maxY;
-      vy = -Math.abs(vy) * bounce;
-      vx *= .985;
-      collided = true;
+    rebuildWalls();
+  }
+
+  function triggerSquash(angle, speed) {
+    if (reducedMotion || dragging || speed < 2.2) return;
+
+    const amount = clamp((speed - 1.5) / 30, .07, .34);
+
+    if (amount > squash) squash = amount;
+    squashVelocity += amount * 1.15;
+    squashAngle = angle;
+  }
+
+  Events.on(engine, "collisionStart", (event) => {
+    for (const pair of event.pairs) {
+      const touchesBall = pair.bodyA === ballBody || pair.bodyB === ballBody;
+      if (!touchesBall) continue;
+
+      const normal = pair.collision.normal;
+      const horizontalWall = Math.abs(normal.x) > Math.abs(normal.y);
+      const angle = horizontalWall ? 0 : Math.PI / 2;
+
+      triggerSquash(angle, ballBody.speed);
     }
+  });
 
-    if (collided && Math.hypot(vx, vy) > 180) impact();
-
-    if (y >= maxY - .5 && Math.abs(vy) < 45 && Math.abs(vx) < 12) {
-      y = maxY;
-      vx = 0;
-      vy = 0;
-      paint();
-      raf = 0;
-      lastFrame = 0;
+  function updateSquash(deltaSeconds) {
+    if (reducedMotion) {
+      squash = 0;
+      squashVelocity = 0;
       return;
     }
 
-    paint();
-    raf = requestAnimationFrame(physics);
-  };
+    if (dragging && dragPress > 0) {
+      squash = dragPress;
+      squashAngle = dragPressAngle;
+      squashVelocity = 0;
+      return;
+    }
 
-  const startPhysics = () => {
-    stopPhysics();
-    raf = requestAnimationFrame(physics);
-  };
+    const stiffness = 105;
+    const damping = 13;
 
-  const centerBall = () => {
-    const { maxX, maxY } = bounds();
-    x = maxX / 2;
-    y = maxY / 2;
-    vx = 0;
-    vy = 0;
-    paint();
-  };
+    squashVelocity += (-squash * stiffness - squashVelocity * damping) * deltaSeconds;
+    squash += squashVelocity * deltaSeconds;
+    squash = clamp(squash, -.16, .38);
+  }
 
-  requestAnimationFrame(centerBall);
+  function paintBall() {
+    const x = ballBody.position.x - radius;
+    const y = ballBody.position.y - radius;
 
-  ball.addEventListener("pointerdown", (event) => {
+    ballElement.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+    const speed = ballBody.speed;
+    const impactActive = Math.abs(squash) > .012;
+
+    let angle = squashAngle;
+    let scaleX = 1;
+    let scaleY = 1;
+
+    if (impactActive) {
+      scaleX = clamp(1 - squash, .64, 1.22);
+      scaleY = clamp(1 + squash * .62, .82, 1.34);
+    } else if (!dragging && speed > 7 && !reducedMotion) {
+      const stretch = clamp((speed - 7) / 180, 0, .09);
+      angle = Math.atan2(ballBody.velocity.y, ballBody.velocity.x);
+      scaleX = 1 + stretch;
+      scaleY = 1 - stretch * .46;
+    }
+
+    ballVisual.style.transform =
+      `rotate(${angle}rad) scale(${scaleX}, ${scaleY})`;
+  }
+
+  function pointerPosition(event) {
+    const rect = stage.getBoundingClientRect();
+
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+      width: rect.width,
+      height: rect.height
+    };
+  }
+
+  function updateDraggedPosition(event) {
+    const now = performance.now();
+    const pointer = pointerPosition(event);
+    const dt = Math.max(8, now - previousPointer.time);
+
+    const rawX = pointer.x - grabOffset.x;
+    const rawY = pointer.y - grabOffset.y;
+
+    const minX = radius;
+    const maxX = Math.max(radius, pointer.width - radius);
+    const minY = radius;
+    const maxY = Math.max(radius, pointer.height - radius);
+
+    const nextX = clamp(rawX, minX, maxX);
+    const nextY = clamp(rawY, minY, maxY);
+
+    pointerVelocity.x =
+      pointerVelocity.x * .35 +
+      ((event.clientX - previousPointer.x) / dt) * fixedStep * .65;
+
+    pointerVelocity.y =
+      pointerVelocity.y * .35 +
+      ((event.clientY - previousPointer.y) / dt) * fixedStep * .65;
+
+    const pressureLeft = Math.max(0, minX - rawX);
+    const pressureRight = Math.max(0, rawX - maxX);
+    const pressureTop = Math.max(0, minY - rawY);
+    const pressureBottom = Math.max(0, rawY - maxY);
+
+    const horizontalPressure = Math.max(pressureLeft, pressureRight);
+    const verticalPressure = Math.max(pressureTop, pressureBottom);
+
+    if (horizontalPressure > verticalPressure && horizontalPressure > 0) {
+      dragPress = clamp(horizontalPressure / (radius * 1.35), 0, .34);
+      dragPressAngle = 0;
+    } else if (verticalPressure > 0) {
+      dragPress = clamp(verticalPressure / (radius * 1.35), 0, .34);
+      dragPressAngle = Math.PI / 2;
+    } else {
+      dragPress = 0;
+    }
+
+    Body.setPosition(ballBody, { x: nextX, y: nextY });
+    Body.setVelocity(ballBody, { x: 0, y: 0 });
+    Sleeping.set(ballBody, false);
+
+    previousPointer = {
+      x: event.clientX,
+      y: event.clientY,
+      time: now
+    };
+  }
+
+  ballElement.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+
     dragging = true;
-    dragPointerId = event.pointerId;
-    stopPhysics();
+    activePointer = event.pointerId;
+    pointerVelocity = { x: 0, y: 0 };
+    dragPress = 0;
 
-    ball.setPointerCapture(event.pointerId);
-    ball.classList.add("dragging");
+    const pointer = pointerPosition(event);
 
-    const stageRect = stage.getBoundingClientRect();
-    const ballRect = ball.getBoundingClientRect();
-
-    const grabOffsetX = event.clientX - ballRect.left;
-    const grabOffsetY = event.clientY - ballRect.top;
-
-    lastDragX = event.clientX;
-    lastDragY = event.clientY;
-    lastDragTime = performance.now();
-
-    const move = (moveEvent) => {
-      if (!dragging || moveEvent.pointerId !== dragPointerId) return;
-
-      const now = performance.now();
-      const dt = Math.max(8, now - lastDragTime);
-      const { maxX, maxY } = bounds();
-
-      const nextX = Math.min(
-        maxX,
-        Math.max(0, moveEvent.clientX - stageRect.left - grabOffsetX)
-      );
-      const nextY = Math.min(
-        maxY,
-        Math.max(0, moveEvent.clientY - stageRect.top - grabOffsetY)
-      );
-
-      const pointerVx = ((moveEvent.clientX - lastDragX) / dt) * 1000;
-      const pointerVy = ((moveEvent.clientY - lastDragY) / dt) * 1000;
-
-      vx = vx * .35 + pointerVx * .65;
-      vy = vy * .35 + pointerVy * .65;
-
-      x = nextX;
-      y = nextY;
-      paint();
-
-      lastDragX = moveEvent.clientX;
-      lastDragY = moveEvent.clientY;
-      lastDragTime = now;
+    grabOffset = {
+      x: pointer.x - ballBody.position.x,
+      y: pointer.y - ballBody.position.y
     };
 
-    const release = (releaseEvent) => {
-      if (releaseEvent.pointerId !== dragPointerId) return;
-
-      dragging = false;
-      dragPointerId = null;
-      ball.classList.remove("dragging");
-
-      vx = Math.max(-maxThrow, Math.min(maxThrow, vx));
-      vy = Math.max(-maxThrow, Math.min(maxThrow, vy));
-
-      ball.removeEventListener("pointermove", move);
-      ball.removeEventListener("pointerup", release);
-      ball.removeEventListener("pointercancel", release);
-
-      startPhysics();
+    previousPointer = {
+      x: event.clientX,
+      y: event.clientY,
+      time: performance.now()
     };
 
-    ball.addEventListener("pointermove", move);
-    ball.addEventListener("pointerup", release);
-    ball.addEventListener("pointercancel", release);
+    Body.setStatic(ballBody, true);
+    Sleeping.set(ballBody, false);
+
+    ballElement.setPointerCapture(event.pointerId);
+    ballElement.classList.add("dragging");
   });
 
-  addEventListener("resize", () => {
-    const { maxX, maxY } = bounds();
-    x = Math.min(x, maxX);
-    y = Math.min(y, maxY);
-    paint();
+  ballElement.addEventListener("pointermove", (event) => {
+    if (!dragging || event.pointerId !== activePointer) return;
+    updateDraggedPosition(event);
   });
+
+  function releaseBall(event) {
+    if (!dragging || event.pointerId !== activePointer) return;
+
+    dragging = false;
+    activePointer = null;
+    dragPress = 0;
+
+    ballElement.classList.remove("dragging");
+
+    Body.setStatic(ballBody, false);
+    Sleeping.set(ballBody, false);
+
+    const velocity = limitVector(pointerVelocity, 34);
+    Body.setVelocity(ballBody, velocity);
+
+    try {
+      ballElement.releasePointerCapture(event.pointerId);
+    } catch {
+      // Pointer capture may already be released by the browser.
+    }
+  }
+
+  ballElement.addEventListener("pointerup", releaseBall);
+  ballElement.addEventListener("pointercancel", releaseBall);
+
+  ballElement.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    event.preventDefault();
+    Sleeping.set(ballBody, false);
+    Body.setVelocity(ballBody, {
+      x: (Math.random() - .5) * 14,
+      y: -18
+    });
+  });
+
+  const resizeObserver = new ResizeObserver(() => {
+    resizeBallAndWalls();
+  });
+
+  resizeObserver.observe(stage);
+  requestAnimationFrame(resizeBallAndWalls);
+
+  let lastTime = performance.now();
+  let accumulator = 0;
+
+  function frame(time) {
+    const frameDelta = Math.min(50, time - lastTime);
+    lastTime = time;
+    accumulator += frameDelta;
+
+    while (accumulator >= fixedStep) {
+      if (!dragging) Engine.update(engine, fixedStep);
+      updateSquash(fixedStep / 1000);
+      accumulator -= fixedStep;
+    }
+
+    paintBall();
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
 }
 
 function initSpringGrid() {
@@ -393,4 +516,21 @@ function initSpringGrid() {
   addEventListener("resize", () => {
     requestAnimationFrame(() => placeSelection(selectedCell, false));
   });
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function limitVector(vector, maxLength) {
+  const length = Math.hypot(vector.x, vector.y);
+
+  if (length <= maxLength || length === 0) return vector;
+
+  const scale = maxLength / length;
+
+  return {
+    x: vector.x * scale,
+    y: vector.y * scale
+  };
 }
