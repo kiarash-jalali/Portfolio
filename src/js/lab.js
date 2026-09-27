@@ -447,7 +447,7 @@ function loadMatter() {
     }
 
     const script = document.createElement("script");
-    script.src = "/public/vendor/matter.min.js?v=20260927-5";
+    script.src = "/public/vendor/matter.min.js?v=20260927-6";
     script.async = true;
     script.dataset.matterLoader = "1";
     script.addEventListener("load", () => {
