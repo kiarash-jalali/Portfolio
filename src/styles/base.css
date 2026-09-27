@@ -219,12 +219,17 @@ html[lang="fa"] .kicker {
 }
 
 .rv {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: none;
   transition: opacity .8s var(--ease), transform .8s var(--ease);
 }
 
-.rv.in {
+.reveal-enabled .rv:not(.in) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.reveal-enabled .rv.in {
   opacity: 1;
   transform: none;
 }
