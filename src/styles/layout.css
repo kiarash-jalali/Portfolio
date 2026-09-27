@@ -41,7 +41,7 @@ html[lang="fa"] .hero h1{line-height:1.22;max-width:12ch}
 .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:slide 7s ease infinite}
 @keyframes slide{50%{background-position:100% 0}}
 .typed-line{font-family:var(--font-mono);font-size:clamp(.94rem,1.9vw,1.16rem);color:var(--acc2);margin-top:16px;min-height:1.6em}
-.typed-line::after{content:"▌";animation:blink 1s steps(2) infinite;color:var(--acc)}
+.typed-line::after{content:"▌";animation:blink 0.75s steps(2) infinite;color:var(--acc)}
 @keyframes blink{50%{opacity:0}}
 .hero-lead{color:var(--muted);max-width:57ch;margin-top:18px;font-size:1.02rem}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;align-items:center}

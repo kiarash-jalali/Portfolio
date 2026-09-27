@@ -9,13 +9,12 @@ export const content = {
       work: "See my work",
       contact: "Let's talk",
       copyEmail: "Copy email",
-      location: "Iran · EN / FA",
       statProjects: "Projects",
-      statLanguages: "Languages",
+      statTechnologies: "Technologies",
       statProduct: "Active product",
       statCuriosity: "Curiosity",
       scroll: "SCROLL",
-      roles: ["Front-End Developer", "Computer Engineering Student", "UI builder & detail obsessive", "Building Rootine", "AI-assisted, human-reviewed"]
+      roles: ["Front-End Developer", "Computer Engineering Student", "UI builder & detail obsessive", "Cat lover", "Food Enthusiast", "Fantasy Daydreamer", "Possibly Future Game Developer?...",]
     },
     about: {
       kicker: "ABOUT",
@@ -112,7 +111,6 @@ export const content = {
       work: "پروژه‌ها را ببین",
       contact: "صحبت کنیم",
       copyEmail: "کپی ایمیل",
-      location: "ایران · فارسی / EN",
       statProjects: "پروژه",
       statLanguages: "زبان",
       statProduct: "محصول فعال",
