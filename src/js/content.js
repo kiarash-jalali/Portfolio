@@ -39,7 +39,7 @@ export const content = {
     skills: {
       kicker: "TOOLBOX",
       title: "Skills, with context.",
-      subtitle: "No fake “React 87%” scores. The bars show how each tool currently fits into my work, and the projects below are the evidence.",
+      subtitle: "No fake “React 87%” scores. The bars show how each tool currently fits into my work — daily driver, project experience, or something I'm still growing.",
       daily: "Daily drivers & project tools",
       currently: "CURRENTLY EXPANDING",
       learning: "React patterns · TypeScript · Next.js architecture · Supabase · accessibility · better motion and product thinking.",
@@ -57,7 +57,7 @@ export const content = {
       details: "Details",
       repo: "Repository",
       openProject: "Open project",
-      interactive: "Interactive preview · sample data",
+      interactive: "Live site preview",
       rootineStatus: "PRIVATE ALPHA · IN PROGRESS",
       rootineTagline: "A little structure. More room to live.",
       rootineDemoTitle: "Today",
@@ -84,9 +84,9 @@ export const content = {
       title: "Small things, because small things matter.",
       subtitle: "A short interaction playground — the Rauno-ish corner of the site. Tiny experiments, no giant framework required.",
       magnetTitle: "Magnetic target",
-      magnetBody: "Move around the button. It responds without hijacking the cursor.",
+      magnetBody: "Move anywhere in this card. The whole area acts as the magnetic field.",
       trailTitle: "Springy switches",
-      trailBody: "Simple CSS variables, pointer position and easing — enough to make controls feel less static."
+      trailBody: "A 10×10 field of switches. Touch one and the spring travels horizontally, vertically and diagonally through the grid."
     },
     contact: {
       kicker: "CONTACT",
@@ -142,7 +142,7 @@ export const content = {
     skills: {
       kicker: "جعبه‌ابزار",
       title: "مهارت‌ها، با توضیح واقعی.",
-      subtitle: "نه نوارهای الکی مثل «React 87%». این بخش نشان می‌دهد هر ابزار الان چه جایگاهی در کارم دارد و پروژه‌ها هم مدرک آن هستند.",
+      subtitle: "نه نوارهای الکی مثل «React 87%». این بخش نشان می‌دهد هر ابزار واقعاً چه جایگاهی در کارم دارد؛ ابزار روزمره، تجربه پروژه یا چیزی که هنوز در حال یادگیری‌اش هستم.",
       daily: "ابزارهای روزمره و پروژه",
       currently: "در حال گسترش",
       learning: "الگوهای React · TypeScript · معماری Next.js · Supabase · دسترسی‌پذیری · موشن بهتر و تفکر محصول.",
@@ -160,7 +160,7 @@ export const content = {
       details: "جزئیات",
       repo: "مخزن",
       openProject: "باز کردن پروژه",
-      interactive: "پیش‌نمایش تعاملی · داده نمونه",
+      interactive: "پیش‌نمایش زنده سایت",
       rootineStatus: "آلفای خصوصی · در حال توسعه",
       rootineTagline: "کمی ساختار؛ فضای بیشتر برای زندگی.",
       rootineDemoTitle: "امروز",
@@ -187,9 +187,9 @@ export const content = {
       title: "جزئیات کوچک، چون جزئیات مهم‌اند.",
       subtitle: "یک گوشه‌ی کوتاه برای بازی با تعامل‌ها — بخش کمی Rauno-طور سایت. آزمایش‌های کوچک، بدون فریم‌ورک غول‌پیکر.",
       magnetTitle: "هدف مغناطیسی",
-      magnetBody: "اطراف دکمه حرکت کن. واکنش نشان می‌دهد، بدون اینکه کنترل نشانگر را از تو بگیرد.",
+      magnetBody: "هر جای این کارت حرکت کن. تمام سطح کارت میدان مغناطیسی هدف است.",
       trailTitle: "سوییچ‌های فنری",
-      trailBody: "چند متغیر CSS، موقعیت نشانگر و easing؛ همین‌ها برای زنده‌تر شدن کنترل کافی‌اند."
+      trailBody: "یک شبکه ۱۰×۱۰ از سوییچ‌ها؛ یکی را لمس کن تا موج فنری افقی، عمودی و مورب در کل شبکه حرکت کند."
     },
     contact: {
       kicker: "ارتباط",
@@ -284,8 +284,6 @@ export const tools = [
   { name: "DevTools", sub: "debug", color: "#3b82f6", glyph: "{}" }
 ];
 
-export const evidenceSkills = ["HTML", "CSS", "JavaScript", "React", "Next.js", "Supabase", "AI"];
-
 export const projects = [
   {
     key: "rootine",
@@ -311,6 +309,7 @@ export const projects = [
       en: "It forced me to think about states, architecture, privacy, data flow and product trade-offs — not just how a landing page looks.",
       fa: "این پروژه مجبورم کرد درباره state، معماری، حریم خصوصی، جریان داده و مصالحه‌های محصول فکر کنم؛ نه فقط ظاهر یک لندینگ پیج."
     },
+    live: "https://routine-nine.vercel.app/login",
     repo: "https://github.com/kiarash-jalali/routine"
   },
   {
@@ -374,7 +373,7 @@ export const promptExamples = [
   },
   {
     before: { en: "add some skills to my portfolio", fa: "چندتا مهارت به پورتفولیوم اضافه کن" },
-    after: { en: "Replace unverifiable skill percentages with three honest groups: core frontend, application work and workflow. Keep the animated bar visual, but label each bar with how I actually use the skill (daily driver / project experience / growing). Add a hover interaction that highlights the projects where each skill appears.", fa: "درصدهای غیرقابل‌اثبات مهارت را با سه گروه واقعی جایگزین کن: هسته فرانت‌اند، کار اپلیکیشن و فرایند. ظاهر نوار متحرک را نگه دار، اما هر نوار را با نحوه واقعی استفاده از مهارت برچسب بزن (روزانه / تجربه پروژه / در حال رشد). با hover پروژه‌هایی را که مهارت در آن‌ها استفاده شده برجسته کن." }
+    after: { en: "Replace unverifiable skill percentages with three honest groups: core frontend, application work and workflow. Keep the animated bar visual, but label each bar with how I actually use the skill (daily driver / project experience / growing). Keep the section compact and evidence-based without inventing scores.", fa: "درصدهای غیرقابل‌اثبات مهارت را با سه گروه واقعی جایگزین کن: هسته فرانت‌اند، کار اپلیکیشن و فرایند. ظاهر نوار متحرک را نگه دار، اما هر نوار را با نحوه واقعی استفاده از مهارت برچسب بزن (روزانه / تجربه پروژه / در حال رشد). بخش را جمع‌وجور و واقعی نگه دار و امتیاز ساختگی نساز." }
   },
   {
     before: { en: "show that I use AI but don't make me look like a vibe coder", fa: "نشون بده از AI استفاده می‌کنم ولی شبیه وایب‌کدر نباشه" },
