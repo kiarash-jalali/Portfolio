@@ -29,9 +29,6 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-
       - name: Verify and build
         run: npm run verify
 
