@@ -12,8 +12,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "dependencies": {
-    "@dimforge/rapier2d-compat": "0.21.0"
   }
 }
