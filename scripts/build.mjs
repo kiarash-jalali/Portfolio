@@ -13,7 +13,7 @@ for (const entry of ["index.html", "src", "public", "CNAME", "robots.txt", "site
 
 await mkdir(resolve(dist, "vendor"), { recursive: true });
 await cp(
-  resolve(root, "node_modules/@dimforge/rapier2d"),
+  resolve(root, "node_modules/@dimforge/rapier2d-compat"),
   resolve(dist, "vendor/rapier2d"),
   { recursive: true }
 );
