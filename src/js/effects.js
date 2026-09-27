@@ -92,7 +92,21 @@ function initCursor() {
   const move = (event) => {
     mx = event.clientX;
     my = event.clientY;
+
+    const edgeGap = 34;
+    const nearViewportEdge =
+      mx <= edgeGap ||
+      my <= edgeGap ||
+      mx >= innerWidth - edgeGap ||
+      my >= innerHeight - edgeGap;
+
     dot.style.transform = `translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;
+
+    if (nearViewportEdge) {
+      hideCursor();
+      return;
+    }
+
     showCursor();
   };
 
