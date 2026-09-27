@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiarash Jalali — Front-End Developer</title>
+  <meta name="description" content="Portfolio of Kiarash Jalali — a front-end developer and Computer Engineering student building responsive, bilingual and detail-driven web experiences." />
+  <meta name="theme-color" content="#07070c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kiarash Jalali — Front-End Developer" />
+  <meta property="og:description" content="Interfaces with detail, motion, bilingual UX and a transparent AI-assisted workflow." />
+  <meta property="og:url" content="https://kiarashjalali.net/" />
+  <link rel="canonical" href="https://kiarashjalali.net/" />
+  <link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn/index.css" />
+  <link rel="stylesheet" href="/src/styles/app.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  <div class="bg-fx" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="prog" aria-hidden="true"></div>
+  <div class="cur" id="cursorDot" aria-hidden="true"></div>
+  <div class="cur-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand magnet" href="#home" aria-label="Kiarash Jalali — home">
+        <span class="brand-mark">KJ</span>
+        <span>Kiarash Jalali<small>FRONT-END / UI</small></span>
+      </a>
+
+      <nav class="nav-links" id="navlinks" aria-label="Primary navigation">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#education" data-i18n="nav.education">Education</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#projects" data-i18n="nav.work">Work</a>
+        <a href="#ai" data-i18n="nav.ai">AI</a>
+        <a href="#lab" data-i18n="nav.lab">Lab</a>
+      </nav>
+
+      <div class="nav-tools">
+        <button class="icobtn langbtn hot-target" id="langBtn" type="button" aria-label="Switch language">EN</button>
+        <button class="icobtn hot-target" id="themeBtn" type="button" aria-label="Toggle color theme">
+          <svg id="icoSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg id="icoMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a class="hire magnet" href="#contact"><span data-i18n="nav.contact">Contact</span><span aria-hidden="true">↗</span></a>
+        <button class="icobtn burger hot-target" id="burger" type="button" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <button class="icobtn dclose" id="dclose" type="button" aria-label="Close menu">✕</button>
+    <a href="#about"><span data-i18n="nav.about">About</span><i>01</i></a>
+    <a href="#education"><span data-i18n="nav.education">Education</span><i>02</i></a>
+    <a href="#skills"><span data-i18n="nav.skills">Skills</span><i>03</i></a>
+    <a href="#projects"><span data-i18n="nav.work">Work</span><i>04</i></a>
+    <a href="#ai"><span data-i18n="nav.ai">AI</span><i>05</i></a>
+    <a href="#lab"><span data-i18n="nav.lab">Lab</span><i>06</i></a>
+    <a href="#contact"><span data-i18n="nav.contact">Contact</span><i>07</i></a>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="pill rv"><span class="dot"></span><span data-i18n="hero.status">Open to interesting work & projects</span></span>
+            <h1 class="rv d1"><span data-i18n="hero.hello">Hi, I'm</span><br /><span class="grad">Kiarash Jalali.</span></h1>
+            <div class="typed-line rv d2" id="typed" aria-live="polite"></div>
+            <p class="hero-lead rv d2" data-i18n="hero.lead">Front-end developer and Computer Engineering student building responsive, bilingual interfaces with code, product thinking and AI as part of the toolbox.</p>
+            <div class="hero-cta rv d3">
+              <a class="btn btn-primary magnet" href="#projects"><span data-i18n="hero.work">See my work</span><span aria-hidden="true">↓</span></a>
+              <a class="btn btn-ghost magnet" href="#contact"><span data-i18n="hero.contact">Let's talk</span><span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="quick rv d3">
+              <a class="chip hot-target" href="https://github.com/kiarash-jalali" target="_blank" rel="noopener"><span class="chip-dot"></span>GitHub</a>
+              <button class="chip hot-target" type="button" data-copy-email><span class="chip-dot alt"></span><span data-i18n="hero.copyEmail">Copy email</span></button>
+              <span class="chip static"><span class="chip-dot warm"></span><span data-i18n="hero.location">Iran · EN / FA</span></span>
+            </div>
+          </div>
+
+          <div class="hero-art rv d2" id="heroArt">
+            <div class="card3d glowy" id="card3d">
+              <div class="avatar-frame">
+                <img src="/public/images/kiarash.webp" alt="Kiarash Jalali" />
+                <div class="avatar-overlay"></div>
+                <span class="portrait-label">KJ / 2026</span>
+              </div>
+              <div class="ring r1"></div><div class="ring r2"></div>
+            </div>
+            <div class="float-badge fb1"><span class="swatchdot purple"></span><b>React / Next.js</b></div>
+            <div class="float-badge fb2"><span class="swatchdot cyan"></span><b>EN ↔ FA / RTL</b></div>
+            <div class="float-badge fb3"><span class="swatchdot amber"></span><b>AI + judgment</b></div>
+          </div>
+        </div>
+
+        <div class="hero-stats rv d4">
+          <div class="stat"><b data-count="4">0</b><span data-i18n="hero.statProjects">Projects</span></div>
+          <div class="stat"><b data-count="2">0</b><span data-i18n="hero.statLanguages">Languages</span></div>
+          <div class="stat"><b data-count="1">0</b><span data-i18n="hero.statProduct">Active product</span></div>
+          <div class="stat"><b>∞</b><span data-i18n="hero.statCuriosity">Curiosity</span></div>
+        </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span data-i18n="hero.scroll">SCROLL</span><div class="mouse"><i></i></div></div>
+    </section>
+
+    <div class="marquee" aria-label="Technology stack">
+      <div class="mq-track" id="mqTrack"></div>
+    </div>
+
+    <section id="about">
+      <div class="wrap">
+        <header class="shead rv">
+          <span class="kicker">01 — <span data-i18n="about.kicker">ABOUT</span></span>
+          <h2 data-i18n="about.title">A developer who cares how it feels.</h2>
+          <p data-i18n="about.subtitle">The code matters. So does the tiny moment when a hover, transition or layout makes an interface feel deliberate.</p>
+        </header>
+
+        <div class="about-grid">
+          <aside class="about-card rv glowy">
+            <div class="mini">
+              <img class="mini-av photo" src="/public/images/kiarash.webp" alt="Kiarash Jalali portrait" />
+              <div><h3>Kiarash Jalali</h3><p class="role" data-i18n="about.role">Front-end developer / student</p></div>
+            </div>
+            <div class="facts" id="facts"></div>
+          </aside>
+
+          <div class="about-copy rv d1">
+            <p data-i18n-html="about.p1"></p>
+            <p data-i18n-html="about.p2"></p>
+            <p data-i18n-html="about.p3"></p>
+            <div class="services" id="services"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section-alt">
+      <div class="wrap">
+        <header class="shead rv">
+          <span class="kicker">02 — <span data-i18n="education.kicker">PATH</span></span>
+          <h2 data-i18n="education.title">A slightly unusual route into software.</h2>
+          <p data-i18n="education.subtitle">Engineering first, web development next, Computer Engineering now. The path changed; the habit of figuring things out stayed.</p>
+        </header>
+        <div class="tl rv" id="timeline"></div>
+      </div>
+    </section>
+
+    <section id="interests">
+      <div class="wrap">
+        <header class="shead rv">
+          <span class="kicker">03 — <span data-i18n="interests.kicker">OFF-SCREEN</span></span>
+          <h2 data-i18n="interests.title">There is life outside the editor.</h2>
+          <p data-i18n="interests.subtitle">A few things that keep the tabs in my brain from multiplying forever.</p>
+        </header>
+        <div class="int-grid" id="interestGrid"></div>
+      </div>
+    </section>
+
+    <section id="skills" class="section-alt">
+      <div class="wrap">
+        <header class="shead rv">
+          <span class="kicker">04 — <span data-i18n="skills.kicker">TOOLBOX</span></span>
+          <h2 data-i18n="skills.title">Skills, with context.</h2>
+          <p data-i18n="skills.subtitle">No fake “React 87%” scores. The bars show how each tool currently fits into my work, and the projects below are the evidence.</p>
+        </header>
+        <div class="skills-grid">
+          <div id="skillBlocks"></div>
+          <div class="tools rv d1 glowy">
+            <h3><span class="section-icon">✦</span><span data-i18n="skills.daily">Daily drivers & project tools</span></h3>
+            <div class="tool-grid" id="toolGrid"></div>
+            <div class="nowlearn"><b data-i18n="skills.currently">CURRENTLY EXPANDING</b><p data-i18n="skills.learning">React patterns · TypeScript · Next.js architecture · Supabase · accessibility · better motion and product thinking.</p></div>
+          </div>
+        </div>
+        <div class="evidence-panel rv" id="skillEvidence">
+          <div><span class="kicker plain" data-i18n="skills.evidenceKicker">EVIDENCE MODE</span><h3 data-i18n="skills.evidenceTitle">Hover a skill. See where I used it.</h3></div>
+          <div class="evidence-skills" id="evidenceSkills"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <header class="shead rv">
+          <span class="kicker">05 — <span data-i18n="projects.kicker">SELECTED WORK</span></span>
+          <h2 data-i18n="projects.title">From replicas to a real product.</h2>
+          <p data-i18n="projects.subtitle">The older projects show the foundations. Rootine shows where those foundations are going.</p>
+        </header>
+
+        <div id="featuredProject"></div>
+
+        <div class="projects-toolbar rv">
+          <div class="filters" id="filters"></div>
+          <p class="projects-note" data-i18n="projects.note">Click any project for the deeper breakdown.</p>
+        </div>
+        <div class="pj-grid" id="projectGrid"></div>
+      </div>
+    </section>
+
+    <section id="ai" class="section-alt ai-section">
+      <div class="wrap">
+        <header class="shead rv">
+          <span class="kicker">06 — <span data-i18n="ai.kicker">AI, OPENLY</span></span>
+          <h2 data-i18n="ai.title">I work with AI, and I'm good at using it.</h2>
+          <p data-i18n="ai.subtitle">Not as a substitute for understanding the work. As a multiplier for exploring, debugging, reviewing and iterating faster.</p>
+        </header>
+
+        <div class="ai-grid">
+          <div class="ai-story rv glowy">
+            <p data-i18n-html="ai.body"></p>
+            <div class="ai-steps" id="aiSteps" role="tablist" aria-label="AI workflow"></div>
+            <div class="ai-step-detail" id="aiStepDetail" aria-live="polite"></div>
+          </div>
+
+          <div class="prompt-lab rv d1 glowy">
+            <div class="prompt-top"><span class="kicker plain" data-i18n="ai.demoKicker">PROMPT REFINER</span><span class="demo-note" data-i18n="ai.demoNote">illustrative · no API call</span></div>
+            <div class="prompt-grid">
+              <div><span class="prompt-label" data-i18n="ai.before">Rough prompt</span><div class="prompt-box" id="promptBefore"></div></div>
+              <div><span class="prompt-label" data-i18n="ai.after">Refined prompt</span><div class="prompt-box after" id="promptAfter">···</div></div>
+            </div>
+            <div class="prompt-actions"><button class="btn btn-primary magnet" id="refinePrompt" type="button" data-i18n="ai.refine">Refine it</button><button class="btn btn-ghost" id="nextPrompt" type="button" data-i18n="ai.next">Try another</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab" class="lab-section">
+      <div class="wrap">
+        <header class="shead rv compact">
+          <span class="kicker">07 — <span data-i18n="lab.kicker">THE LAB</span></span>
+          <h2 data-i18n="lab.title">Small things, because small things matter.</h2>
+          <p data-i18n="lab.subtitle">A short interaction playground — the Rauno-ish corner of the site. Tiny experiments, no giant framework required.</p>
+        </header>
+        <div class="lab-grid">
+          <article class="lab-card glowy rv" id="magnetLab">
+            <span class="lab-num">EXP. 001</span>
+            <h3 data-i18n="lab.magnetTitle">Magnetic target</h3>
+            <p data-i18n="lab.magnetBody">Move around the button. It responds without hijacking the cursor.</p>
+            <div class="lab-stage"><button class="orbit-btn magnet strong-magnet" type="button"><span>↗</span></button><div class="orbit-ring"></div></div>
+          </article>
+          <article class="lab-card glowy rv d1" id="physicsLab">
+            <span class="lab-num">EXP. 002</span>
+            <h3 data-i18n="lab.trailTitle">Springy switches</h3>
+            <p data-i18n="lab.trailBody">Simple CSS variables, pointer position and easing — enough to make controls feel less static.</p>
+            <div class="switch-row" id="switchRow"><button class="micro-switch active" type="button">01</button><button class="micro-switch" type="button">02</button><button class="micro-switch" type="button">03</button><span class="switch-indicator"></span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-alt contact-section">
+      <div class="wrap">
+        <div class="contact-grid">
+          <div class="rv">
+            <span class="kicker">08 — <span data-i18n="contact.kicker">CONTACT</span></span>
+            <h2 class="contact-big" data-i18n="contact.title">Have a role, project, or weirdly good idea?</h2>
+            <p class="contact-lead" data-i18n="contact.body">I'm studying, building and improving for the next while — but I'm open to good frontend work, collaborations and interesting projects.</p>
+            <div class="contact-links" id="contactLinks"></div>
+          </div>
+          <form class="contact-form rv d1 glowy" id="contactForm">
+            <label><span data-i18n="contact.name">Your name</span><input id="contactName" name="name" autocomplete="name" required /></label>
+            <label><span data-i18n="contact.email">Your email</span><input id="contactEmail" name="email" type="email" autocomplete="email" required /></label>
+            <label><span data-i18n="contact.message">What are we talking about?</span><textarea id="contactMessage" name="message" rows="5" required></textarea></label>
+            <button class="btn btn-primary magnet" type="submit"><span data-i18n="contact.send">Open email draft</span><span aria-hidden="true">↗</span></button>
+            <p class="form-note" data-i18n="contact.formNote">No backend tricks here — this opens your email client with the message filled in.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><span>© <span id="year"></span> Kiarash Jalali</span><span class="footer-note" data-i18n="footer.note">Built with HTML, CSS & JavaScript. AI assisted. Human reviewed.</span><a href="#home" data-i18n="footer.top">Back to top ↑</a></div>
+  </footer>
+
+  <button class="totop hot-target" id="totop" type="button" aria-label="Back to top">↑</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="project-modal" id="projectModal" aria-labelledby="modalTitle">
+    <button class="modal-close hot-target" id="modalClose" type="button" aria-label="Close project details">✕</button>
+    <div class="modal-art" id="modalArt"></div>
+    <div class="modal-content">
+      <span class="kicker plain" id="modalEyebrow"></span>
+      <h2 id="modalTitle"></h2>
+      <p class="modal-lead" id="modalDescription"></p>
+      <div class="modal-tags" id="modalTags"></div>
+      <div class="modal-columns"><div><h3 data-i18n="projects.whatBuilt">What I built / learned</h3><ul id="modalFeatures"></ul></div><div><h3 data-i18n="projects.whyMatters">Why it matters</h3><p id="modalWhy"></p></div></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </dialog>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
