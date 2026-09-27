@@ -82,8 +82,8 @@ export const content = {
       kicker: "THE LAB",
       title: "Small things, because small things matter.",
       subtitle: "A short interaction playground — the Rauno-ish corner of the site. Tiny experiments, no giant framework required.",
-      magnetTitle: "Gooey physics ball",
-      magnetBody: "Grab it, throw it, press it into a wall, and watch the impact squash before it springs back.",
+      magnetTitle: "Soft-body physics",
+      magnetBody: "Grab the blob itself. Its perimeter is physically simulated, so it stretches, squashes, wobbles and rebounds continuously instead of swapping between canned shapes.",
       trailTitle: "Springy switches",
       trailBody: "Choose one of 100 cells. The active state flows to the new cell while the grid ripples around it."
     },
@@ -184,8 +184,8 @@ export const content = {
       kicker: "آزمایشگاه",
       title: "جزئیات کوچک، چون جزئیات مهم‌اند.",
       subtitle: "یک گوشه‌ی کوتاه برای بازی با تعامل‌ها — بخش کمی Rauno-طور سایت. آزمایش‌های کوچک، بدون فریم‌ورک غول‌پیکر.",
-      magnetTitle: "توپ فیزیکی ژله‌ای",
-      magnetBody: "توپ را بگیر و پرتاب کن یا به دیواره فشار بده؛ هنگام برخورد فشرده می‌شود و بعد دوباره به شکل خودش برمی‌گردد.",
+      magnetTitle: "فیزیک جسم نرم",
+      magnetBody: "خود جسم نرم را بگیر و پرتاب کن؛ محیط آن واقعاً شبیه‌سازی می‌شود، بنابراین به‌صورت پیوسته کش می‌آید، فشرده می‌شود، موج می‌زند و برمی‌گردد؛ نه اینکه بین چند شکل آماده جابه‌جا شود.",
       trailTitle: "سوییچ‌های فنری",
       trailBody: "یکی از ۱۰۰ خانه را انتخاب کن. حالت فعال با حرکتی روان به خانه جدید می‌رود و موج فنری در شبکه پخش می‌شود."
     },
