@@ -27,7 +27,7 @@ function safePath(urlPath) {
 
   if (decoded.startsWith("/vendor/rapier2d/")) {
     const relative = decoded.slice("/vendor/rapier2d/".length);
-    return resolve(process.cwd(), "node_modules/@dimforge/rapier2d", relative);
+    return resolve(process.cwd(), "node_modules/@dimforge/rapier2d-compat", relative);
   }
 
   const clean = normalize(decoded).replace(/^(\.\.(\/|\\|$))+/, "");
@@ -37,7 +37,7 @@ function safePath(urlPath) {
 const server = createServer(async (req, res) => {
   try {
     let filePath = safePath(req.url || "/");
-    const packageRoot = resolve(process.cwd(), "node_modules/@dimforge/rapier2d");
+    const packageRoot = resolve(process.cwd(), "node_modules/@dimforge/rapier2d-compat");
     if (!filePath.startsWith(root) && !filePath.startsWith(packageRoot)) {
       throw new Error("Path outside root");
     }
