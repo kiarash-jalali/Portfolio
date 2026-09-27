@@ -25,6 +25,7 @@ export function initTheme() {
 }
 
 export function initGlobalEffects() {
+  document.documentElement.classList.add("reveal-enabled");
   initScrollUi();
   initCursor();
   initDrawer();
