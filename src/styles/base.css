@@ -172,7 +172,7 @@ section {
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: .72rem;
+  font-size: 1.5rem;
   letter-spacing: .22em;
   color: var(--acc2);
   text-transform: uppercase;

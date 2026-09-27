@@ -23,7 +23,7 @@ export const content = {
       role: "Front-end developer / student",
       p1: "I started with <strong>HTML and CSS</strong>, recreating real interfaces until spacing, layout and responsiveness stopped feeling mysterious. JavaScript came next, then React and product-level work through Rootine.",
       p2: "I like front-end because it sits between logic and taste. A page can technically work and still feel wrong. I enjoy the part where structure, motion, typography and interaction start working together.",
-      p3: "I also work openly with <strong>AI</strong>. I use it to explore, debug, compare approaches and move faster — then I read the output, challenge it and make it fit the project instead of treating generation as the finish line."
+      p3: "I also work openly with <strong>AI</strong> (not as a <strong>VIBE</strong> coder). I use it to explore, debug, compare approaches and move faster than i could be on myself searching in stackoverflow or elsewhere — then I read the output, challenge it and make it fit the project instead of treating the generated thing as the finish line."
     },
     education: {
       kicker: "PATH",
