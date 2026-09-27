@@ -244,14 +244,17 @@
           <article class="lab-card glowy rv" id="magnetLab">
             <span class="lab-num">EXP. 001</span>
             <h3 data-i18n="lab.magnetTitle">Magnetic target</h3>
-            <p data-i18n="lab.magnetBody">Move around the button. It responds without hijacking the cursor.</p>
-            <div class="lab-stage"><button class="orbit-btn magnet strong-magnet" type="button"><span>↗</span></button><div class="orbit-ring"></div></div>
+            <p data-i18n="lab.magnetBody">Move anywhere in this card. On touch, grab the ball and throw it.</p>
+            <div class="lab-stage" id="magnetStage">
+              <button class="orbit-btn" id="magnetTarget" type="button" aria-label="Interactive physics target"><span>↗</span></button>
+              <div class="orbit-ring" aria-hidden="true"></div>
+            </div>
           </article>
           <article class="lab-card glowy rv d1" id="physicsLab">
             <span class="lab-num">EXP. 002</span>
             <h3 data-i18n="lab.trailTitle">Springy switches</h3>
-            <p data-i18n="lab.trailBody">Simple CSS variables, pointer position and easing — enough to make controls feel less static.</p>
-            <div class="switch-row" id="switchRow"><button class="micro-switch active" type="button">01</button><button class="micro-switch" type="button">02</button><button class="micro-switch" type="button">03</button><span class="switch-indicator"></span></div>
+            <p data-i18n="lab.trailBody">Choose one of 100 cells. The active state flows to the new cell while the grid ripples around it.</p>
+            <div class="spring-grid" id="springGrid" aria-label="10 by 10 spring switch grid"></div>
           </article>
         </div>
       </div>
