@@ -1,5 +1,3 @@
-import RAPIER from "/vendor/rapier2d/rapier.es.js";
-
 let rapierReady;
 
 export function initLab() {
@@ -18,9 +16,16 @@ async function initSoftBodyBall() {
   if (!stage || !svg || !blob || !rim || !highlight || !shadow || stage.dataset.softBodyBound) return;
   stage.dataset.softBodyBound = "1";
 
+  let RAPIER;
+
   try {
-    rapierReady ||= RAPIER.init();
-    await rapierReady;
+    rapierReady ||= import("/vendor/rapier2d/rapier.es.js").then(async (module) => {
+      const api = module.default || module;
+      await api.init();
+      return api;
+    });
+
+    RAPIER = await rapierReady;
   } catch (error) {
     console.error("Rapier failed to initialize:", error);
     stage.classList.add("physics-error");
