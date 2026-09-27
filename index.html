@@ -102,6 +102,9 @@
               </div>
               <div class="ring r1"></div><div class="ring r2"></div>
             </div>
+            <div class="float-badge fb1"><span class="swatchdot purple"></span><b>HTML.CSS.JS</b></div>
+            <div class="float-badge fb2"><span class="swatchdot cyan"></span><b></b></div>
+            <div class="float-badge fb3"><span class="swatchdot amber"></span><b>AI + judgment</b></div>
           </div>
         </div>
 
@@ -183,6 +186,10 @@
             <div class="nowlearn"><b data-i18n="skills.currently">CURRENTLY EXPANDING</b><p data-i18n="skills.learning">React patterns · TypeScript · Next.js architecture · Supabase · accessibility · better motion and product thinking.</p></div>
           </div>
         </div>
+        <div class="evidence-panel rv" id="skillEvidence">
+          <div><span class="kicker plain" data-i18n="skills.evidenceKicker">EVIDENCE MODE</span><h3 data-i18n="skills.evidenceTitle">Hover a skill. See where I used it.</h3></div>
+          <div class="evidence-skills" id="evidenceSkills"></div>
+        </div>
       </div>
     </section>
 
@@ -242,14 +249,14 @@
           <article class="lab-card glowy rv" id="magnetLab">
             <span class="lab-num">EXP. 001</span>
             <h3 data-i18n="lab.magnetTitle">Magnetic target</h3>
-            <p data-i18n="lab.magnetBody">Move anywhere in this card. The whole area acts as the magnetic field.</p>
-            <div class="lab-stage"><button class="orbit-btn" id="magnetTarget" type="button"><span>↗</span></button><div class="orbit-ring"></div></div>
+            <p data-i18n="lab.magnetBody">Move around the button. It responds without hijacking the cursor.</p>
+            <div class="lab-stage"><button class="orbit-btn magnet strong-magnet" type="button"><span>↗</span></button><div class="orbit-ring"></div></div>
           </article>
           <article class="lab-card glowy rv d1" id="physicsLab">
             <span class="lab-num">EXP. 002</span>
             <h3 data-i18n="lab.trailTitle">Springy switches</h3>
-            <p data-i18n="lab.trailBody">A 10×10 field of switches. Touch one and the spring travels outward in every direction.</p>
-            <div class="spring-grid" id="springGrid" aria-label="10 by 10 spring switch grid"></div>
+            <p data-i18n="lab.trailBody">Simple CSS variables, pointer position and easing — enough to make controls feel less static.</p>
+            <div class="switch-row" id="switchRow"><button class="micro-switch active" type="button">01</button><button class="micro-switch" type="button">02</button><button class="micro-switch" type="button">03</button><span class="switch-indicator"></span></div>
           </article>
         </div>
       </div>
