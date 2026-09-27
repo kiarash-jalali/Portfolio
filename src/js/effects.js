@@ -72,9 +72,34 @@ function initCursor() {
   const dot = document.querySelector("#cursorDot");
   const ring = document.querySelector("#cursorRing");
   if (!dot || !ring) return;
+
   let rx = innerWidth / 2, ry = innerHeight / 2, mx = rx, my = ry;
-  const move = (event) => { mx = event.clientX; my = event.clientY; dot.style.transform = `translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`; };
+  let cursorVisible = false;
+
+  const showCursor = () => {
+    if (cursorVisible) return;
+    cursorVisible = true;
+    dot.classList.add("ready");
+    ring.classList.add("ready");
+  };
+
+  const hideCursor = () => {
+    cursorVisible = false;
+    dot.classList.remove("ready");
+    ring.classList.remove("ready", "hot", "press");
+  };
+
+  const move = (event) => {
+    mx = event.clientX;
+    my = event.clientY;
+    dot.style.transform = `translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;
+    showCursor();
+  };
+
   addEventListener("pointermove", move, { passive: true });
+  document.documentElement.addEventListener("mouseleave", hideCursor);
+  addEventListener("blur", hideCursor);
+
   document.addEventListener("pointerover", (event) => {
     if (event.target.closest("a,button,input,textarea,.hot-target,.pj,.tool,.int,.svc")) ring.classList.add("hot");
   });
@@ -83,11 +108,14 @@ function initCursor() {
   });
   addEventListener("pointerdown", () => ring.classList.add("press"));
   addEventListener("pointerup", () => ring.classList.remove("press"));
+
   function tick() {
-    rx += (mx - rx) * .16; ry += (my - ry) * .16;
+    rx += (mx - rx) * .16;
+    ry += (my - ry) * .16;
     ring.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
     requestAnimationFrame(tick);
   }
+
   requestAnimationFrame(tick);
 }
 
