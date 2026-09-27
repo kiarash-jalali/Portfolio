@@ -243,11 +243,14 @@
         <div class="lab-grid">
           <article class="lab-card glowy rv" id="magnetLab">
             <span class="lab-num">EXP. 001</span>
-            <h3 data-i18n="lab.magnetTitle">Magnetic target</h3>
-            <p data-i18n="lab.magnetBody">Move anywhere in this card. On touch, grab the ball and throw it.</p>
-            <div class="lab-stage" id="magnetStage">
-              <button class="orbit-btn" id="magnetTarget" type="button" aria-label="Interactive physics target"><span>↗</span></button>
-              <div class="orbit-ring" aria-hidden="true"></div>
+            <h3 data-i18n="lab.magnetTitle">Gooey physics ball</h3>
+            <p data-i18n="lab.magnetBody">Grab it, throw it, and let the walls push it out of shape before it springs back.</p>
+            <div class="lab-stage goo-stage" id="magnetStage">
+              <button class="goo-ball" id="physicsBall" type="button" aria-label="Grab and throw the physics ball">
+                <span class="goo-ball-visual" aria-hidden="true">
+                  <span class="goo-ball-shine"></span>
+                </span>
+              </button>
             </div>
           </article>
           <article class="lab-card glowy rv d1" id="physicsLab">
@@ -301,6 +304,7 @@
     </div>
   </dialog>
 
+  <script src="/public/vendor/matter.min.js"></script>
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
