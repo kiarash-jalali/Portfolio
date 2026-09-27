@@ -17,7 +17,6 @@ const types = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
-  ".wasm": "application/wasm",
   ".ico": "image/x-icon",
   ".txt": "text/plain; charset=utf-8"
 };
@@ -25,10 +24,6 @@ const types = {
 function safePath(urlPath) {
   const decoded = decodeURIComponent(urlPath.split("?")[0]);
 
-  if (decoded.startsWith("/vendor/rapier2d/")) {
-    const relative = decoded.slice("/vendor/rapier2d/".length);
-    return resolve(process.cwd(), "node_modules/@dimforge/rapier2d-compat", relative);
-  }
 
   const clean = normalize(decoded).replace(/^(\.\.(\/|\\|$))+/, "");
   return resolve(root, `.${clean}`);
@@ -37,10 +32,7 @@ function safePath(urlPath) {
 const server = createServer(async (req, res) => {
   try {
     let filePath = safePath(req.url || "/");
-    const packageRoot = resolve(process.cwd(), "node_modules/@dimforge/rapier2d-compat");
-    if (!filePath.startsWith(root) && !filePath.startsWith(packageRoot)) {
-      throw new Error("Path outside root");
-    }
+    if (!filePath.startsWith(root)) throw new Error("Path outside root");
 
     const info = await stat(filePath).catch(() => null);
     if (info?.isDirectory()) filePath = join(filePath, "index.html");
