@@ -387,4 +387,4 @@ export const contactLinks = [
   { label: { en: "Telegram", fa: "تلگرام" }, value: "@Kiarash_jal", href: "https://t.me/Kiarash_jal" }
 ];
 
-export const marqueeStack = ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Sass", "Git", "GitHub", "Vite", "Responsive Design", "RTL / i18n", "Accessibility", "PWA", "AI-assisted workflow"];
+export const marqueeStack = ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Sass", "Git", "GitHub", "Vite", "Responsive Design", "Accessibility", "PWA", "AI-assisted workflow"];
