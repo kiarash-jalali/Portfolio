@@ -4,7 +4,7 @@ import { initTheme, initGlobalEffects, refreshEffects } from "./effects.js";
 import { initHeroTyping } from "./hero.js";
 import { initProjects, refreshProjects } from "./projects.js";
 import { initAI, refreshAI } from "./ai.js";
-import { initLab } from "./lab.js?v=20260927-5";
+import { initLab } from "./lab.js?v=20260927-6";
 import { initContact } from "./contact.js";
 
 initTheme();
