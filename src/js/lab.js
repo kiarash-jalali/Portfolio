@@ -31,7 +31,8 @@ async function initMatterSoftBody() {
     Bodies,
     Composite,
     Constraint,
-    Engine
+    Engine,
+    Sleeping
   } = Matter;
 
   const fixedStep = 1000 / 120;
@@ -366,7 +367,7 @@ async function initMatterSoftBody() {
         x: particle.velocity.x * .42 + limited.x * .58,
         y: particle.velocity.y * .42 + limited.y * .58
       });
-      Body.setSleeping(particle, false);
+      Sleeping.set(particle, false);
     }
 
     activePointer = null;
@@ -403,7 +404,7 @@ async function initMatterSoftBody() {
         x: particle.velocity.x + impulse.x,
         y: particle.velocity.y + impulse.y
       });
-      Body.setSleeping(particle, false);
+      Sleeping.set(particle, false);
     }
   });
 
