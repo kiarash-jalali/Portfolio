@@ -245,12 +245,26 @@
             <span class="lab-num">EXP. 001</span>
             <h3 data-i18n="lab.magnetTitle">Gooey physics ball</h3>
             <p data-i18n="lab.magnetBody">Grab it, throw it, and let the walls push it out of shape before it springs back.</p>
-            <div class="lab-stage goo-stage" id="magnetStage">
-              <button class="goo-ball" id="physicsBall" type="button" aria-label="Grab and throw the physics ball">
-                <span class="goo-ball-visual" aria-hidden="true">
-                  <span class="goo-ball-shine"></span>
-                </span>
-              </button>
+            <div class="lab-stage goo-stage" id="magnetStage" tabindex="0" aria-label="Soft-body physics playground. Drag and throw the blob.">
+              <svg class="goo-physics-svg" id="gooPhysicsSvg" viewBox="0 0 520 300" aria-hidden="true">
+                <defs>
+                  <radialGradient id="gooFill" cx="30%" cy="22%" r="82%">
+                    <stop offset="0%" stop-color="#9db2ff" />
+                    <stop offset="34%" stop-color="#6e72ff" />
+                    <stop offset="72%" stop-color="#3baee9" />
+                    <stop offset="100%" stop-color="#1ba3c8" />
+                  </radialGradient>
+                  <filter id="gooGlow" x="-60%" y="-60%" width="220%" height="220%">
+                    <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#4c6fff" flood-opacity=".30" />
+                    <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#22d3ee" flood-opacity=".18" />
+                  </filter>
+                </defs>
+                <ellipse class="goo-floor-shadow" id="gooFloorShadow" cx="130" cy="268" rx="45" ry="10"></ellipse>
+                <path class="goo-blob" id="gooBlob" filter="url(#gooGlow)"></path>
+                <path class="goo-blob-rim" id="gooBlobRim"></path>
+                <ellipse class="goo-highlight" id="gooHighlight" cx="112" cy="72" rx="13" ry="8"></ellipse>
+              </svg>
+              <span class="goo-hint" aria-hidden="true">drag · throw · squish</span>
             </div>
           </article>
           <article class="lab-card glowy rv d1" id="physicsLab">
@@ -304,7 +318,6 @@
     </div>
   </dialog>
 
-  <script src="/public/vendor/matter.min.js"></script>
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
