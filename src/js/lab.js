@@ -1,355 +1,319 @@
+import RAPIER from "/vendor/rapier2d/rapier.es.js";
+
+let rapierReady;
+
 export function initLab() {
-  initMatterBall();
   initSpringGrid();
+  initSoftBodyBall();
 }
 
-function initMatterBall() {
+async function initSoftBodyBall() {
   const stage = document.querySelector("#magnetStage");
-  const ballElement = document.querySelector("#physicsBall");
-  const ballVisual = ballElement?.querySelector(".goo-ball-visual");
-  const Matter = window.Matter;
+  const svg = document.querySelector("#gooPhysicsSvg");
+  const blob = document.querySelector("#gooBlob");
+  const rim = document.querySelector("#gooBlobRim");
+  const highlight = document.querySelector("#gooHighlight");
+  const shadow = document.querySelector("#gooFloorShadow");
 
-  if (!stage || !ballElement || !ballVisual || stage.dataset.physicsBound) return;
-  stage.dataset.physicsBound = "1";
+  if (!stage || !svg || !blob || !rim || !highlight || !shadow || stage.dataset.softBodyBound) return;
+  stage.dataset.softBodyBound = "1";
 
-  if (!Matter) {
-    console.warn("Matter.js did not load, so the physics Lab experiment is unavailable.");
-    ballElement.disabled = true;
+  try {
+    rapierReady ||= RAPIER.init();
+    await rapierReady;
+  } catch (error) {
+    console.error("Rapier failed to initialize:", error);
+    stage.classList.add("physics-error");
     return;
   }
 
-  const { Body, Bodies, Composite, Engine, Events, Sleeping } = Matter;
-  const engine = Engine.create({ enableSleeping: true });
-
-  engine.world.gravity.y = 1;
-  engine.world.gravity.scale = .00105;
-
-  const wallThickness = 70;
-  const fixedStep = 1000 / 60;
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  let radius = Math.max(30, ballElement.offsetWidth / 2);
-  let walls = [];
-  let dragging = false;
-  let activePointer = null;
-  let grabOffset = { x: 0, y: 0 };
-  let pointerVelocity = { x: 0, y: 0 };
-  let previousPointer = { x: 0, y: 0, time: 0 };
-
-  let squash = 0;
-  let squashVelocity = 0;
-  let squashAngle = 0;
-  let dragPress = 0;
-  let dragPressAngle = 0;
-
-  const size = () => ({
-    width: stage.clientWidth,
-    height: stage.clientHeight
-  });
-
-  const ballBody = Bodies.circle(
-    Math.max(radius, stage.clientWidth * .5),
-    Math.max(radius, stage.clientHeight * .3),
-    radius,
-    {
-      label: "goo-ball",
-      restitution: .82,
-      friction: .015,
-      frictionStatic: .02,
-      frictionAir: .009,
-      density: .0017,
-      sleepThreshold: 85
-    }
-  );
-
-  Composite.add(engine.world, ballBody);
-
-  function rebuildWalls() {
-    if (walls.length) Composite.remove(engine.world, walls);
-
-    const { width, height } = size();
-
-    walls = [
-      Bodies.rectangle(
-        width / 2,
-        -wallThickness / 2,
-        width + wallThickness * 2,
-        wallThickness,
-        { isStatic: true, label: "wall-top" }
-      ),
-      Bodies.rectangle(
-        width / 2,
-        height + wallThickness / 2,
-        width + wallThickness * 2,
-        wallThickness,
-        { isStatic: true, label: "wall-bottom" }
-      ),
-      Bodies.rectangle(
-        -wallThickness / 2,
-        height / 2,
-        wallThickness,
-        height + wallThickness * 2,
-        { isStatic: true, label: "wall-left" }
-      ),
-      Bodies.rectangle(
-        width + wallThickness / 2,
-        height / 2,
-        wallThickness,
-        height + wallThickness * 2,
-        { isStatic: true, label: "wall-right" }
-      )
-    ];
-
-    Composite.add(engine.world, walls);
-
-    const clampedX = clamp(ballBody.position.x, radius, Math.max(radius, width - radius));
-    const clampedY = clamp(ballBody.position.y, radius, Math.max(radius, height - radius));
-
-    Body.setPosition(ballBody, { x: clampedX, y: clampedY });
-  }
-
-  function resizeBallAndWalls() {
-    const nextRadius = Math.max(30, ballElement.offsetWidth / 2);
-
-    if (Math.abs(nextRadius - radius) > .5) {
-      const ratio = nextRadius / radius;
-      Body.scale(ballBody, ratio, ratio);
-      radius = nextRadius;
-    }
-
-    rebuildWalls();
-  }
-
-  function triggerSquash(angle, speed) {
-    if (reducedMotion || dragging || speed < 2.2) return;
-
-    const amount = clamp((speed - 1.5) / 30, .07, .34);
-
-    if (amount > squash) squash = amount;
-    squashVelocity += amount * 1.15;
-    squashAngle = angle;
-  }
-
-  Events.on(engine, "collisionStart", (event) => {
-    for (const pair of event.pairs) {
-      const touchesBall = pair.bodyA === ballBody || pair.bodyB === ballBody;
-      if (!touchesBall) continue;
-
-      const normal = pair.collision.normal;
-      const horizontalWall = Math.abs(normal.x) > Math.abs(normal.y);
-      const angle = horizontalWall ? 0 : Math.PI / 2;
-
-      triggerSquash(angle, ballBody.speed);
-    }
-  });
-
-  function updateSquash(deltaSeconds) {
-    if (reducedMotion) {
-      squash = 0;
-      squashVelocity = 0;
-      return;
-    }
-
-    if (dragging && dragPress > 0) {
-      squash = dragPress;
-      squashAngle = dragPressAngle;
-      squashVelocity = 0;
-      return;
-    }
-
-    const stiffness = 105;
-    const damping = 13;
-
-    squashVelocity += (-squash * stiffness - squashVelocity * damping) * deltaSeconds;
-    squash += squashVelocity * deltaSeconds;
-    squash = clamp(squash, -.16, .38);
-  }
-
-  function paintBall() {
-    const x = ballBody.position.x - radius;
-    const y = ballBody.position.y - radius;
-
-    ballElement.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-
-    const speed = ballBody.speed;
-    const impactActive = Math.abs(squash) > .012;
-
-    let angle = squashAngle;
-    let scaleX = 1;
-    let scaleY = 1;
-
-    if (impactActive) {
-      scaleX = clamp(1 - squash, .64, 1.22);
-      scaleY = clamp(1 + squash * .62, .82, 1.34);
-    } else if (!dragging && speed > 7 && !reducedMotion) {
-      const stretch = clamp((speed - 7) / 180, 0, .09);
-      angle = Math.atan2(ballBody.velocity.y, ballBody.velocity.x);
-      scaleX = 1 + stretch;
-      scaleY = 1 - stretch * .46;
-    }
-
-    ballVisual.style.transform =
-      `rotate(${angle}rad) scale(${scaleX}, ${scaleY})`;
-  }
-
-  function pointerPosition(event) {
-    const rect = stage.getBoundingClientRect();
-
-    return {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top,
-      width: rect.width,
-      height: rect.height
-    };
-  }
-
-  function updateDraggedPosition(event) {
-    const now = performance.now();
-    const pointer = pointerPosition(event);
-    const dt = Math.max(8, now - previousPointer.time);
-
-    const rawX = pointer.x - grabOffset.x;
-    const rawY = pointer.y - grabOffset.y;
-
-    const minX = radius;
-    const maxX = Math.max(radius, pointer.width - radius);
-    const minY = radius;
-    const maxY = Math.max(radius, pointer.height - radius);
-
-    const nextX = clamp(rawX, minX, maxX);
-    const nextY = clamp(rawY, minY, maxY);
-
-    pointerVelocity.x =
-      pointerVelocity.x * .35 +
-      ((event.clientX - previousPointer.x) / dt) * fixedStep * .65;
-
-    pointerVelocity.y =
-      pointerVelocity.y * .35 +
-      ((event.clientY - previousPointer.y) / dt) * fixedStep * .65;
-
-    const pressureLeft = Math.max(0, minX - rawX);
-    const pressureRight = Math.max(0, rawX - maxX);
-    const pressureTop = Math.max(0, minY - rawY);
-    const pressureBottom = Math.max(0, rawY - maxY);
-
-    const horizontalPressure = Math.max(pressureLeft, pressureRight);
-    const verticalPressure = Math.max(pressureTop, pressureBottom);
-
-    if (horizontalPressure > verticalPressure && horizontalPressure > 0) {
-      dragPress = clamp(horizontalPressure / (radius * 1.35), 0, .34);
-      dragPressAngle = 0;
-    } else if (verticalPressure > 0) {
-      dragPress = clamp(verticalPressure / (radius * 1.35), 0, .34);
-      dragPressAngle = Math.PI / 2;
-    } else {
-      dragPress = 0;
-    }
-
-    Body.setPosition(ballBody, { x: nextX, y: nextY });
-    Body.setVelocity(ballBody, { x: 0, y: 0 });
-    Sleeping.set(ballBody, false);
-
-    previousPointer = {
-      x: event.clientX,
-      y: event.clientY,
-      time: now
-    };
-  }
-
-  ballElement.addEventListener("pointerdown", (event) => {
-    event.preventDefault();
-
-    dragging = true;
-    activePointer = event.pointerId;
-    pointerVelocity = { x: 0, y: 0 };
-    dragPress = 0;
-
-    const pointer = pointerPosition(event);
-
-    grabOffset = {
-      x: pointer.x - ballBody.position.x,
-      y: pointer.y - ballBody.position.y
-    };
-
-    previousPointer = {
-      x: event.clientX,
-      y: event.clientY,
-      time: performance.now()
-    };
-
-    Body.setStatic(ballBody, true);
-    Sleeping.set(ballBody, false);
-
-    ballElement.setPointerCapture(event.pointerId);
-    ballElement.classList.add("dragging");
-  });
-
-  ballElement.addEventListener("pointermove", (event) => {
-    if (!dragging || event.pointerId !== activePointer) return;
-    updateDraggedPosition(event);
-  });
-
-  function releaseBall(event) {
-    if (!dragging || event.pointerId !== activePointer) return;
-
-    dragging = false;
-    activePointer = null;
-    dragPress = 0;
-
-    ballElement.classList.remove("dragging");
-
-    Body.setStatic(ballBody, false);
-    Sleeping.set(ballBody, false);
-
-    const velocity = limitVector(pointerVelocity, 34);
-    Body.setVelocity(ballBody, velocity);
-
-    try {
-      ballElement.releasePointerCapture(event.pointerId);
-    } catch {
-      // Pointer capture may already be released by the browser.
-    }
-  }
-
-  ballElement.addEventListener("pointerup", releaseBall);
-  ballElement.addEventListener("pointercancel", releaseBall);
-
-  ballElement.addEventListener("keydown", (event) => {
-    if (event.key !== "Enter" && event.key !== " ") return;
-
-    event.preventDefault();
-    Sleeping.set(ballBody, false);
-    Body.setVelocity(ballBody, {
-      x: (Math.random() - .5) * 14,
-      y: -18
-    });
-  });
-
-  const resizeObserver = new ResizeObserver(() => {
-    resizeBallAndWalls();
-  });
-
-  resizeObserver.observe(stage);
-  requestAnimationFrame(resizeBallAndWalls);
-
-  let lastTime = performance.now();
+  const pixelsPerMeter = 100;
+  const fixedStep = 1 / 120;
+  const maxFrameDelta = .05;
+  const particleCount = 28;
+
+  let world;
+  let softBody;
+  let radiusPx = 46;
+  let stageWidth = 0;
+  let stageHeight = 0;
   let accumulator = 0;
+  let previousTime = performance.now();
+  let grabbedParticle = -1;
+  let activePointer = null;
+  let resizeTimer = 0;
+
+  function pxToWorld(value) {
+    return value / pixelsPerMeter;
+  }
+
+  function worldToPx(value) {
+    return value * pixelsPerMeter;
+  }
+
+  function createWall(x, y, halfWidth, halfHeight) {
+    const collider = RAPIER.ColliderDesc
+      .cuboid(halfWidth, halfHeight)
+      .setTranslation(x, y)
+      .setFriction(.48)
+      .setRestitution(.42);
+
+    world.createCollider(collider);
+  }
+
+  function buildSimulation() {
+    stageWidth = Math.max(240, stage.clientWidth);
+    stageHeight = Math.max(220, stage.clientHeight);
+    radiusPx = clamp(stageWidth * .09, 38, 50);
+
+    svg.setAttribute("viewBox", `0 0 ${stageWidth} ${stageHeight}`);
+
+    const width = pxToWorld(stageWidth);
+    const height = pxToWorld(stageHeight);
+    const radius = pxToWorld(radiusPx);
+    const wall = .09;
+
+    world = new RAPIER.World({ x: 0, y: 13.5 });
+    world.timestep = fixedStep;
+
+    createWall(width / 2, -wall, width / 2 + wall, wall);
+    createWall(width / 2, height + wall, width / 2 + wall, wall);
+    createWall(-wall, height / 2, wall, height / 2 + wall);
+    createWall(width + wall, height / 2, wall, height / 2 + wall);
+
+    const surface = RAPIER.ColliderDesc
+      .ball(radius * .08)
+      .setFriction(.42)
+      .setRestitution(.50);
+
+    const desc = RAPIER.SoftBodyDesc
+      .disk(
+        { x: width * .24, y: height * .22 },
+        radius,
+        particleCount
+      )
+      .setSoftness(16, .62)
+      .setVolumeFactor(1.035)
+      .setParticleMass(.045)
+      .setParticleRadius(radius * .085)
+      .setLinearDamping(.22)
+      .setSurfaceCollider(surface)
+      .setSelfContacts(true)
+      .setAdditionalPgsIterations(4)
+      .setAdditionalSolverIterations(2)
+      .setCanSleep(true);
+
+    softBody = world.createSoftBody(desc);
+    grabbedParticle = -1;
+    activePointer = null;
+    accumulator = 0;
+    previousTime = performance.now();
+
+    renderSoftBody();
+  }
+
+  function particlePoints() {
+    if (!softBody) return [];
+
+    const positions = softBody.particlePositions();
+    const points = [];
+
+    for (let i = 0; i < positions.length; i += 2) {
+      points.push({
+        x: worldToPx(positions[i]),
+        y: worldToPx(positions[i + 1])
+      });
+    }
+
+    return points;
+  }
+
+  function smoothClosedPath(points, tension = .86) {
+    const count = points.length;
+    if (count < 3) return "";
+
+    let d = `M ${points[0].x.toFixed(2)} ${points[0].y.toFixed(2)}`;
+
+    for (let i = 0; i < count; i++) {
+      const p0 = points[(i - 1 + count) % count];
+      const p1 = points[i];
+      const p2 = points[(i + 1) % count];
+      const p3 = points[(i + 2) % count];
+
+      const cp1x = p1.x + ((p2.x - p0.x) / 6) * tension;
+      const cp1y = p1.y + ((p2.y - p0.y) / 6) * tension;
+      const cp2x = p2.x - ((p3.x - p1.x) / 6) * tension;
+      const cp2y = p2.y - ((p3.y - p1.y) / 6) * tension;
+
+      d += ` C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)}, ${cp2x.toFixed(2)} ${cp2y.toFixed(2)}, ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
+    }
+
+    return d + " Z";
+  }
+
+  function renderSoftBody() {
+    const points = particlePoints();
+    if (!points.length) return;
+
+    const path = smoothClosedPath(points);
+    blob.setAttribute("d", path);
+    rim.setAttribute("d", path);
+
+    let minX = Infinity;
+    let maxX = -Infinity;
+    let minY = Infinity;
+    let maxY = -Infinity;
+    let centreX = 0;
+    let centreY = 0;
+
+    for (const point of points) {
+      minX = Math.min(minX, point.x);
+      maxX = Math.max(maxX, point.x);
+      minY = Math.min(minY, point.y);
+      maxY = Math.max(maxY, point.y);
+      centreX += point.x;
+      centreY += point.y;
+    }
+
+    centreX /= points.length;
+    centreY /= points.length;
+
+    const blobWidth = maxX - minX;
+    const blobHeight = maxY - minY;
+    const floorDistance = Math.max(0, stageHeight - maxY);
+
+    shadow.setAttribute("cx", centreX.toFixed(2));
+    shadow.setAttribute("cy", Math.min(stageHeight - 8, maxY + 18).toFixed(2));
+    shadow.setAttribute("rx", Math.max(22, blobWidth * .42).toFixed(2));
+    shadow.setAttribute("ry", Math.max(5, Math.min(11, blobHeight * .10)).toFixed(2));
+    shadow.style.opacity = String(clamp(.34 - floorDistance / 260, .08, .34));
+
+    highlight.setAttribute("cx", (centreX - blobWidth * .18).toFixed(2));
+    highlight.setAttribute("cy", (centreY - blobHeight * .20).toFixed(2));
+    highlight.setAttribute("rx", Math.max(8, blobWidth * .13).toFixed(2));
+    highlight.setAttribute("ry", Math.max(5, blobHeight * .08).toFixed(2));
+  }
 
   function frame(time) {
-    const frameDelta = Math.min(50, time - lastTime);
-    lastTime = time;
-    accumulator += frameDelta;
+    const elapsed = Math.min(maxFrameDelta, (time - previousTime) / 1000);
+    previousTime = time;
+    accumulator += elapsed;
 
     while (accumulator >= fixedStep) {
-      if (!dragging) Engine.update(engine, fixedStep);
-      updateSquash(fixedStep / 1000);
+      world.step();
       accumulator -= fixedStep;
     }
 
-    paintBall();
+    renderSoftBody();
     requestAnimationFrame(frame);
   }
 
+  function pointerWorld(event) {
+    const rect = stage.getBoundingClientRect();
+
+    return {
+      x: pxToWorld(event.clientX - rect.left),
+      y: pxToWorld(event.clientY - rect.top)
+    };
+  }
+
+  function nearestParticle(target) {
+    if (!softBody) return { index: -1, distance: Infinity };
+
+    const positions = softBody.particlePositions();
+    let bestIndex = -1;
+    let bestDistance = Infinity;
+
+    for (let i = 0; i < positions.length; i += 2) {
+      const dx = positions[i] - target.x;
+      const dy = positions[i + 1] - target.y;
+      const distance = Math.hypot(dx, dy);
+
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestIndex = i / 2;
+      }
+    }
+
+    return { index: bestIndex, distance: bestDistance };
+  }
+
+  stage.addEventListener("pointerdown", (event) => {
+    if (!softBody || activePointer !== null) return;
+
+    const target = pointerWorld(event);
+    const nearest = nearestParticle(target);
+    const grabRadius = pxToWorld(radiusPx * 1.35);
+
+    if (nearest.index < 0 || nearest.distance > grabRadius) return;
+
+    event.preventDefault();
+
+    grabbedParticle = nearest.index;
+    activePointer = event.pointerId;
+
+    softBody.setParticlePinned(grabbedParticle, true);
+    softBody.setParticleKinematicTarget(grabbedParticle, target);
+    softBody.wakeUp();
+
+    stage.setPointerCapture(event.pointerId);
+    stage.classList.add("dragging");
+  });
+
+  stage.addEventListener("pointermove", (event) => {
+    if (!softBody || event.pointerId !== activePointer || grabbedParticle < 0) return;
+
+    event.preventDefault();
+    softBody.setParticleKinematicTarget(grabbedParticle, pointerWorld(event));
+    softBody.wakeUp();
+  });
+
+  function release(event) {
+    if (!softBody || event.pointerId !== activePointer || grabbedParticle < 0) return;
+
+    softBody.setParticleKinematicTarget(grabbedParticle, pointerWorld(event));
+    softBody.setParticlePinned(grabbedParticle, false);
+    softBody.wakeUp();
+
+    grabbedParticle = -1;
+    activePointer = null;
+    stage.classList.remove("dragging");
+
+    try {
+      stage.releasePointerCapture(event.pointerId);
+    } catch {
+      // The browser may already have released pointer capture.
+    }
+  }
+
+  stage.addEventListener("pointerup", release);
+  stage.addEventListener("pointercancel", release);
+
+  stage.addEventListener("keydown", (event) => {
+    if (!softBody) return;
+
+    const impulses = {
+      ArrowLeft: { x: -.24, y: 0 },
+      ArrowRight: { x: .24, y: 0 },
+      ArrowUp: { x: 0, y: -.34 },
+      ArrowDown: { x: 0, y: .18 },
+      " ": { x: .16, y: -.36 }
+    };
+
+    const impulse = impulses[event.key];
+    if (!impulse) return;
+
+    event.preventDefault();
+    softBody.applyImpulse(impulse, true);
+  });
+
+  const resizeObserver = new ResizeObserver(() => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(buildSimulation, 120);
+  });
+
+  resizeObserver.observe(stage);
+  buildSimulation();
   requestAnimationFrame(frame);
 }
 
@@ -520,17 +484,4 @@ function initSpringGrid() {
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
-}
-
-function limitVector(vector, maxLength) {
-  const length = Math.hypot(vector.x, vector.y);
-
-  if (length <= maxLength || length === 0) return vector;
-
-  const scale = maxLength / length;
-
-  return {
-    x: vector.x * scale,
-    y: vector.y * scale
-  };
 }
