@@ -42,10 +42,10 @@ function initLivingPool(canvas) {
     const desired = reducedMotion
       ? Math.max(10, Math.round(width / 120))
       : width < 620
-        ? 17
+        ? 22
         : width < 1050
-          ? 24
-          : 34;
+          ? 30
+          : 42;
 
     while (creatures.length < desired) {
       creatures.push(createCreature(creatures.length));
@@ -59,7 +59,7 @@ function initLivingPool(canvas) {
   function createCreature(index = 0) {
     const personality = personalityCycle[index % personalityCycle.length];
     const angle = random(0, Math.PI * 2);
-    const speed = random(14, 34);
+    const speed = random(12, 28);
 
     return {
       personality,
@@ -68,14 +68,14 @@ function initLivingPool(canvas) {
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       angle,
-      length: random(17, 38),
-      thickness: random(1.6, 3.4),
+      length: random(28, 58),
+      thickness: random(2.5, 4.6),
       bend: random(.08, .28),
       phase: random(0, Math.PI * 2),
       frequency: random(.7, 1.55),
       seed: random(-1000, 1000),
-      tint: { r: 214, g: 216, b: 223 },
-      opacity: random(.34, .72),
+      tint: { r: 232, g: 234, b: 240 },
+      opacity: random(.62, .9),
       proximity: 0,
       feed: 0,
       feedGoal: random(2.1, 4.7),
@@ -117,7 +117,7 @@ function initLivingPool(canvas) {
     creature.annoyed = 0;
     creature.sated = 0;
     creature.deadUntil = 0;
-    creature.tint = { r: 214, g: 216, b: 223 };
+    creature.tint = { r: 232, g: 234, b: 240 };
   }
 
   function updateCreature(creature, dt, time) {
@@ -135,8 +135,8 @@ function initLivingPool(canvas) {
     const distance = Math.max(1, Math.hypot(dx, dy));
     const nearPointer = pointer.active && distance < 185;
 
-    let targetColor = { r: 214, g: 216, b: 223 };
-    let desiredSpeed = 30;
+    let targetColor = { r: 232, g: 234, b: 240 };
+    let desiredSpeed = 24;
 
     const flow =
       Math.sin(creature.y * .005 + time * .00028 + creature.seed) +
@@ -214,8 +214,8 @@ function initLivingPool(canvas) {
     creature.tint.g += (targetColor.g - creature.tint.g) * Math.min(1, dt * 7);
     creature.tint.b += (targetColor.b - creature.tint.b) * Math.min(1, dt * 7);
 
-    const margin = 88;
-    const edgeForce = 42;
+    const margin = 74;
+    const edgeForce = 54;
 
     if (creature.x < margin) creature.vx += edgeForce * dt;
     if (creature.x > width - margin) creature.vx -= edgeForce * dt;
@@ -283,8 +283,8 @@ function initLivingPool(canvas) {
     );
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineWidth = creature.thickness * 2.05;
-    ctx.strokeStyle = `rgba(${color},${creature.opacity * .22})`;
+    ctx.lineWidth = creature.thickness * 2.35;
+    ctx.strokeStyle = `rgba(${color},${creature.opacity * .34})`;
     ctx.stroke();
 
     ctx.shadowBlur = 0;
@@ -292,8 +292,8 @@ function initLivingPool(canvas) {
     ctx.strokeStyle = `rgba(${color},${creature.opacity})`;
     ctx.stroke();
 
-    ctx.lineWidth = Math.max(.65, creature.thickness * .28);
-    ctx.strokeStyle = `rgba(255,255,255,${creature.opacity * .58})`;
+    ctx.lineWidth = Math.max(.9, creature.thickness * .34);
+    ctx.strokeStyle = `rgba(255,255,255,${creature.opacity * .78})`;
     ctx.stroke();
 
     ctx.restore();
