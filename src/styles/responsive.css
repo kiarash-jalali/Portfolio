@@ -25,14 +25,11 @@
 
 @media(max-width:900px) {
   .hero-grid {
-    grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .hero-art {
-    order: -1;
-    margin-bottom: 8px;
-    min-height: 390px;
+  .hero-copy {
+    margin-inline: auto;
   }
 
   .quick, .hero-cta {
@@ -53,26 +50,6 @@
 
   .scroll-cue {
     display: none;
-  }
-
-  .card3d {
-    width: min(320px,78vw);
-  }
-
-  .float-badge {
-    font-size: .62rem;
-  }
-
-  .fb1 {
-    inset-inline-start: 2%;
-  }
-
-  .fb2 {
-    inset-inline-end: 0;
-  }
-
-  .fb3 {
-    inset-inline-start: 1%;
   }
 
   .about-grid, .skills-grid, .ai-grid, .contact-grid {
@@ -113,7 +90,7 @@
 
 @media(max-width:680px) {
   :root {
-    --nav-h: 64px;
+    --nav-h: 70px;
   }
 
   .wrap {
@@ -137,23 +114,17 @@
   }
 
   .hero {
-    padding-top: 94px;
+    padding-top: calc(var(--nav-h) + 34px);
+    padding-bottom: 76px;
   }
 
-  .hero-art {
-    min-height: 350px;
-  }
-
-  .card3d {
-    width: min(280px,77vw);
-  }
-
-  .float-badge {
-    padding: 7px 9px;
+  .hero-shell {
+    min-height: calc(100svh - var(--nav-h) - 94px);
   }
 
   .hero h1 {
-    font-size: clamp(2.6rem,13vw,4rem);
+    font-size: clamp(3.35rem,16vw,5.2rem);
+    line-height: .92;
   }
 
   .hero-lead {
@@ -265,22 +236,6 @@
     min-width: 42px;
   }
 
-  .hero-art {
-    min-height: 310px;
-  }
-
-  .card3d {
-    width: 250px;
-  }
-
-  .fb2 {
-    top: 39%;
-  }
-
-  .hero-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .prompt-actions {
     flex-direction: column;
   }
@@ -330,8 +285,19 @@
     animation: none;
   }
 
-  .float-badge, .ring, .blob, .dot, .typed-line::after {
+  .dot, .typed-line::after {
     animation: none;
+  }
+
+  .intro-gate {
+    animation-delay: .4s;
+    animation-duration: .2s;
+  }
+
+  .intro-gate__text {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .bar-fill {
