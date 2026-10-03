@@ -114,12 +114,13 @@
   }
 
   .hero {
-    padding-top: calc(var(--nav-h) + 34px);
-    padding-bottom: 76px;
+    padding-top: var(--nav-h);
+    padding-bottom: 0;
   }
 
   .hero-shell {
-    min-height: calc(100svh - var(--nav-h) - 94px);
+    min-height: calc(100svh - var(--nav-h));
+    padding-bottom: 58px;
   }
 
   .hero h1 {
