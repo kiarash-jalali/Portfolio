@@ -1,9 +1,7 @@
 import { projects, profile } from "./content.js";
 import { getLang, localized, t } from "./i18n.js";
-import { showToast } from "./ui.js";
 
 let activeFilter = "all";
-let evidence = null;
 
 export function initProjects() {
   document.addEventListener("click", (event) => {
@@ -28,52 +26,6 @@ export function initProjects() {
       return;
     }
 
-    const skill = event.target.closest("[data-evidence]");
-    if (skill) {
-      evidence = evidence === skill.dataset.evidence ? null : skill.dataset.evidence;
-      applyEvidence();
-      return;
-    }
-
-    const task = event.target.closest(".rp-task");
-    if (task) {
-      task.classList.toggle("done");
-      task.querySelector("i").textContent = task.classList.contains("done") ? "✓" : "";
-      updateRootinePreview();
-      return;
-    }
-
-    if (event.target.closest("#rpCheckin")) {
-      const tasks = [...document.querySelectorAll(".rp-task")];
-      const allDone = tasks.every((item) => item.classList.contains("done"));
-      tasks.forEach((task) => {
-        task.classList.toggle("done", !allDone);
-        task.querySelector("i").textContent = !allDone ? "✓" : "";
-      });
-      updateRootinePreview();
-      showToast(allDone ? t("toast.reset") : t("toast.done"));
-    }
-  });
-
-  document.addEventListener("pointerover", (event) => {
-    const skill = event.target.closest("[data-evidence]");
-    if (!skill || matchMedia("(hover:none)").matches) return;
-    evidence = skill.dataset.evidence;
-    applyEvidence();
-  });
-  document.addEventListener("pointerout", (event) => {
-    const skill = event.target.closest("[data-evidence]");
-    if (!skill || matchMedia("(hover:none)").matches) return;
-    if (event.relatedTarget?.closest?.("[data-evidence]") === skill) return;
-    evidence = null;
-    applyEvidence();
-  });
-  document.addEventListener("focusin", (event) => {
-    const skill = event.target.closest("[data-evidence]");
-    if (skill) { evidence = skill.dataset.evidence; applyEvidence(); }
-  });
-  document.addEventListener("focusout", (event) => {
-    if (event.target.closest("[data-evidence]")) { evidence = null; applyEvidence(); }
   });
 
   document.querySelector("#modalClose")?.addEventListener("click", closeModal);
@@ -86,8 +38,6 @@ export function initProjects() {
 
 export function refreshProjects() {
   applyFilter();
-  applyEvidence();
-  updateRootinePreview();
 }
 
 function applyFilter() {
@@ -95,30 +45,6 @@ function applyFilter() {
   document.querySelectorAll(".pj[data-project-cat]").forEach((card) => card.classList.toggle("hide", activeFilter !== "all" && card.dataset.projectCat !== activeFilter));
   const featured = document.querySelector(".featured");
   if (featured) featured.style.display = activeFilter === "all" || activeFilter === "app" ? "grid" : "none";
-}
-
-function applyEvidence() {
-  document.querySelectorAll("[data-evidence]").forEach((button) => button.classList.toggle("active", evidence === button.dataset.evidence));
-  document.querySelectorAll(".project-node").forEach((node) => {
-    const skills = (node.dataset.projectSkills || "").split(",");
-    node.classList.toggle("evidence-hit", Boolean(evidence && skills.includes(evidence)));
-    node.classList.toggle("evidence-dim", Boolean(evidence && !skills.includes(evidence)));
-  });
-}
-
-function updateRootinePreview() {
-  const tasks = [...document.querySelectorAll(".rp-task")];
-  if (!tasks.length) return;
-  const done = tasks.filter((item) => item.classList.contains("done")).length;
-  const count = document.querySelector("#rpCount");
-  const ring = document.querySelector("#rpRing");
-  const checkin = document.querySelector("#rpCheckin");
-  if (count) count.textContent = `${done}/${tasks.length}`;
-  if (ring) ring.style.setProperty("--pct", `${Math.round((done / tasks.length) * 100)}%`);
-  if (checkin) {
-    checkin.classList.toggle("complete", done === tasks.length);
-    checkin.textContent = done === tasks.length ? t("projects.rootineReset") : t("projects.rootineCheckin");
-  }
 }
 
 function openProject(key) {

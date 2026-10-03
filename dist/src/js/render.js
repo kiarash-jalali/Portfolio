@@ -1,6 +1,6 @@
 import {
   facts, services, education, interests, skillGroups, tools,
-  evidenceSkills, projects, aiSteps, contactLinks, marqueeStack
+  projects, aiSteps, contactLinks, marqueeStack
 } from "./content.js";
 import { getLang, localized, t } from "./i18n.js";
 
@@ -46,8 +46,6 @@ export function renderDynamicContent() {
     <div class="tool hot-target"><div class="glyph" style="background:${tool.color}">${esc(tool.glyph)}</div><b>${esc(tool.name)}</b><span>${esc(tool.sub)}</span></div>
   `).join("");
 
-  document.querySelector("#evidenceSkills").innerHTML = evidenceSkills.map((skill) => `<button class="evidence-skill hot-target" type="button" data-evidence="${esc(skill)}">${esc(skill)}</button>`).join("");
-
   document.querySelector("#filters").innerHTML = ["all", "app", "clone", "tool"].map((key, i) => `
     <button class="fbtn hot-target ${i === 0 ? "active" : ""}" type="button" data-filter="${key}">${esc(t(`projects.filters.${key}`))}</button>
   `).join("");
@@ -82,22 +80,12 @@ function renderFeatured(project, lang) {
           <a class="btn btn-ghost magnet hot-target" href="${project.repo}" target="_blank" rel="noopener">${esc(t("projects.repo"))}<span>↗</span></a>
         </div>
       </div>
-      <div class="rootine-preview" id="rootinePreview">
-        <div class="rp-top"><div class="rp-brand"><i></i>Rootine</div><span class="rp-time">${esc(t("projects.interactive"))}</span></div>
-        <div class="rp-body">
-          <aside class="rp-side" aria-hidden="true"><span></span><span></span><span></span><span></span></aside>
-          <div class="rp-main">
-            <span class="rp-kicker">${esc(t("projects.rootineStatus"))}</span>
-            <h4 class="rp-title">${esc(t("projects.rootineDemoTitle"))}</h4>
-            <div class="rp-progress"><div class="rp-ring" id="rpRing"><b id="rpCount">0/3</b></div><p>${esc(t("projects.rootineDemoCopy"))}</p></div>
-            <div class="rp-list">
-              <button class="rp-task hot-target" type="button"><i></i><span>${lang === "fa" ? "کمی حرکت صبحگاهی" : "A little morning movement"}</span></button>
-              <button class="rp-task hot-target" type="button"><i></i><span>${lang === "fa" ? "چند صفحه مطالعه" : "Read a few pages"}</span></button>
-              <button class="rp-task hot-target" type="button"><i></i><span>${lang === "fa" ? "زمان برای ساختن" : "Make time to build"}</span></button>
-            </div>
-            <button class="rp-checkin hot-target" id="rpCheckin" type="button">${esc(t("projects.rootineCheckin"))}</button>
-          </div>
+      <div class="rootine-preview rootine-live-preview" id="rootinePreview">
+        <div class="rootine-live-bar">
+          <span><i></i>${esc(t("projects.interactive"))}</span>
+          <a href="${project.live}" target="_blank" rel="noopener">${esc(t("projects.live"))} ↗</a>
         </div>
+        <iframe src="${project.live}" title="${esc(project.title)} live login preview" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>
       </div>
     </article>`;
 }
