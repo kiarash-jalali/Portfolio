@@ -202,12 +202,12 @@ function initLivingPool(canvas) {
 
     if (creature.personality === "friendly" && creature.sated > 0) {
       targetColor = { r: 88, g: 192, b: 255 };
-      desiredSpeed = 102;
+      desiredSpeed = 92;
     }
 
     if (creature.personality === "neutral" && creature.annoyed > 0) {
       targetColor = { r: 244, g: 214, b: 142 };
-      desiredSpeed = 92;
+      desiredSpeed = 102;
     }
 
     creature.tint.r += (targetColor.r - creature.tint.r) * Math.min(1, dt * 7);
