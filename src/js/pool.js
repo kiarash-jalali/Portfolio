@@ -44,16 +44,16 @@ function initLivingPool(canvas) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const perViewport = reducedMotion
-      ? Math.max(10, Math.round(width / 120))
+      ? Math.max(5, Math.round(width / 240))
       : width < 620
-        ? 18
+        ? 9
         : width < 1050
-          ? 24
-          : 30;
+          ? 12
+          : 15;
 
     const viewportCount = Math.max(1, worldHeight / height);
     const desired = Math.min(
-      reducedMotion ? 80 : 180,
+      reducedMotion ? 40 : 90,
       Math.max(perViewport, Math.round(perViewport * viewportCount))
     );
 
@@ -80,9 +80,11 @@ function initLivingPool(canvas) {
       angle,
       wanderAngle: angle,
       wanderTimer: random(.7, 2.4),
-      headRadius: random(5.5, 8.5),
-      tailLength: random(10, 19),
-      tailWidth: random(1.3, 2.4),
+      bodyLength: random(22, 32),
+      bodyHeight: random(11, 17),
+      tailLength: random(10, 16),
+      tailSpread: random(7, 12),
+      finSize: random(3.5, 6.5),
       phase: random(0, Math.PI * 2),
       frequency: random(1.25, 2.15),
       seed: random(-1000, 1000),
@@ -294,17 +296,21 @@ function initLivingPool(canvas) {
 
     const tailWave =
       Math.sin(time * .0105 * creature.frequency + creature.phase) *
-      creature.headRadius * .72;
+      creature.tailSpread * .42;
 
     const tailTipWave =
-      Math.sin(time * .016 * creature.wobble + creature.phase * 1.35) *
-      creature.headRadius * .34;
+      Math.sin(time * .015 * creature.wobble + creature.phase * 1.35) *
+      creature.tailSpread * .22;
+
+    const finWave =
+      Math.sin(time * .0085 * creature.frequency + creature.phase * .7) *
+      creature.finSize * .18;
 
     const screenY = creature.y - scrollYPos;
 
     if (
-      screenY < -creature.tailLength - creature.headRadius * 3 ||
-      screenY > height + creature.tailLength + creature.headRadius * 3
+      screenY < -creature.bodyLength - creature.tailLength ||
+      screenY > height + creature.bodyLength + creature.tailLength
     ) {
       return;
     }
@@ -322,75 +328,165 @@ function initLivingPool(canvas) {
       creature.sated > 0;
 
     if (glow) {
-      ctx.shadowColor = `rgba(${color},${.26 + creature.proximity * .3})`;
-      ctx.shadowBlur = 12 + creature.proximity * 11;
+      ctx.shadowColor = `rgba(${color},${.24 + creature.proximity * .28})`;
+      ctx.shadowBlur = 10 + creature.proximity * 10;
     }
 
-    // Round leading head.
-    ctx.beginPath();
-    ctx.arc(0, 0, creature.headRadius * 1.18, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${color},${creature.opacity * .18})`;
-    ctx.fill();
+    const halfLength = creature.bodyLength * .5;
+    const halfHeight = creature.bodyHeight * .5;
+    const tailBaseX = -halfLength * .82;
+    const tailTipX = tailBaseX - creature.tailLength;
 
+    // Wide two-lobed goldfish-style fan tail.
     ctx.beginPath();
-    ctx.arc(0, 0, creature.headRadius, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${color},${creature.opacity})`;
+    ctx.moveTo(tailBaseX, -halfHeight * .34);
+    ctx.bezierCurveTo(
+      tailBaseX - creature.tailLength * .24,
+      -creature.tailSpread * .34 + tailWave * .18,
+      tailTipX + creature.tailLength * .12,
+      -creature.tailSpread + tailWave,
+      tailTipX,
+      -creature.tailSpread + tailWave + tailTipWave
+    );
+    ctx.bezierCurveTo(
+      tailTipX + creature.tailLength * .18,
+      -creature.tailSpread * .18 + tailWave * .42,
+      tailTipX + creature.tailLength * .22,
+      tailWave * .12,
+      tailTipX + creature.tailLength * .25,
+      tailWave * .08
+    );
+    ctx.bezierCurveTo(
+      tailTipX + creature.tailLength * .22,
+      creature.tailSpread * .18 + tailWave * .42,
+      tailTipX + creature.tailLength * .12,
+      creature.tailSpread + tailWave,
+      tailTipX,
+      creature.tailSpread + tailWave + tailTipWave
+    );
+    ctx.bezierCurveTo(
+      tailBaseX - creature.tailLength * .24,
+      creature.tailSpread * .34 + tailWave * .18,
+      tailBaseX,
+      halfHeight * .34,
+      tailBaseX,
+      halfHeight * .34
+    );
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${color},${creature.opacity * .58})`;
     ctx.fill();
 
     ctx.shadowBlur = 0;
 
-    // Small specular highlight so the head reads as the front.
+    // Dorsal fin.
     ctx.beginPath();
-    ctx.arc(
-      creature.headRadius * .22,
-      -creature.headRadius * .26,
-      creature.headRadius * .25,
+    ctx.moveTo(-creature.bodyLength * .10, -halfHeight * .72);
+    ctx.quadraticCurveTo(
+      -creature.bodyLength * .18,
+      -halfHeight - creature.finSize - finWave,
+      creature.bodyLength * .05,
+      -halfHeight * .78
+    );
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${color},${creature.opacity * .38})`;
+    ctx.fill();
+
+    // Lower fin.
+    ctx.beginPath();
+    ctx.moveTo(-creature.bodyLength * .02, halfHeight * .70);
+    ctx.quadraticCurveTo(
+      -creature.bodyLength * .08,
+      halfHeight + creature.finSize * .72 + finWave,
+      creature.bodyLength * .14,
+      halfHeight * .76
+    );
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${color},${creature.opacity * .28})`;
+    ctx.fill();
+
+    // Rounded body with slightly fuller front and narrower rear.
+    ctx.beginPath();
+    ctx.moveTo(halfLength, 0);
+    ctx.bezierCurveTo(
+      halfLength * .88,
+      -halfHeight * .90,
+      -halfLength * .22,
+      -halfHeight * 1.02,
+      tailBaseX,
+      -halfHeight * .34
+    );
+    ctx.bezierCurveTo(
+      -halfLength * .76,
+      -halfHeight * .10,
+      -halfLength * .76,
+      halfHeight * .10,
+      tailBaseX,
+      halfHeight * .34
+    );
+    ctx.bezierCurveTo(
+      -halfLength * .22,
+      halfHeight * 1.02,
+      halfLength * .88,
+      halfHeight * .90,
+      halfLength,
+      0
+    );
+    ctx.closePath();
+
+    ctx.fillStyle = `rgba(${color},${creature.opacity})`;
+    ctx.fill();
+
+    ctx.lineWidth = .8;
+    ctx.strokeStyle = `rgba(255,255,255,${creature.opacity * .24})`;
+    ctx.stroke();
+
+    // Soft body highlight.
+    ctx.beginPath();
+    ctx.ellipse(
+      creature.bodyLength * .17,
+      -creature.bodyHeight * .18,
+      creature.bodyLength * .19,
+      creature.bodyHeight * .13,
+      -.22,
       0,
       Math.PI * 2
     );
-    ctx.fillStyle = `rgba(255,255,255,${creature.opacity * .68})`;
+    ctx.fillStyle = `rgba(255,255,255,${creature.opacity * .18})`;
     ctx.fill();
 
-    // Short tapered tail, attached behind the head.
-    const tailStartX = -creature.headRadius * .72;
-    const tailMidX = tailStartX - creature.tailLength * .42;
-    const tailEndX = tailStartX - creature.tailLength;
-
-    const drawTail = (lineWidth, alpha) => {
-      ctx.beginPath();
-      ctx.moveTo(tailStartX, 0);
-      ctx.bezierCurveTo(
-        tailStartX - creature.tailLength * .18,
-        tailWave * .18,
-        tailMidX,
-        tailWave * .72,
-        tailEndX,
-        tailWave + tailTipWave
-      );
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.lineWidth = lineWidth;
-      ctx.strokeStyle = `rgba(${color},${alpha})`;
-      ctx.stroke();
-    };
-
-    drawTail(creature.tailWidth * 2.1, creature.opacity * .18);
-    drawTail(creature.tailWidth, creature.opacity * .92);
+    // Tiny dark eye with a small catchlight.
+    const eyeX = creature.bodyLength * .31;
+    const eyeY = -creature.bodyHeight * .12;
+    const eyeRadius = Math.max(1.15, creature.bodyHeight * .075);
 
     ctx.beginPath();
-    ctx.moveTo(tailStartX, 0);
-    ctx.bezierCurveTo(
-      tailStartX - creature.tailLength * .18,
-      tailWave * .18,
-      tailMidX,
-      tailWave * .72,
-      tailEndX,
-      tailWave + tailTipWave
+    ctx.arc(eyeX, eyeY, eyeRadius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(10,11,14,${creature.opacity * .72})`;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(
+      eyeX + eyeRadius * .28,
+      eyeY - eyeRadius * .28,
+      Math.max(.45, eyeRadius * .30),
+      0,
+      Math.PI * 2
     );
-    ctx.lineCap = "round";
-    ctx.lineWidth = Math.max(.7, creature.tailWidth * .3);
-    ctx.strokeStyle = `rgba(255,255,255,${creature.opacity * .72})`;
-    ctx.stroke();
+    ctx.fillStyle = `rgba(255,255,255,${creature.opacity * .70})`;
+    ctx.fill();
+
+    // Small pectoral fin nearest the viewer.
+    ctx.beginPath();
+    ctx.moveTo(creature.bodyLength * .08, creature.bodyHeight * .18);
+    ctx.quadraticCurveTo(
+      creature.bodyLength * .02,
+      creature.bodyHeight * .42 + finWave,
+      creature.bodyLength * .26,
+      creature.bodyHeight * .30
+    );
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${color},${creature.opacity * .42})`;
+    ctx.fill();
 
     ctx.restore();
   }
@@ -433,7 +529,7 @@ function initLivingPool(canvas) {
   function spawnHeart(creature) {
     hearts.push({
       x: creature.x,
-      y: creature.y - creature.headRadius * 1.7,
+      y: creature.y - creature.bodyHeight * 1.15,
       vx: random(-7, 7),
       vy: random(-28, -20),
       life: 1.45,
@@ -557,7 +653,7 @@ function initLivingPool(canvas) {
         distance: Math.hypot(creature.x - pointer.x, creature.y - pointer.y)
       }))
       .filter(({ creature, distance }) =>
-        distance < Math.max(14, creature.headRadius + creature.tailLength * .45)
+        distance < Math.max(16, creature.bodyLength * .5 + creature.tailLength * .3)
       )
       .sort((a, b) => a.distance - b.distance)[0];
 
