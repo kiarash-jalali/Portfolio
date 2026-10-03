@@ -226,7 +226,7 @@ html[dir="rtl"] .nav-links a::after {
 
 /* hero */
 .hero {
-  min-height: 100svh;
+  min-height: 190svh;
   display: flex;
   align-items: stretch;
   padding-top: var(--nav-h);
@@ -240,9 +240,10 @@ html[dir="rtl"] .nav-links a::after {
 
 .hero-shell {
   display: flex;
-  align-items: flex-end;
-  min-height: calc(100svh - var(--nav-h));
-  padding-bottom: 74px;
+  align-items: flex-start;
+  min-height: calc(190svh - var(--nav-h));
+  padding-top: calc(100svh - var(--nav-h) + 88px);
+  padding-bottom: 110px;
 }
 
 .hero-grid {
@@ -395,7 +396,8 @@ html[lang="fa"] .hero h1 {
 
 .scroll-cue {
   position: absolute;
-  bottom: 22px;
+  top: calc(100svh - 64px);
+  bottom: auto;
   inset-inline-start: 50%;
   transform: translateX(-50%);
   display: flex;
