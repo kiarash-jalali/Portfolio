@@ -8,7 +8,7 @@ function initLivingPool(canvas) {
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
 
-  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const creatures = [];
   const particles = [];
   const hearts = [];
@@ -416,7 +416,7 @@ function initLivingPool(canvas) {
 
     ctx.clearRect(0, 0, width, height);
 
-    const motionScale = reduceMotion ? .28 : 1;
+    const motionScale = reducedMotion ? .28 : 1;
 
     for (const creature of creatures) {
       updateCreature(creature, dt * motionScale, time);
