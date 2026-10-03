@@ -228,9 +228,9 @@ html[dir="rtl"] .nav-links a::after {
 .hero {
   min-height: 100svh;
   display: flex;
-  align-items: center;
-  padding-top: calc(var(--nav-h) + 54px);
-  padding-bottom: 92px;
+  align-items: stretch;
+  padding-top: var(--nav-h);
+  padding-bottom: 0;
   position: relative;
 }
 
@@ -240,8 +240,9 @@ html[dir="rtl"] .nav-links a::after {
 
 .hero-shell {
   display: flex;
-  align-items: center;
-  min-height: calc(100svh - var(--nav-h) - 120px);
+  align-items: flex-end;
+  min-height: calc(100svh - var(--nav-h));
+  padding-bottom: 74px;
 }
 
 .hero-grid {
@@ -250,7 +251,7 @@ html[dir="rtl"] .nav-links a::after {
 }
 
 .hero-copy {
-  width: min(900px,100%);
+  width: min(780px,100%);
 }
 
 .pill {
@@ -289,7 +290,7 @@ html[dir="rtl"] .nav-links a::after {
 }
 
 .hero h1 {
-  font-size: clamp(4rem,8.4vw,8.25rem);
+  font-size: clamp(3.7rem,7.2vw,7.2rem);
   font-weight: 650;
   margin: 24px 0 0;
   letter-spacing: -.065em;
