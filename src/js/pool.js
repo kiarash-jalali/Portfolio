@@ -22,6 +22,8 @@ function initLivingPool(canvas) {
 
   let width = innerWidth;
   let height = innerHeight;
+  let worldHeight = Math.max(document.documentElement.scrollHeight, innerHeight);
+  let scrollYPos = window.scrollY;
   let dpr = 1;
   let lastTime = performance.now();
 
@@ -30,6 +32,8 @@ function initLivingPool(canvas) {
   function resize() {
     width = innerWidth;
     height = innerHeight;
+    worldHeight = Math.max(document.documentElement.scrollHeight, height);
+    scrollYPos = window.scrollY;
     dpr = Math.min(devicePixelRatio || 1, 1.5);
 
     canvas.width = Math.round(width * dpr);
@@ -39,13 +43,19 @@ function initLivingPool(canvas) {
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const desired = reducedMotion
+    const perViewport = reducedMotion
       ? Math.max(10, Math.round(width / 120))
       : width < 620
-        ? 22
+        ? 18
         : width < 1050
-          ? 30
-          : 42;
+          ? 24
+          : 30;
+
+    const viewportCount = Math.max(1, worldHeight / height);
+    const desired = Math.min(
+      reducedMotion ? 80 : 180,
+      Math.max(perViewport, Math.round(perViewport * viewportCount))
+    );
 
     while (creatures.length < desired) {
       creatures.push(createCreature(creatures.length));
@@ -64,10 +74,12 @@ function initLivingPool(canvas) {
     return {
       personality,
       x: random(24, Math.max(25, width - 24)),
-      y: random(24, Math.max(25, height - 24)),
+      y: random(24, Math.max(25, worldHeight - 24)),
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       angle,
+      wanderAngle: angle,
+      wanderTimer: random(.7, 2.4),
       headRadius: random(5.5, 8.5),
       tailLength: random(10, 19),
       tailWidth: random(1.3, 2.4),
@@ -95,22 +107,25 @@ function initLivingPool(canvas) {
       creature.y = -30;
     } else if (side === 1) {
       creature.x = width + 30;
-      creature.y = random(30, height - 30);
+      creature.y = random(30, Math.max(31, worldHeight - 30));
     } else if (side === 2) {
       creature.x = random(30, width - 30);
-      creature.y = height + 30;
+      creature.y = worldHeight + 30;
     } else {
       creature.x = -30;
-      creature.y = random(30, height - 30);
+      creature.y = random(30, Math.max(31, worldHeight - 30));
     }
 
-    const targetX = width * random(.25, .75);
-    const targetY = height * random(.2, .8);
+    const targetX = random(width * .2, width * .8);
+    const targetY = random(worldHeight * .08, worldHeight * .92);
     const direction = Math.atan2(targetY - creature.y, targetX - creature.x);
     const speed = random(26, 46);
 
     creature.vx = Math.cos(direction) * speed;
     creature.vy = Math.sin(direction) * speed;
+    creature.angle = direction;
+    creature.wanderAngle = direction + random(-.45, .45);
+    creature.wanderTimer = random(.7, 2.4);
     creature.feed = 0;
     creature.feedGoal = random(2.1, 4.7);
     creature.cooldown = random(1.5, 4);
@@ -138,17 +153,21 @@ function initLivingPool(canvas) {
     let targetColor = { r: 232, g: 234, b: 240 };
     let desiredSpeed = 32;
 
-    const flow =
-      Math.sin(creature.y * .005 + time * .00028 + creature.seed) +
-      Math.cos(creature.x * .004 - time * .00022 - creature.seed * .5);
+    creature.wanderTimer -= dt;
 
-    const flowAngle = flow * 1.2 + Math.sin(time * .00018 + creature.phase) * .55;
+    if (creature.wanderTimer <= 0) {
+      creature.wanderAngle += random(-1.05, 1.05);
+      creature.wanderTimer = random(.65, 2.1);
+    }
 
-    creature.vx += Math.cos(flowAngle) * 5.5 * dt;
-    creature.vy += Math.sin(flowAngle) * 5.5 * dt;
+    const microDrift =
+      Math.sin(time * .0007 * creature.frequency + creature.phase) * .38;
 
-    creature.vx += Math.sin(time * .001 * creature.frequency + creature.phase) * 2.5 * dt;
-    creature.vy += Math.cos(time * .0009 * creature.frequency + creature.phase) * 2.5 * dt;
+    const steerAngle = creature.wanderAngle + microDrift;
+    const wanderForce = 18;
+
+    creature.vx += Math.cos(steerAngle) * wanderForce * dt;
+    creature.vy += Math.sin(steerAngle) * wanderForce * dt;
 
     creature.proximity += ((nearPointer ? 1 - distance / 185 : 0) - creature.proximity) * Math.min(1, dt * 7);
 
@@ -214,13 +233,13 @@ function initLivingPool(canvas) {
     creature.tint.g += (targetColor.g - creature.tint.g) * Math.min(1, dt * 7);
     creature.tint.b += (targetColor.b - creature.tint.b) * Math.min(1, dt * 7);
 
-    const margin = 74;
-    const edgeForce = 54;
+    const margin = 72;
+    const edgeForce = 78;
 
     if (creature.x < margin) creature.vx += edgeForce * dt;
     if (creature.x > width - margin) creature.vx -= edgeForce * dt;
     if (creature.y < margin) creature.vy += edgeForce * dt;
-    if (creature.y > height - margin) creature.vy -= edgeForce * dt;
+    if (creature.y > worldHeight - margin) creature.vy -= edgeForce * dt;
 
     creature.vx *= Math.pow(.992, dt * 60);
     creature.vy *= Math.pow(.992, dt * 60);
@@ -240,10 +259,31 @@ function initLivingPool(canvas) {
     creature.x += creature.vx * dt;
     creature.y += creature.vy * dt;
 
-    if (creature.x < -90) creature.x = width + 70;
-    if (creature.x > width + 90) creature.x = -70;
-    if (creature.y < -90) creature.y = height + 70;
-    if (creature.y > height + 90) creature.y = -70;
+    const boundaryPad = 18;
+
+    if (creature.x < boundaryPad) {
+      creature.x = boundaryPad;
+      creature.vx = Math.abs(creature.vx) * random(.72, 1.02);
+      creature.vy += random(-16, 16);
+      creature.wanderAngle = random(-Math.PI * .42, Math.PI * .42);
+    } else if (creature.x > width - boundaryPad) {
+      creature.x = width - boundaryPad;
+      creature.vx = -Math.abs(creature.vx) * random(.72, 1.02);
+      creature.vy += random(-16, 16);
+      creature.wanderAngle = Math.PI + random(-Math.PI * .42, Math.PI * .42);
+    }
+
+    if (creature.y < boundaryPad) {
+      creature.y = boundaryPad;
+      creature.vy = Math.abs(creature.vy) * random(.72, 1.02);
+      creature.vx += random(-16, 16);
+      creature.wanderAngle = Math.PI / 2 + random(-Math.PI * .42, Math.PI * .42);
+    } else if (creature.y > worldHeight - boundaryPad) {
+      creature.y = worldHeight - boundaryPad;
+      creature.vy = -Math.abs(creature.vy) * random(.72, 1.02);
+      creature.vx += random(-16, 16);
+      creature.wanderAngle = -Math.PI / 2 + random(-Math.PI * .42, Math.PI * .42);
+    }
 
     const movementAngle = Math.atan2(creature.vy, creature.vx);
     creature.angle += angleDelta(creature.angle, movementAngle) * Math.min(1, dt * 4.5);
@@ -260,8 +300,17 @@ function initLivingPool(canvas) {
       Math.sin(time * .016 * creature.wobble + creature.phase * 1.35) *
       creature.headRadius * .34;
 
+    const screenY = creature.y - scrollYPos;
+
+    if (
+      screenY < -creature.tailLength - creature.headRadius * 3 ||
+      screenY > height + creature.tailLength + creature.headRadius * 3
+    ) {
+      return;
+    }
+
     ctx.save();
-    ctx.translate(creature.x, creature.y);
+    ctx.translate(creature.x, screenY);
     ctx.rotate(creature.angle);
 
     const color =
@@ -425,14 +474,19 @@ function initLivingPool(canvas) {
       const alpha = clamp(particle.life / particle.maxLife, 0, 1);
 
       ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.size * alpha, 0, Math.PI * 2);
+      ctx.arc(particle.x, particle.y - scrollYPos, particle.size * alpha, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255,255,255,${alpha * .9})`;
       ctx.fill();
     }
 
     for (const heart of hearts) {
       const alpha = clamp(heart.life / heart.maxLife, 0, 1);
-      drawHeart(heart.x, heart.y, heart.scale * (1 + (1 - alpha) * .28), alpha);
+      drawHeart(
+        heart.x,
+        heart.y - scrollYPos,
+        heart.scale * (1 + (1 - alpha) * .28),
+        alpha
+      );
     }
   }
 
@@ -478,7 +532,7 @@ function initLivingPool(canvas) {
 
   function handlePointerMove(event) {
     pointer.x = event.clientX;
-    pointer.y = event.clientY;
+    pointer.y = event.clientY + scrollYPos;
     pointer.active = true;
   }
 
@@ -489,7 +543,7 @@ function initLivingPool(canvas) {
   function handlePointerDown(event) {
     pointer.down = true;
     pointer.x = event.clientX;
-    pointer.y = event.clientY;
+    pointer.y = event.clientY + scrollYPos;
     pointer.active = true;
 
     if (event.target.closest("a, button, input, textarea, select, dialog, .project-modal")) return;
@@ -520,7 +574,30 @@ function initLivingPool(canvas) {
     pointer.down = false;
   }
 
+  function handleScroll() {
+    scrollYPos = window.scrollY;
+
+    if (pointer.active) {
+      pointer.y = pointer.y - (pointer.lastScrollY || 0) + scrollYPos;
+    }
+
+    pointer.lastScrollY = scrollYPos;
+  }
+
+  const documentResizeObserver = new ResizeObserver(() => {
+    const nextWorldHeight = Math.max(document.documentElement.scrollHeight, innerHeight);
+
+    if (Math.abs(nextWorldHeight - worldHeight) > 4) {
+      resize();
+    }
+  });
+
+  documentResizeObserver.observe(document.documentElement);
+
+  pointer.lastScrollY = scrollYPos;
+
   addEventListener("resize", resize, { passive: true });
+  addEventListener("scroll", handleScroll, { passive: true });
   addEventListener("pointermove", handlePointerMove, { passive: true });
   addEventListener("pointerleave", handlePointerLeave, { passive: true });
   addEventListener("blur", handlePointerLeave);
