@@ -59,7 +59,7 @@ function initLivingPool(canvas) {
   function createCreature(index = 0) {
     const personality = personalityCycle[index % personalityCycle.length];
     const angle = random(0, Math.PI * 2);
-    const speed = random(12, 28);
+    const speed = random(22, 42);
 
     return {
       personality,
@@ -68,14 +68,14 @@ function initLivingPool(canvas) {
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       angle,
-      length: random(28, 58),
-      thickness: random(2.5, 4.6),
-      bend: random(.08, .28),
+      headRadius: random(5.5, 8.5),
+      tailLength: random(10, 19),
+      tailWidth: random(1.3, 2.4),
       phase: random(0, Math.PI * 2),
-      frequency: random(.7, 1.55),
+      frequency: random(1.25, 2.15),
       seed: random(-1000, 1000),
       tint: { r: 232, g: 234, b: 240 },
-      opacity: random(.62, .9),
+      opacity: random(.72, .95),
       proximity: 0,
       feed: 0,
       feedGoal: random(2.1, 4.7),
@@ -83,7 +83,7 @@ function initLivingPool(canvas) {
       annoyed: 0,
       sated: 0,
       deadUntil: 0,
-      wobble: random(.7, 1.3)
+      wobble: random(1.15, 2.05)
     };
   }
 
@@ -107,7 +107,7 @@ function initLivingPool(canvas) {
     const targetX = width * random(.25, .75);
     const targetY = height * random(.2, .8);
     const direction = Math.atan2(targetY - creature.y, targetX - creature.x);
-    const speed = random(20, 38);
+    const speed = random(26, 46);
 
     creature.vx = Math.cos(direction) * speed;
     creature.vy = Math.sin(direction) * speed;
@@ -136,7 +136,7 @@ function initLivingPool(canvas) {
     const nearPointer = pointer.active && distance < 185;
 
     let targetColor = { r: 232, g: 234, b: 240 };
-    let desiredSpeed = 24;
+    let desiredSpeed = 32;
 
     const flow =
       Math.sin(creature.y * .005 + time * .00028 + creature.seed) +
@@ -155,7 +155,7 @@ function initLivingPool(canvas) {
     if (creature.personality === "shy" && nearPointer) {
       const strength = clamp(1 - distance / 185, 0, 1);
       targetColor = { r: 255, g: 74, b: 88 };
-      desiredSpeed = 66 + strength * 88;
+      desiredSpeed = 78 + strength * 96;
 
       creature.vx -= (dx / distance) * (78 + strength * 190) * dt;
       creature.vy -= (dy / distance) * (78 + strength * 190) * dt;
@@ -168,7 +168,7 @@ function initLivingPool(canvas) {
     if (creature.personality === "friendly" && nearPointer && creature.sated <= 0) {
       const strength = clamp(1 - distance / 185, 0, 1);
       targetColor = { r: 63, g: 177, b: 255 };
-      desiredSpeed = 44 + strength * 45;
+      desiredSpeed = 50 + strength * 52;
 
       if (distance > 36) {
         creature.vx += (dx / distance) * (42 + strength * 54) * dt;
@@ -202,7 +202,7 @@ function initLivingPool(canvas) {
 
     if (creature.personality === "friendly" && creature.sated > 0) {
       targetColor = { r: 88, g: 192, b: 255 };
-      desiredSpeed = 82;
+      desiredSpeed = 102;
     }
 
     if (creature.personality === "neutral" && creature.annoyed > 0) {
@@ -252,48 +252,95 @@ function initLivingPool(canvas) {
   function drawCreature(creature, time) {
     if (creature.deadUntil) return;
 
-    const pulse =
-      Math.sin(time * .005 * creature.frequency + creature.phase) *
-      creature.length *
-      creature.bend;
+    const tailWave =
+      Math.sin(time * .0105 * creature.frequency + creature.phase) *
+      creature.headRadius * .72;
 
-    const tail = Math.sin(time * .008 * creature.wobble + creature.phase) * creature.thickness * 2.4;
+    const tailTipWave =
+      Math.sin(time * .016 * creature.wobble + creature.phase * 1.35) *
+      creature.headRadius * .34;
 
     ctx.save();
     ctx.translate(creature.x, creature.y);
     ctx.rotate(creature.angle);
 
-    const color = `${Math.round(creature.tint.r)},${Math.round(creature.tint.g)},${Math.round(creature.tint.b)}`;
-    const glow = creature.proximity > .04 || creature.annoyed > 0 || creature.sated > 0;
+    const color =
+      `${Math.round(creature.tint.r)},${Math.round(creature.tint.g)},${Math.round(creature.tint.b)}`;
+
+    const glow =
+      creature.proximity > .04 ||
+      creature.annoyed > 0 ||
+      creature.sated > 0;
 
     if (glow) {
-      ctx.shadowColor = `rgba(${color},${.2 + creature.proximity * .28})`;
-      ctx.shadowBlur = 11 + creature.proximity * 9;
+      ctx.shadowColor = `rgba(${color},${.26 + creature.proximity * .3})`;
+      ctx.shadowBlur = 12 + creature.proximity * 11;
     }
 
+    // Round leading head.
     ctx.beginPath();
-    ctx.moveTo(-creature.length * .5, tail * .15);
-    ctx.bezierCurveTo(
-      -creature.length * .18,
-      pulse * .52,
-      creature.length * .18,
-      -pulse * .34,
-      creature.length * .5,
-      tail
-    );
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.lineWidth = creature.thickness * 2.35;
-    ctx.strokeStyle = `rgba(${color},${creature.opacity * .34})`;
-    ctx.stroke();
+    ctx.arc(0, 0, creature.headRadius * 1.18, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${color},${creature.opacity * .18})`;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(0, 0, creature.headRadius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${color},${creature.opacity})`;
+    ctx.fill();
 
     ctx.shadowBlur = 0;
-    ctx.lineWidth = creature.thickness;
-    ctx.strokeStyle = `rgba(${color},${creature.opacity})`;
-    ctx.stroke();
 
-    ctx.lineWidth = Math.max(.9, creature.thickness * .34);
-    ctx.strokeStyle = `rgba(255,255,255,${creature.opacity * .78})`;
+    // Small specular highlight so the head reads as the front.
+    ctx.beginPath();
+    ctx.arc(
+      creature.headRadius * .22,
+      -creature.headRadius * .26,
+      creature.headRadius * .25,
+      0,
+      Math.PI * 2
+    );
+    ctx.fillStyle = `rgba(255,255,255,${creature.opacity * .68})`;
+    ctx.fill();
+
+    // Short tapered tail, attached behind the head.
+    const tailStartX = -creature.headRadius * .72;
+    const tailMidX = tailStartX - creature.tailLength * .42;
+    const tailEndX = tailStartX - creature.tailLength;
+
+    const drawTail = (lineWidth, alpha) => {
+      ctx.beginPath();
+      ctx.moveTo(tailStartX, 0);
+      ctx.bezierCurveTo(
+        tailStartX - creature.tailLength * .18,
+        tailWave * .18,
+        tailMidX,
+        tailWave * .72,
+        tailEndX,
+        tailWave + tailTipWave
+      );
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = lineWidth;
+      ctx.strokeStyle = `rgba(${color},${alpha})`;
+      ctx.stroke();
+    };
+
+    drawTail(creature.tailWidth * 2.1, creature.opacity * .18);
+    drawTail(creature.tailWidth, creature.opacity * .92);
+
+    ctx.beginPath();
+    ctx.moveTo(tailStartX, 0);
+    ctx.bezierCurveTo(
+      tailStartX - creature.tailLength * .18,
+      tailWave * .18,
+      tailMidX,
+      tailWave * .72,
+      tailEndX,
+      tailWave + tailTipWave
+    );
+    ctx.lineCap = "round";
+    ctx.lineWidth = Math.max(.7, creature.tailWidth * .3);
+    ctx.strokeStyle = `rgba(255,255,255,${creature.opacity * .72})`;
     ctx.stroke();
 
     ctx.restore();
@@ -337,7 +384,7 @@ function initLivingPool(canvas) {
   function spawnHeart(creature) {
     hearts.push({
       x: creature.x,
-      y: creature.y - creature.length * .35,
+      y: creature.y - creature.headRadius * 1.7,
       vx: random(-7, 7),
       vy: random(-28, -20),
       life: 1.45,
@@ -455,7 +502,9 @@ function initLivingPool(canvas) {
         creature,
         distance: Math.hypot(creature.x - pointer.x, creature.y - pointer.y)
       }))
-      .filter(({ creature, distance }) => distance < Math.max(18, creature.length * .72))
+      .filter(({ creature, distance }) =>
+        distance < Math.max(14, creature.headRadius + creature.tailLength * .45)
+      )
       .sort((a, b) => a.distance - b.distance)[0];
 
     if (!hit) return;
