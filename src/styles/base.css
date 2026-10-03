@@ -84,7 +84,7 @@ section {
 }
 
 .section-alt {
-  background: color-mix(in srgb,var(--bg2) 58%,transparent);
+  background: rgba(10,11,14,.28);
   border-block: 1px solid var(--border);
 }
 
