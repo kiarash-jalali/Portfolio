@@ -262,7 +262,7 @@ html[dir="rtl"] .nav-links a::after {
   padding: 8px 15px;
   border-radius: 99px;
   border: 1px solid var(--border);
-  background: rgba(17,18,22,.62);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   font-family: var(--font-mono);
@@ -300,7 +300,7 @@ html[dir="rtl"] .nav-links a::after {
 }
 
 .hero-name {
-  color: #f0f1f4;
+  color: var(--text);
   text-shadow: 0 16px 50px rgba(0,0,0,.3);
 }
 
@@ -358,7 +358,7 @@ html[lang="fa"] .hero h1 {
   padding: 8px 14px;
   border-radius: 99px;
   border: 1px solid var(--border);
-  background: rgba(17,18,22,.58);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   font-size: .8rem;
@@ -451,7 +451,7 @@ html[dir="rtl"] .scroll-cue {
 /* marquee */
 .marquee {
   border-block: 1px solid var(--border);
-  background: rgba(10,11,14,.72);
+  background: var(--marquee-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   overflow: hidden;
@@ -539,7 +539,7 @@ html[dir="rtl"] .mq-track {
   position: relative;
   z-index: 1;
   border-top: 1px solid var(--border);
-  background: rgba(10,11,14,.78);
+  background: var(--footer-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 24px 0;
