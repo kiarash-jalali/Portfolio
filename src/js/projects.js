@@ -1,5 +1,5 @@
-import { projects, profile } from "./content.js?v=20261010-5";
-import { getLang, localized, t } from "./i18n.js?v=20261010-5";
+import { projects, profile } from "./content.js";
+import { getLang, localized, t } from "./i18n.js";
 
 let activeFilter = "all";
 
