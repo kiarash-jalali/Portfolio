@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "BNazanin";
+  src: url("/public/fonts/BNazanin.woff") format("woff");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -22,8 +30,9 @@ body {
   transition: background .5s var(--ease), color .5s var(--ease);
 }
 
-html[lang="fa"] body {
-  font-family: "Vazirmatn", var(--font-body);
+html[lang="fa"] body,
+html[lang="fa"] body * {
+  font-family: "BNazanin", Tahoma, sans-serif !important;
 }
 
 img {
@@ -57,13 +66,28 @@ h1, h2, h3, h4 {
   letter-spacing: -.02em;
 }
 
-html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3, html[lang="fa"] h4 {
-  font-family: "Vazirmatn", var(--font-display);
+html[lang="fa"] h1,
+html[lang="fa"] h2,
+html[lang="fa"] h3,
+html[lang="fa"] h4 {
+  font-family: "BNazanin", Tahoma, sans-serif !important;
   letter-spacing: 0;
 }
 
 p {
   margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+li {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+html[lang="en"] p,
+html[lang="en"] li {
+  hyphens: auto;
 }
 
 ul {
@@ -84,8 +108,9 @@ section {
 }
 
 .section-alt {
-  background: rgba(10,11,14,.28);
+  background: var(--section-alt-bg);
   border-block: 1px solid var(--border);
+  transition: background .5s var(--ease), border-color .5s var(--ease);
 }
 
 .skip-link {
