@@ -172,11 +172,11 @@
   }
 
   .rootine-live-preview {
-    min-height: 390px;
+    min-height: 470px;
   }
 
   .rootine-live-preview iframe {
-    min-height: 344px;
+    min-height: 424px;
   }
 
   .featured-copy {
