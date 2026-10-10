@@ -69,6 +69,8 @@ export const content = {
     ai: {
       kicker: "AI, OPENLY",
       title: "Yes, I use AI.",
+      titleMain: "Yes, I use AI.",
+      titleAside: "and I'm good at it",
       subtitle: "It is part of my workflow for research, debugging, implementation help and review — useful when the context is good and the output is checked.",
       body: "I use AI when it can save time or help me look at a problem from another angle: learning an unfamiliar API, comparing approaches, debugging, reviewing code, or getting a first implementation on the screen. I still read the result, test it, change it when needed, and stay responsible for the final code.",
       demoKicker: "PROMPT REFINER",
@@ -171,6 +173,8 @@ export const content = {
     ai: {
       kicker: "هوش مصنوعی، شفاف",
       title: "بله، از هوش مصنوعی استفاده می‌کنم.",
+      titleMain: "بله، از هوش مصنوعی استفاده می‌کنم.",
+      titleAside: "و خوب هم ازش استفاده می‌کنم",
       subtitle: "برای تحقیق، دیباگ، کمک در پیاده‌سازی و بازبینی بخشی از روند کارم است؛ وقتی زمینه درست باشد و خروجی هم بررسی شود، ابزار مفیدی است.",
       body: "وقتی می‌تواند زمان ذخیره کند یا زاویه‌ی دیگری به یک مسئله بدهد از AI استفاده می‌کنم؛ مثلاً برای آشنا شدن با یک API، مقایسه‌ی چند راه، دیباگ، بازبینی کد یا ساختن نسخه‌ی اول یک ایده. خروجی را می‌خوانم، تست می‌کنم، در صورت نیاز بازنویسی می‌کنم و مسئول نتیجه‌ی نهایی خودم هستم.",
       demoKicker: "بهبود پرامپت",
