@@ -1,5 +1,5 @@
-import { aiSteps, promptExamples } from "./content.js";
-import { getLang, localized } from "./i18n.js";
+import { aiSteps, promptExamples } from "./content.js?v=20261010-5";
+import { getLang, localized } from "./i18n.js?v=20261010-5";
 
 let activeStep = "prompt";
 let promptIndex = 0;
