@@ -56,7 +56,7 @@ export const content = {
       details: "Details",
       repo: "Repository",
       openProject: "Open project",
-      interactive: "Live site preview",
+      interactive: "Live interactive demo",
       rootineStatus: "PRIVATE ALPHA · IN PROGRESS",
       rootineTagline: "A routine app I'm still shaping.",
       rootineDemoTitle: "Today",
@@ -160,7 +160,7 @@ export const content = {
       details: "جزئیات",
       repo: "مخزن",
       openProject: "باز کردن پروژه",
-      interactive: "پیش‌نمایش زنده سایت",
+      interactive: "دموی زنده و تعاملی",
       rootineStatus: "آلفای خصوصی · در حال توسعه",
       rootineTagline: "اپلیکیشنی برای روتین‌ها که هنوز دارم شکلش می‌دهم.",
       rootineDemoTitle: "امروز",
@@ -312,6 +312,7 @@ export const projects = [
       fa: "این پروژه مجبورم کرد درباره state، معماری، حریم خصوصی، جریان داده و مصالحه‌های محصول فکر کنم؛ نه فقط ظاهر یک لندینگ پیج."
     },
     live: "https://routine-nine.vercel.app/login",
+    preview: "https://routine-nine.vercel.app/portfolio-demo",
     repo: "https://github.com/kiarash-jalali/routine"
   },
   {
