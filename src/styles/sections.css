@@ -895,6 +895,23 @@ html[dir="rtl"] .tl-card:hover {
   opacity: 0;
 }
 
+/* merged subsections */
+.about-education,
+.skills-offscreen {
+  margin-top: clamp(58px,7vw,96px);
+  padding-top: clamp(44px,5vw,70px);
+  border-top: 1px solid var(--border);
+}
+
+.about-education .shead,
+.skills-offscreen .shead {
+  margin-bottom: clamp(28px,4vw,44px);
+}
+
+.skills-offscreen .int-grid {
+  margin-top: 0;
+}
+
 /* contact */
 .contact-grid {
   display: grid;
