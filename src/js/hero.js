@@ -1,4 +1,4 @@
-import { getLang, onLangChange, t } from "./i18n.js?v=20261010-5";
+import { getLang, onLangChange, t } from "./i18n.js";
 
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let timer;
