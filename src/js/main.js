@@ -1,6 +1,6 @@
 import { initI18n, toggleLang, getLang, applyTranslations } from "./i18n.js";
 import { renderDynamicContent } from "./render.js";
-import { initTheme, initGlobalEffects, refreshEffects } from "./effects.js?v=20261010-2";
+import { initTheme, initGlobalEffects, refreshEffects } from "./effects.js?v=20261010-3";
 import { initHeroTyping } from "./hero.js";
 import { initProjects, refreshProjects } from "./projects.js";
 import { initAI, refreshAI } from "./ai.js";
@@ -40,7 +40,7 @@ syncLanguageUi();
 document.querySelector("#year").textContent = new Date().getFullYear();
 
 console.log(
-  "%cYou found the backstage :)%c\nThis portfolio intentionally keeps the interaction layer in plain JavaScript. Rootine is where I push React/Next.js further.\nTry: window.kj.help()",
+  "%cYou found the backstage :)%c\nThis portfolio keeps most of its interaction layer in plain JavaScript. Rootine is where I work more with React and Next.js.\nTry: window.kj.help()",
   "color:#22d3ee;font-size:16px;font-weight:700",
   "color:#9698ad"
 );
@@ -49,7 +49,7 @@ window.kj = {
   help() {
     return {
       hello: "Hi. You're inspecting the right things.",
-      stack: ["HTML", "CSS", "JavaScript", "React/Next.js in Rootine", "AI-assisted workflow"],
+      stack: ["HTML", "CSS", "JavaScript", "React/Next.js in Rootine"],
       github: "https://github.com/kiarash-jalali"
     };
   }
