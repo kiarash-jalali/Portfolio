@@ -64,6 +64,13 @@ function initLivingPool(canvas) {
     if (creatures.length > desired) {
       creatures.length = desired;
     }
+
+    const bandHeight = worldHeight / Math.max(1, creatures.length);
+
+    creatures.forEach((creature, index) => {
+      creature.homeY = (index + .5) * bandHeight;
+      creature.homeRange = Math.max(height * .42, bandHeight * .48);
+    });
   }
 
   function createCreature(index = 0, total = 1) {
@@ -79,6 +86,8 @@ function initLivingPool(canvas) {
         24,
         Math.max(25, worldHeight - 24)
       ),
+      homeY: ((index + .5) / Math.max(1, total)) * worldHeight,
+      homeRange: Math.max(height * .42, (worldHeight / Math.max(1, total)) * .48),
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       angle,
@@ -128,7 +137,11 @@ function initLivingPool(canvas) {
     }
 
     const targetX = random(width * .2, width * .8);
-    const targetY = random(worldHeight * .08, worldHeight * .92);
+    const targetY = clamp(
+      creature.homeY + random(-creature.homeRange, creature.homeRange),
+      30,
+      Math.max(31, worldHeight - 30)
+    );
     const direction = Math.atan2(targetY - creature.y, targetX - creature.x);
     const speed = random(26, 46);
 
@@ -179,6 +192,12 @@ function initLivingPool(canvas) {
 
     creature.vx += Math.cos(steerAngle) * wanderForce * dt;
     creature.vy += Math.sin(steerAngle) * wanderForce * dt;
+
+    // Keep the population distributed across loose page-height bands.
+    // This is deliberately gentle so pointer reactions still win locally.
+    const verticalDrift = creature.homeY - creature.y;
+    const laneForce = clamp(verticalDrift * .018, -14, 14);
+    creature.vy += laneForce * dt;
 
     creature.proximity += ((nearPointer ? 1 - distance / 185 : 0) - creature.proximity) * Math.min(1, dt * 7);
 
