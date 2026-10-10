@@ -85,7 +85,7 @@ function renderFeatured(project, lang) {
           <span><i></i>${esc(t("projects.interactive"))}</span>
           <a href="${project.live}" target="_blank" rel="noopener">${esc(t("projects.live"))} ↗</a>
         </div>
-        <iframe src="${project.live}" title="${esc(project.title)} live interactive preview" loading="eager" referrerpolicy="strict-origin-when-cross-origin" tabindex="0"></iframe>
+        <iframe src="${project.preview || project.live}" title="${esc(project.title)} live interactive preview" loading="eager" referrerpolicy="strict-origin-when-cross-origin" tabindex="0"></iframe>
       </div>
     </article>`;
 }
