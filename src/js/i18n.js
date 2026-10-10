@@ -1,4 +1,4 @@
-import { content } from "./content.js?v=20261010-5";
+import { content } from "./content.js";
 
 const root = document.documentElement;
 let currentLang = readStored("kj-lang") || "en";
