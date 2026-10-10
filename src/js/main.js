@@ -1,11 +1,11 @@
-import { initI18n, toggleLang, getLang, applyTranslations } from "./i18n.js?v=20261010-5";
-import { renderDynamicContent } from "./render.js?v=20261010-5";
-import { initTheme, initGlobalEffects, refreshEffects } from "./effects.js?v=20261010-5";
-import { initHeroTyping } from "./hero.js?v=20261010-5";
-import { initProjects, refreshProjects } from "./projects.js?v=20261010-5";
-import { initAI, refreshAI } from "./ai.js?v=20261010-5";
-import { initLab } from "./lab.js?v=20260927-6";
-import { initContact } from "./contact.js?v=20261010-5";
+import { initI18n, toggleLang, getLang, applyTranslations } from "./i18n.js";
+import { renderDynamicContent } from "./render.js";
+import { initTheme, initGlobalEffects, refreshEffects } from "./effects.js";
+import { initHeroTyping } from "./hero.js";
+import { initProjects, refreshProjects } from "./projects.js";
+import { initAI, refreshAI } from "./ai.js";
+import { initLab } from "./lab.js";
+import { initContact } from "./contact.js";
 
 initTheme();
 initI18n();
