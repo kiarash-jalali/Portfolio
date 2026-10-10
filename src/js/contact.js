@@ -1,4 +1,4 @@
-import { profile } from "./content.js";
+import { profile } from "./content.js?v=20261010-5";
 import { copyEmail } from "./ui.js";
 
 export function initContact() {
