@@ -5,7 +5,7 @@ export const content = {
     hero: {
       status: "Open to interesting work & projects",
       hello: "Hi, I'm",
-      lead: "Front-end developer and Computer Engineering student building responsive, bilingual interfaces with code, product thinking and AI as part of the toolbox.",
+      lead: "Front-end developer and Computer Engineering student. I like turning small ideas into usable interfaces, then refining them until they feel right.",
       work: "See my work",
       contact: "Let's talk",
       copyEmail: "Copy email",
@@ -14,42 +14,42 @@ export const content = {
       statProduct: "Active product",
       statCuriosity: "Curiosity",
       scroll: "SCROLL",
-      roles: ["Front-End Developer", "Computer Engineering Student", "UI builder & detail obsessive", "Cat lover", "Food Enthusiast", "Fantasy Daydreamer", "Possibly Future Game Developer?...",]
+      roles: ["Front-End Developer", "Computer Engineering Student", "Building Rootine", "UI tinkerer", "Cat lover", "Occasional game-dev daydreamer"]
     },
     about: {
       kicker: "ABOUT",
-      title: "A developer who cares how it feels.",
-      subtitle: "The code matters. So does the tiny moment when a hover, transition or layout makes an interface feel deliberate.",
+      title: "Hi, I'm Kiarash.",
+      subtitle: "I'm studying Computer Engineering, building front-end projects, and learning mostly by making things I actually want to use.",
       role: "Front-end developer / student",
-      p1: "I started with <strong>HTML and CSS</strong>, recreating real interfaces until spacing, layout and responsiveness stopped feeling mysterious. JavaScript came next, then React and product-level work through Rootine.",
-      p2: "I like front-end because it sits between logic and taste. A page can technically work and still feel wrong. I enjoy the part where structure, motion, typography and interaction start working together.",
-      p3: "I also work openly with <strong>AI</strong> (not as a <strong>VIBE</strong> coder). I use it to explore, debug, compare approaches and move faster than i could be on myself searching in stackoverflow or elsewhere — then I read the output, challenge it and make it fit the project instead of treating the generated thing as the finish line."
+      p1: "I started learning web development with <strong>HTML and CSS</strong>, then moved into JavaScript and React by building projects. I still enjoy working close to the browser because the feedback is immediate: change something, test it, and see what actually feels better.",
+      p2: "Before Computer Engineering, I studied <strong>Chemical Engineering</strong> at Amirkabir University. The subjects changed, but the way I approach problems did not: break things down, test an idea, keep what works, and adjust what does not.",
+      p3: "Outside coursework, I keep a few projects moving, rebuild interfaces I want to understand, and make small experiments just because they seem interesting. This portfolio is mainly a place to introduce myself and keep that work together."
     },
     education: {
       kicker: "PATH",
-      title: "A slightly unusual route into software.",
-      subtitle: "Engineering first, web development next, Computer Engineering now. The path changed; the habit of figuring things out stayed."
+      title: "Found the chemistry in computers.",
+      subtitle: "I started in Chemical Engineering, moved through web development, and now study Computer Engineering. Different subjects, same habit of taking things apart to understand how they work."
     },
     interests: {
       kicker: "OFF-SCREEN",
-      title: "There is life outside the editor.",
-      subtitle: "A few things that keep the tabs in my brain from multiplying forever."
+      title: "Away from the keyboard.",
+      subtitle: "A few things I spend time on when I'm not studying or building something."
     },
     skills: {
       kicker: "TOOLBOX",
-      title: "Skills, with context.",
-      subtitle: "No fake “React 87%” scores. The bars show how each tool currently fits into my work — daily driver, project experience, or something I'm still growing.",
-      daily: "Daily drivers & project tools",
-      currently: "CURRENTLY EXPANDING",
-      learning: "React patterns · TypeScript · Next.js architecture · Supabase · accessibility · better motion and product thinking.",
+      title: "What I work with.",
+      subtitle: "A practical snapshot of the tools I've used in projects, the ones I reach for often, and the ones I'm still getting better at.",
+      daily: "Tools I use across projects",
+      currently: "LEARNING NEXT",
+      learning: "React patterns · TypeScript · Next.js architecture · Supabase · accessibility · interaction design.",
       evidenceKicker: "EVIDENCE MODE",
       evidenceTitle: "Hover a skill. See where I used it."
     },
     projects: {
       kicker: "SELECTED WORK",
-      title: "From replicas to a real product.",
-      subtitle: "The older projects show the foundations. Rootine shows where those foundations are going.",
-      note: "Click any project for the deeper breakdown.",
+      title: "Things I've built.",
+      subtitle: "Some started as practice, some became longer projects. I keep both here because they show what I've learned along the way.",
+      note: "Open a project for the details.",
       filters: { all: "All projects", app: "Apps", clone: "Clones", tool: "Tools" },
       viewCase: "View case study",
       live: "Live demo",
@@ -58,7 +58,7 @@ export const content = {
       openProject: "Open project",
       interactive: "Live site preview",
       rootineStatus: "PRIVATE ALPHA · IN PROGRESS",
-      rootineTagline: "A little structure. More room to live.",
+      rootineTagline: "A routine app I'm still shaping.",
       rootineDemoTitle: "Today",
       rootineDemoCopy: "Tap the routines. The preview is fake data; the product thinking isn't.",
       rootineCheckin: "Finish check-in",
@@ -68,9 +68,9 @@ export const content = {
     },
     ai: {
       kicker: "AI, OPENLY",
-      title: "I work with AI, and I'm good at using it.",
-      subtitle: "Not as a substitute for understanding the work. As a multiplier for exploring, debugging, reviewing and iterating faster.",
-      body: "I'm a Computer Engineering student, not a <strong>prompt-only builder</strong>. The useful skill isn't asking an AI to “make it better.” It's giving it enough context to be useful, spotting weak decisions, modifying the result, and knowing when to throw the result away. I stay responsible for what ships.",
+      title: "Yes, I use AI.",
+      subtitle: "It is part of my workflow for research, debugging, implementation help and review — useful when the context is good and the output is checked.",
+      body: "I use AI when it can save time or help me look at a problem from another angle: learning an unfamiliar API, comparing approaches, debugging, reviewing code, or getting a first implementation on the screen. I still read the result, test it, change it when needed, and stay responsible for the final code.",
       demoKicker: "PROMPT REFINER",
       demoNote: "illustrative · no API call",
       before: "Rough prompt",
@@ -80,8 +80,8 @@ export const content = {
     },
     lab: {
       kicker: "THE LAB",
-      title: "Small things, because small things matter.",
-      subtitle: "A short interaction playground — the Rauno-ish corner of the site. Tiny experiments, no giant framework required.",
+      title: "My little garden of code.",
+      subtitle: "Small experiments I keep around because trying things is half the fun: motion, physics, interactions, and whatever I feel like testing next.",
       magnetTitle: "Soft-body physics",
       magnetBody: "Grab the blob itself. Its perimeter is physically simulated, so it stretches, squashes, wobbles and rebounds continuously instead of swapping between canned shapes.",
       trailTitle: "Springy switches",
@@ -89,15 +89,15 @@ export const content = {
     },
     contact: {
       kicker: "CONTACT",
-      title: "Have a role, project, or weirdly good idea?",
-      body: "I'm studying, building and improving for the next while — but I'm open to good frontend work, collaborations and interesting projects.",
+      title: "Want to talk?",
+      body: "If you have a front-end role, a project, or just want to ask about something on this site, feel free to reach out.",
       name: "Your name",
       email: "Your email",
       message: "What are we talking about?",
       send: "Open email draft",
-      formNote: "No backend tricks here — this opens your email client with the message filled in."
+      formNote: "This opens your email client with the message already filled in."
     },
-    footer: { note: "Built with HTML, CSS & JavaScript. AI assisted. Human reviewed.", top: "Back to top ↑" },
+    footer: { note: "Built with HTML, CSS & JavaScript.", top: "Back to top ↑" },
     toast: { copied: "Email copied ✓", copyFailed: "Copy failed — email selected", reset: "Preview reset", done: "Check-in complete ✓" }
   },
 
@@ -107,7 +107,7 @@ export const content = {
     hero: {
       status: "آماده برای فرصت‌ها و پروژه‌های جالب",
       hello: "سلام، من",
-      lead: "توسعه‌دهنده فرانت‌اند و دانشجوی مهندسی کامپیوتر؛ رابط‌های واکنش‌گرا و دوزبانه می‌سازم و در کنار کدنویسی، از تفکر محصول و هوش مصنوعی هم به‌عنوان ابزار استفاده می‌کنم.",
+      lead: "توسعه‌دهنده فرانت‌اند و دانشجوی مهندسی کامپیوترم. دوست دارم ایده‌های کوچک را به رابط‌های واقعی تبدیل کنم و بعد آن‌قدر روی جزئیاتشان کار کنم تا حس خوبی پیدا کنند.",
       work: "پروژه‌ها را ببین",
       contact: "صحبت کنیم",
       copyEmail: "کپی ایمیل",
@@ -116,42 +116,42 @@ export const content = {
       statProduct: "محصول فعال",
       statCuriosity: "کنجکاوی",
       scroll: "اسکرول",
-      roles: ["توسعه‌دهنده فرانت‌اند", "دانشجوی مهندسی کامپیوتر", "سازنده رابط و عاشق جزئیات", "در حال ساخت Rootine", "همراه AI، با بررسی انسانی"]
+      roles: ["توسعه‌دهنده فرانت‌اند", "دانشجوی مهندسی کامپیوتر", "در حال ساخت Rootine", "علاقه‌مند به تجربه‌های رابط", "دوستدار گربه‌ها", "گاهی خیال‌پرداز بازی‌سازی"]
     },
     about: {
       kicker: "درباره من",
-      title: "توسعه‌دهنده‌ای که به حس رابط اهمیت می‌دهد.",
-      subtitle: "کد مهم است؛ اما آن لحظه‌ی کوچکی که یک hover، ترنزیشن یا چیدمان باعث می‌شود رابط حساب‌شده به نظر برسد هم مهم است.",
+      title: "سلام، من کیارشم.",
+      subtitle: "مهندسی کامپیوتر می‌خوانم، پروژه‌های فرانت‌اند می‌سازم و بیشتر چیزها را با ساختن و امتحان کردن یاد می‌گیرم.",
       role: "توسعه‌دهنده فرانت‌اند / دانشجو",
-      p1: "با <strong>HTML و CSS</strong> شروع کردم و رابط‌های واقعی را بازسازی کردم تا فاصله‌گذاری، چیدمان و ریسپانسیو بودن برایم از حالت راز خارج شوند. بعد جاوااسکریپت آمد و حالا با React و پروژه‌ی Rootine روی کار محصولی جدی‌تر پیش می‌روم.",
-      p2: "فرانت‌اند را دوست دارم چون بین منطق و سلیقه قرار دارد. یک صفحه می‌تواند از نظر فنی کار کند و در عین حال حس بدی بدهد. بخش مورد علاقه‌ام جایی است که ساختار، حرکت، تایپوگرافی و تعامل با هم جور می‌شوند.",
-      p3: "همچنین خیلی شفاف با <strong>هوش مصنوعی</strong> کار می‌کنم. برای ایده‌پردازی، دیباگ، مقایسه‌ی راه‌حل‌ها و سریع‌تر شدن از آن استفاده می‌کنم؛ بعد خروجی را می‌خوانم، نقد می‌کنم و با معماری پروژه هماهنگش می‌کنم. تولید شدن کد برای من پایان کار نیست."
+      p1: "یادگیری وب را با <strong>HTML و CSS</strong> شروع کردم و بعد با پروژه‌های مختلف سراغ JavaScript و React رفتم. هنوز هم کار نزدیک به مرورگر را دوست دارم؛ چیزی را تغییر می‌دهی، امتحانش می‌کنی و خیلی سریع می‌فهمی چه چیزی بهتر شده و چه چیزی نه.",
+      p2: "قبل از مهندسی کامپیوتر، در دانشگاه امیرکبیر <strong>مهندسی شیمی</strong> خواندم. موضوعات عوض شدند، اما روش حل مسئله برایم همان ماند: مسئله را خرد کن، یک ایده را امتحان کن، نتیجه را ببین و اگر لازم بود مسیر را عوض کن.",
+      p3: "بیرون از دانشگاه چند پروژه را ادامه می‌دهم، رابط‌هایی را که دوست دارم از نو می‌سازم تا بهتر بفهممشان و گاهی هم فقط برای کنجکاوی یک ایده‌ی کوچک را تبدیل به کد می‌کنم. این پورتفولیو بیشتر از هر چیز جایی است برای معرفی خودم و جمع کردن همین کارها کنار هم."
     },
     education: {
       kicker: "مسیر",
-      title: "مسیر کمی غیرمعمول من تا نرم‌افزار.",
-      subtitle: "اول مهندسی، بعد توسعه وب و حالا مهندسی کامپیوتر. مسیر عوض شد؛ عادتِ حل کردن مسئله نه."
+      title: "شیمی را توی کامپیوتر پیدا کردم.",
+      subtitle: "از مهندسی شیمی شروع کردم، از توسعه وب رد شدم و حالا مهندسی کامپیوتر می‌خوانم. موضوع‌ها فرق دارند؛ عادتِ باز کردن مسئله و فهمیدن سازوکارش همان است."
     },
     interests: {
       kicker: "بیرون از صفحه",
-      title: "زندگی فقط داخل ادیتور نیست.",
-      subtitle: "چند چیزی که کمک می‌کنند تعداد تب‌های باز ذهنم بی‌نهایت نشود."
+      title: "وقتی پشت کیبورد نیستم.",
+      subtitle: "چند چیزی که بیرون از درس و پروژه برایشان وقت می‌گذارم."
     },
     skills: {
       kicker: "جعبه‌ابزار",
-      title: "مهارت‌ها، با توضیح واقعی.",
-      subtitle: "نه نوارهای الکی مثل «React 87%». این بخش نشان می‌دهد هر ابزار واقعاً چه جایگاهی در کارم دارد؛ ابزار روزمره، تجربه پروژه یا چیزی که هنوز در حال یادگیری‌اش هستم.",
-      daily: "ابزارهای روزمره و پروژه",
-      currently: "در حال گسترش",
-      learning: "الگوهای React · TypeScript · معماری Next.js · Supabase · دسترسی‌پذیری · موشن بهتر و تفکر محصول.",
+      title: "با چه چیزهایی کار می‌کنم.",
+      subtitle: "یک تصویر ساده از ابزارهایی که در پروژه‌ها استفاده کرده‌ام، چیزهایی که بیشتر سراغشان می‌روم و چیزهایی که هنوز در حال بهتر شدن در آن‌ها هستم.",,
+      daily: "ابزارهای مورد استفاده در پروژه‌ها",
+      currently: "مرحله بعدی یادگیری",
+      learning: "الگوهای React · TypeScript · معماری Next.js · Supabase · دسترسی‌پذیری · طراحی تعامل.",
       evidenceKicker: "حالت مدرک",
       evidenceTitle: "روی یک مهارت برو؛ ببین کجا از آن استفاده کرده‌ام."
     },
     projects: {
       kicker: "نمونه‌کار",
-      title: "از بازسازی رابط تا یک محصول واقعی.",
-      subtitle: "پروژه‌های قدیمی پایه‌ها را نشان می‌دهند. Rootine نشان می‌دهد این پایه‌ها دارند به کجا می‌روند.",
-      note: "برای جزئیات بیشتر روی هر پروژه کلیک کن.",
+      title: "چیزهایی که ساخته‌ام.",
+      subtitle: "بعضی پروژه‌ها برای تمرین شروع شدند و بعضی بیشتر ادامه پیدا کردند. هر دو را نگه داشته‌ام چون مسیر یادگیری را بهتر نشان می‌دهند.",,
+      note: "برای دیدن جزئیات، پروژه را باز کن.",
       filters: { all: "همه", app: "اپلیکیشن", clone: "کلون‌ها", tool: "ابزار" },
       viewCase: "مشاهده جزئیات",
       live: "دموی زنده",
@@ -160,7 +160,7 @@ export const content = {
       openProject: "باز کردن پروژه",
       interactive: "پیش‌نمایش زنده سایت",
       rootineStatus: "آلفای خصوصی · در حال توسعه",
-      rootineTagline: "کمی ساختار؛ فضای بیشتر برای زندگی.",
+      rootineTagline: "اپلیکیشنی برای روتین‌ها که هنوز دارم شکلش می‌دهم.",
       rootineDemoTitle: "امروز",
       rootineDemoCopy: "روی روتین‌ها بزن. داده‌ها نمایشی‌اند؛ فکر پشت محصول نه.",
       rootineCheckin: "پایان چک‌این",
@@ -170,9 +170,9 @@ export const content = {
     },
     ai: {
       kicker: "هوش مصنوعی، شفاف",
-      title: "با هوش مصنوعی کار می‌کنم، و در استفاده از آن خوبم.",
-      subtitle: "نه به‌جای فهمیدن کار؛ به‌عنوان ابزاری برای ایده‌پردازی، دیباگ، بازبینی و سریع‌تر تکرار کردن.",
-      body: "دانشجوی مهندسی کامپیوترم، نه یک <strong>سازنده‌ی صرفاً پرامپتی</strong>. مهارت اصلی این نیست که از AI بخواهی «بهترش کن». مهم این است که زمینه‌ی کافی بدهی، تصمیم‌های ضعیف را تشخیص بدهی، خروجی را تغییر بدهی و بدانی چه زمانی باید کل خروجی را کنار بگذاری. مسئول چیزی که منتشر می‌شود خودم هستم.",
+      title: "بله، از هوش مصنوعی استفاده می‌کنم.",
+      subtitle: "برای تحقیق، دیباگ، کمک در پیاده‌سازی و بازبینی بخشی از روند کارم است؛ وقتی زمینه درست باشد و خروجی هم بررسی شود، ابزار مفیدی است.",
+      body: "وقتی می‌تواند زمان ذخیره کند یا زاویه‌ی دیگری به یک مسئله بدهد از AI استفاده می‌کنم؛ مثلاً برای آشنا شدن با یک API، مقایسه‌ی چند راه، دیباگ، بازبینی کد یا ساختن نسخه‌ی اول یک ایده. خروجی را می‌خوانم، تست می‌کنم، در صورت نیاز بازنویسی می‌کنم و مسئول نتیجه‌ی نهایی خودم هستم.",
       demoKicker: "بهبود پرامپت",
       demoNote: "نمایشی · بدون API",
       before: "پرامپت خام",
@@ -182,8 +182,8 @@ export const content = {
     },
     lab: {
       kicker: "آزمایشگاه",
-      title: "جزئیات کوچک، چون جزئیات مهم‌اند.",
-      subtitle: "یک گوشه‌ی کوتاه برای بازی با تعامل‌ها — بخش کمی Rauno-طور سایت. آزمایش‌های کوچک، بدون فریم‌ورک غول‌پیکر.",
+      title: "باغچه‌ی کوچک کد من.",
+      subtitle: "چند آزمایش کوچک که نگهشان داشته‌ام چون امتحان کردن ایده‌ها نصف لذت ماجراست؛ حرکت، فیزیک، تعامل و هر چیزی که بعداً دلم بخواهد تست کنم.",,
       magnetTitle: "فیزیک جسم نرم",
       magnetBody: "خود جسم نرم را بگیر و پرتاب کن؛ محیط آن واقعاً شبیه‌سازی می‌شود، بنابراین به‌صورت پیوسته کش می‌آید، فشرده می‌شود، موج می‌زند و برمی‌گردد؛ نه اینکه بین چند شکل آماده جابه‌جا شود.",
       trailTitle: "سوییچ‌های فنری",
@@ -191,15 +191,15 @@ export const content = {
     },
     contact: {
       kicker: "ارتباط",
-      title: "کار، پروژه یا یک ایده‌ی عجیبِ خوب داری؟",
-      body: "مدتی در حال درس خواندن، ساختن و بهتر شدنم؛ اما برای کار خوب فرانت‌اند، همکاری و پروژه‌های جالب باز هستم.",
+      title: "صحبت کنیم؟",
+      body: "اگر موقعیت فرانت‌اند، پروژه‌ای برای همکاری یا حتی سؤالی درباره‌ی یکی از کارهای این سایت داری، خوشحال می‌شوم پیام بدهی.",
       name: "نام شما",
       email: "ایمیل شما",
       message: "در مورد چه چیزی صحبت می‌کنیم؟",
       send: "باز کردن پیش‌نویس ایمیل",
-      formNote: "بک‌اند نمایشی در کار نیست؛ این دکمه ایمیل شما را با متن پرشده باز می‌کند."
+      formNote: "این دکمه برنامه ایمیل شما را با متن آماده باز می‌کند.",
     },
-    footer: { note: "ساخته‌شده با HTML، CSS و JavaScript. با کمک AI، با بررسی انسانی.", top: "بازگشت به بالا ↑" },
+    footer: { note: "ساخته‌شده با HTML، CSS و JavaScript.", top: "بازگشت به بالا ↑" },
     toast: { copied: "ایمیل کپی شد ✓", copyFailed: "کپی نشد — ایمیل انتخاب شد", reset: "پیش‌نمایش ریست شد", done: "چک‌این کامل شد ✓" }
   }
 };
@@ -213,27 +213,27 @@ export const profile = {
 export const facts = [
   { label: { en: "Focus", fa: "تمرکز" }, value: { en: "Front-end / UI", fa: "فرانت‌اند / UI" } },
   { label: { en: "Study", fa: "تحصیل" }, value: { en: "Computer Engineering", fa: "مهندسی کامپیوتر" } },
-  { label: { en: "Languages", fa: "زبان سایت" }, value: { en: "English + Persian", fa: "فارسی + انگلیسی" } },
+  { label: { en: "Current project", fa: "پروژه فعلی" }, value: { en: "Rootine", fa: "Rootine" } },
   { label: { en: "Now", fa: "الان" }, value: { en: "Building Rootine", fa: "در حال ساخت Rootine" } }
 ];
 
 export const services = [
-  { icon: "01", title: { en: "Interface craft", fa: "ساخت رابط" }, body: { en: "Responsive layouts, typography, motion and the small interactions that make a page feel finished.", fa: "چیدمان واکنش‌گرا، تایپوگرافی، حرکت و تعامل‌های کوچکی که باعث می‌شوند صفحه کامل حس شود." } },
-  { icon: "02", title: { en: "Bilingual UX", fa: "تجربه دوزبانه" }, body: { en: "English-first interfaces that also work properly in Persian and RTL, not just translated strings.", fa: "رابط‌های انگلیسی‌محور که در فارسی و RTL هم واقعاً درست کار می‌کنند، نه فقط با ترجمه متن." } },
-  { icon: "03", title: { en: "Product thinking", fa: "تفکر محصول" }, body: { en: "Moving beyond landing pages into states, flows, constraints and real product decisions through Rootine.", fa: "حرکت از صفحه‌های ساده به سمت state، flow، محدودیت و تصمیم‌های واقعی محصول در Rootine." } }
+  { icon: "01", title: { en: "Front-end foundations", fa: "پایه‌های فرانت‌اند" }, body: { en: "Layouts, components, styling and browser behaviour — the practical pieces I use to turn a design into a working page.", fa: "چیدمان، کامپوننت، استایل و رفتار مرورگر؛ چیزهای عملی‌ای که با آن‌ها یک طرح را به صفحه‌ی واقعی تبدیل می‌کنم." } },
+  { icon: "02", title: { en: "Interaction & motion", fa: "تعامل و حرکت" }, body: { en: "Small transitions and interactions when they make the interface clearer, nicer to use, or simply more fun.", fa: "حرکت‌ها و تعامل‌های کوچک، وقتی رابط را واضح‌تر، خوش‌استفاده‌تر یا کمی جذاب‌تر می‌کنند." } },
+  { icon: "03", title: { en: "Product work", fa: "کار محصول" }, body: { en: "Working through state, data, edge cases and longer-lived decisions in projects such as Rootine.", fa: "کار با state، داده، حالت‌های مرزی و تصمیم‌های ماندگارتر در پروژه‌هایی مثل Rootine." } }
 ];
 
 export const education = [
-  { year: { en: "NOW", fa: "اکنون" }, title: { en: "Computer Engineering", fa: "مهندسی کامپیوتر" }, place: { en: "Currently studying", fa: "در حال تحصیل" }, body: { en: "Deepening the software side while continuing to build real interfaces and products.", fa: "در حال عمیق‌تر شدن در بخش نرم‌افزار و همزمان ساخت رابط‌ها و محصولات واقعی." }, tags: ["Software", "Programming", "Systems"], now: true },
-  { year: { en: "2023–2024", fa: "۲۰۲۳–۲۰۲۴" }, title: { en: "Web Design & Development", fa: "طراحی و توسعه وب" }, place: { en: "Tehran Technical Complex", fa: "مجتمع فنی تهران" }, body: { en: "A one-year structured program covering the web foundations that became the base of my frontend work.", fa: "یک دوره‌ی ساختاریافته یک‌ساله برای پایه‌های وب که تبدیل به زیربنای کار فرانت‌اند من شد." }, tags: ["HTML", "CSS", "JavaScript", "UI"] },
-  { year: { en: "2023", fa: "۲۰۲۳" }, title: { en: "Associate of Science — Chemical Engineering", fa: "کاردانی مهندسی شیمی" }, place: { en: "Amirkabir University of Technology", fa: "دانشگاه صنعتی امیرکبیر" }, body: { en: "My first engineering path — useful training in structured problem solving even after changing direction.", fa: "اولین مسیر مهندسی من؛ تمرینی خوب برای حل مسئله‌ی ساختاریافته، حتی بعد از تغییر مسیر." }, tags: ["Engineering", "Problem solving"] }
+  { year: { en: "NOW", fa: "اکنون" }, title: { en: "Computer Engineering", fa: "مهندسی کامپیوتر" }, place: { en: "Currently studying", fa: "در حال تحصیل" }, body: { en: "My current degree, alongside the web projects I build outside class.", fa: "رشته‌ای که الان می‌خوانم، در کنار پروژه‌های وبی که بیرون از کلاس می‌سازم." }, tags: ["Software", "Programming", "Systems"], now: true },
+  { year: { en: "2023–2024", fa: "۲۰۲۳–۲۰۲۴" }, title: { en: "Web Design & Development", fa: "طراحی و توسعه وب" }, place: { en: "Tehran Technical Complex", fa: "مجتمع فنی تهران" }, body: { en: "A one-year course where I learned the web fundamentals and started building interfaces consistently.", fa: "یک دوره‌ی یک‌ساله که در آن پایه‌های وب را یاد گرفتم و ساختن منظم رابط‌ها را شروع کردم." }, tags: ["HTML", "CSS", "JavaScript", "UI"] },
+  { year: { en: "2023", fa: "۲۰۲۳" }, title: { en: "Associate of Science — Chemical Engineering", fa: "کاردانی مهندسی شیمی" }, place: { en: "Amirkabir University of Technology", fa: "دانشگاه صنعتی امیرکبیر" }, body: { en: "My first university field. I eventually moved toward software, but I kept the methodical way of approaching problems.", fa: "اولین رشته دانشگاهی من. بعداً به سمت نرم‌افزار رفتم، اما نگاه مرحله‌به‌مرحله به حل مسئله را با خودم نگه داشتم." }, tags: ["Engineering", "Problem solving"] }
 ];
 
 export const interests = [
-  { emoji: "🎮", title: { en: "Gaming", fa: "گیمینگ" }, body: { en: "Systems, worlds, interface details — and occasionally forgetting what time it is.", fa: "سیستم‌ها، دنیاها، جزئیات رابط — و گاهی فراموش کردن ساعت." }, gradient: "linear-gradient(135deg,#7c5cff,#3b82f6)" },
-  { emoji: "🍳", title: { en: "Cooking", fa: "آشپزی" }, body: { en: "Professional cooking taught me that timing, mise en place and iteration also apply outside code.", fa: "آشپزی حرفه‌ای به من یاد داد زمان‌بندی، آماده‌سازی و تکرار فقط مخصوص کدنویسی نیستند." }, gradient: "linear-gradient(135deg,#f5a623,#ff6b6b)" },
-  { emoji: "✍️", title: { en: "Writing fiction", fa: "داستان‌نویسی" }, body: { en: "I like building worlds with sentences for the same reason I like building interfaces with components.", fa: "ساختن دنیا با جمله را به همان دلیلی دوست دارم که ساختن رابط با کامپوننت را." }, gradient: "linear-gradient(135deg,#22d3ee,#14b8a6)" },
-  { emoji: "🧪", title: { en: "Experimenting", fa: "آزمایش کردن" }, body: { en: "Small CSS ideas, interactions, tools and whatever makes me ask: can I make that myself?", fa: "ایده‌های کوچک CSS، تعامل‌ها، ابزارها و هر چیزی که باعث شود بپرسم: خودم می‌توانم بسازمش؟" }, gradient: "linear-gradient(135deg,#a855f7,#22d3ee)" }
+  { emoji: "🎮", title: { en: "Gaming", fa: "بازی" }, body: { en: "Mostly RPGs and systems-heavy games. I pay far too much attention to UI, progression systems and world design.", fa: "بیشتر RPG و بازی‌های سیستم‌محور. معمولاً بیشتر از حد لازم به رابط، سیستم پیشرفت و طراحی دنیا دقت می‌کنم." }, gradient: "linear-gradient(135deg,#7c5cff,#3b82f6)" },
+  { emoji: "🍳", title: { en: "Cooking", fa: "آشپزی" }, body: { en: "I spent time working professionally in kitchens, and I still enjoy the pace, precision and improvisation of cooking.", fa: "مدتی به‌صورت حرفه‌ای در آشپزخانه کار کرده‌ام و هنوز ریتم، دقت و بداهه‌ی آشپزی را دوست دارم." }, gradient: "linear-gradient(135deg,#f5a623,#ff6b6b)" },
+  { emoji: "✍️", title: { en: "Writing fiction", fa: "داستان‌نویسی" }, body: { en: "I like writing characters and worlds when I want a break from building interfaces.", fa: "وقتی می‌خواهم از ساختن رابط فاصله بگیرم، نوشتن شخصیت و دنیاهای داستانی را دوست دارم." }, gradient: "linear-gradient(135deg,#22d3ee,#14b8a6)" },
+  { emoji: "🧪", title: { en: "Experimenting", fa: "آزمایش کردن" }, body: { en: "Small browser experiments, odd interactions and ideas that are worth building just to see what happens.", fa: "آزمایش‌های کوچک در مرورگر، تعامل‌های عجیب و ایده‌هایی که فقط برای دیدن نتیجه ارزش ساختن دارند." }, gradient: "linear-gradient(135deg,#a855f7,#22d3ee)" }
 ];
 
 export const skillGroups = [
@@ -260,9 +260,9 @@ export const skillGroups = [
     icon: "✦",
     warm: true,
     items: [
-      { name: "Responsive + RTL", status: { en: "active focus", fa: "تمرکز فعال" }, level: 88, skills: ["CSS", "RTL"] },
+      { name: "Responsive layout", status: { en: "regular project work", fa: "استفاده منظم در پروژه" }, level: 88, skills: ["CSS"] },
       { name: "Accessibility", status: { en: "actively improving", fa: "در حال پیشرفت" }, level: 67, skills: ["Accessibility"] },
-      { name: "AI-assisted development", status: { en: "daily workflow", fa: "فرایند روزانه" }, level: 91, skills: ["AI"] }
+      { name: "Debugging / DevTools", status: { en: "regular workflow", fa: "بخش ثابت فرایند کار" }, level: 82, skills: ["JavaScript"] }
     ]
   }
 ];
@@ -287,21 +287,21 @@ export const projects = [
     key: "rootine",
     featured: true,
     category: "app",
-    skills: ["HTML", "CSS", "JavaScript", "React", "Next.js", "Supabase", "AI"],
+    skills: ["HTML", "CSS", "JavaScript", "React", "Next.js", "Supabase"],
     title: "Rootine",
     subtitle: { en: "Routine-first productivity app", fa: "اپلیکیشن بهره‌وری با محوریت روتین" },
     description: {
-      en: "A calm, bilingual productivity app built around routines, tasks, daily check-ins, reminders and forgiving progress instead of pressure.",
-      fa: "یک اپلیکیشن بهره‌وری آرام و دوزبانه با محوریت روتین، کارها، چک‌این روزانه، یادآوری و پیشرفت بدون فشار."
+      en: "A calm productivity app built around routines, tasks, daily check-ins, reminders and forgiving progress instead of pressure.",
+      fa: "یک اپلیکیشن بهره‌وری آرام با محوریت روتین، کارها، چک‌این روزانه، یادآوری و پیشرفت بدون فشار."
     },
     modalDescription: {
-      en: "Rootine is where my work moved beyond static pages. It has authentication, database-backed routines and tasks, bilingual UI, PWA/offline behaviour, reminders, themes, tests and product rules that have to survive real user state.",
-      fa: "Rootine جایی است که کار من از صفحه‌های ایستا عبور کرد. احراز هویت، روتین و کارهای متصل به دیتابیس، رابط دوزبانه، PWA و حالت آفلاین، یادآوری، تم‌ها، تست و قوانین واقعی محصول دارد."
+      en: "Rootine is where my work moved beyond static pages. It has authentication, database-backed routines and tasks, PWA/offline behaviour, reminders, themes, tests and product rules that have to survive real user state.",
+      fa: "Rootine جایی است که کار من از صفحه‌های ایستا عبور کرد. احراز هویت، روتین و کارهای متصل به دیتابیس، PWA و حالت آفلاین، یادآوری، تم‌ها، تست و قوانین واقعی محصول دارد."
     },
-    tags: ["React", "Next.js", "TypeScript", "Supabase", "PWA", "EN / FA"],
+    tags: ["React", "Next.js", "TypeScript", "Supabase", "PWA"],
     features: {
-      en: ["Server-first authenticated reads with interactive client components", "English/Persian i18n and RTL foundations", "Supabase Auth, PostgreSQL and row-level security", "PWA/offline workflow with deliberately limited private-data caching", "Web Push reminders, testing, linting and build verification"],
-      fa: ["خواندن اولیه احراز هویت‌شده در سرور و تعامل در کلاینت", "ساختار i18n انگلیسی/فارسی و پایه‌های RTL", "Supabase Auth، PostgreSQL و Row Level Security", "جریان PWA/آفلاین با محدودیت آگاهانه برای داده خصوصی", "یادآوری Web Push، تست، lint و بررسی build"]
+      en: ["Server-first authenticated reads with interactive client components", "Routine, task and daily check-in state across the app", "Supabase Auth, PostgreSQL and row-level security", "PWA/offline workflow with deliberately limited private-data caching", "Web Push reminders, testing, linting and build verification"],
+      fa: ["خواندن اولیه احراز هویت‌شده در سرور و تعامل در کلاینت", "مدیریت state روتین، کار و چک‌این روزانه در اپ", "Supabase Auth، PostgreSQL و Row Level Security", "جریان PWA/آفلاین با محدودیت آگاهانه برای داده خصوصی", "یادآوری Web Push، تست، lint و بررسی build"]
     },
     why: {
       en: "It forced me to think about states, architecture, privacy, data flow and product trade-offs — not just how a landing page looks.",
@@ -358,24 +358,24 @@ export const projects = [
 ];
 
 export const aiSteps = [
-  { key: "prompt", number: "01", title: { en: "Prompt", fa: "پرامپت" }, detail: { en: "Give the model constraints, existing context and the actual outcome I want — not just a vague instruction.", fa: "محدودیت‌ها، زمینه موجود و نتیجه واقعی موردنظر را می‌دهم؛ نه فقط یک دستور مبهم." } },
-  { key: "inspect", number: "02", title: { en: "Inspect", fa: "بررسی" }, detail: { en: "Read the output against the project: architecture, accessibility, naming, UX and whether it even solves the right problem.", fa: "خروجی را با پروژه مقایسه می‌کنم: معماری، دسترسی‌پذیری، نام‌گذاری، UX و حتی اینکه مسئله درست را حل کرده یا نه." } },
-  { key: "refactor", number: "03", title: { en: "Refactor", fa: "بازنویسی" }, detail: { en: "Simplify it, rename things, move logic, remove generic AI patterns and make the code fit how the project actually works.", fa: "ساده‌اش می‌کنم، نام‌ها را اصلاح می‌کنم، منطق را جابه‌جا می‌کنم، الگوهای کلیشه‌ای AI را حذف می‌کنم و کد را با پروژه هماهنگ می‌کنم." } },
-  { key: "verify", number: "04", title: { en: "Verify", fa: "تأیید" }, detail: { en: "Run it, test the edge cases, inspect it visually and keep iterating until I am comfortable putting my name on the result.", fa: "اجرا می‌کنم، حالت‌های مرزی را تست می‌کنم، بصری بررسی می‌کنم و تا جایی تکرار می‌کنم که حاضر باشم اسم خودم را پای نتیجه بگذارم." } }
+  { key: "prompt", number: "01", title: { en: "Context", fa: "زمینه" }, detail: { en: "I give it the existing code, constraints and the actual problem instead of asking for a generic answer.", fa: "کد موجود، محدودیت‌ها و مسئله واقعی را می‌دهم تا جواب از زمینه پروژه جدا نباشد." } },
+  { key: "inspect", number: "02", title: { en: "Check", fa: "بررسی" }, detail: { en: "I read what it produced and compare it with the project before deciding whether any of it is useful.", fa: "خروجی را می‌خوانم و با خود پروژه مقایسه می‌کنم تا ببینم اصلاً چیزی از آن ارزش استفاده دارد یا نه." } },
+  { key: "refactor", number: "03", title: { en: "Adapt", fa: "تطبیق" }, detail: { en: "I rename, simplify and reshape the useful parts so they fit the codebase rather than looking pasted in.", fa: "بخش‌های مفید را ساده و بازنویسی می‌کنم تا با کد پروژه جور باشند، نه اینکه وصله‌شده به نظر برسند." } },
+  { key: "verify", number: "04", title: { en: "Test", fa: "تست" }, detail: { en: "Then I run it, test the edge cases and keep iterating until the result behaves the way I expect.", fa: "بعد اجرا و تستش می‌کنم، حالت‌های مرزی را می‌بینم و تا وقتی درست رفتار نکند ادامه می‌دهم." } }
 ];
 
 export const promptExamples = [
   {
     before: { en: "make my hero section better", fa: "بخش هیرو رو بهتر کن" },
-    after: { en: "Keep the current dark visual language, but rebuild the hero around one strong asymmetrical composition: a 5–7 word kinetic headline, one supporting paragraph, two CTAs and a portrait card. Preserve the custom cursor and pointer tilt. Use motion only on entry and direct interaction, and keep the result usable at 360px without horizontal overflow.", fa: "زبان بصری تیره فعلی را نگه دار، اما هیرو را با یک ترکیب نامتقارن قوی بازسازی کن: تیتر پویا ۵ تا ۷ کلمه، یک پاراگراف پشتیبان، دو CTA و کارت پرتره. نشانگر سفارشی و tilt با pointer را حفظ کن. حرکت فقط در ورود و تعامل مستقیم باشد و در عرض ۳۶۰px بدون اسکرول افقی درست کار کند." }
+    after: { en: "Keep the living-pool opening, but make the first viewport quieter: navigation, background interaction and a clear scroll cue only. Move the introduction below the fold, preserve accessibility, and keep the layout stable from 360px through desktop.", fa: "صفحه شروع با پس‌زمینه زنده را نگه دار، اما نمای اول را خلوت‌تر کن: فقط ناوبری، تعامل پس‌زمینه و راهنمای اسکرول. معرفی را بعد از فولد بیاور، دسترسی‌پذیری را حفظ کن و چیدمان از ۳۶۰ پیکسل تا دسکتاپ پایدار بماند." }
   },
   {
     before: { en: "add some skills to my portfolio", fa: "چندتا مهارت به پورتفولیوم اضافه کن" },
     after: { en: "Replace unverifiable skill percentages with three honest groups: core frontend, application work and workflow. Keep the animated bar visual, but label each bar with how I actually use the skill (daily driver / project experience / growing). Keep the section compact and evidence-based without inventing scores.", fa: "درصدهای غیرقابل‌اثبات مهارت را با سه گروه واقعی جایگزین کن: هسته فرانت‌اند، کار اپلیکیشن و فرایند. ظاهر نوار متحرک را نگه دار، اما هر نوار را با نحوه واقعی استفاده از مهارت برچسب بزن (روزانه / تجربه پروژه / در حال رشد). بخش را جمع‌وجور و واقعی نگه دار و امتیاز ساختگی نساز." }
   },
   {
-    before: { en: "show that I use AI but don't make me look like a vibe coder", fa: "نشون بده از AI استفاده می‌کنم ولی شبیه وایب‌کدر نباشه" },
-    after: { en: "Create a transparent AI-workflow section that treats AI as a tool rather than an identity. Show four interactive stages — Prompt, Inspect, Refactor, Verify — and one before/after prompt example. Avoid AI-startup visuals and avoid claiming that prompting replaces engineering knowledge.", fa: "بخشی شفاف برای فرایند کار با AI بساز که هوش مصنوعی را ابزار بداند نه هویت. چهار مرحله تعاملی Prompt، Inspect، Refactor و Verify و یک نمونه قبل/بعد پرامپت نشان بده. از ظاهر استارتاپ‌های AI دوری کن و ادعا نکن پرامپت‌نویسی جای دانش مهندسی را می‌گیرد." }
+    before: { en: "help me debug why these particles drift to one side", fa: "کمکم کن بفهمم چرا این ذره‌ها کم‌کم به یک سمت جمع می‌شن" },
+    after: { en: "Inspect the movement loop for directional bias. Check the flow-field math, edge forces and wrap behaviour, explain which term can accumulate drift over time, then propose the smallest change that keeps random wandering without letting the population synchronize at one edge.", fa: "حلقه حرکت را از نظر سوگیری جهت بررسی کن. محاسبات flow field، نیروی لبه‌ها و wrap را ببین، مشخص کن کدام بخش می‌تواند در طول زمان رانش ایجاد کند و بعد کوچک‌ترین تغییری را پیشنهاد بده که حرکت تصادفی را حفظ کند اما نگذارد همه در یک لبه هم‌جهت شوند." }
   }
 ];
 
@@ -385,4 +385,4 @@ export const contactLinks = [
   { label: { en: "Telegram", fa: "تلگرام" }, value: "@Kiarash_jal", href: "https://t.me/Kiarash_jal" }
 ];
 
-export const marqueeStack = ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Sass", "Git", "GitHub", "Vite", "Responsive Design", "Accessibility", "PWA", "AI-assisted workflow"];
+export const marqueeStack = ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Sass", "Git", "GitHub", "Vite", "Responsive Design", "Accessibility", "PWA"];
