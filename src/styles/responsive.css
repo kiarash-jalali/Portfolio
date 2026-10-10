@@ -304,4 +304,11 @@
     transition: none;
   }
 
+  .ai-title-note {
+    animation: none;
+    opacity: .72;
+    transform: none;
+    filter: none;
+  }
+
 }
