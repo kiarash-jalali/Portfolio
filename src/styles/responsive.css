@@ -82,10 +82,6 @@
     flex-direction: column;
   }
 
-  .projects-note {
-    text-align: start;
-  }
-
 }
 
 @media(max-width:680px) {
