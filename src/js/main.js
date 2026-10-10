@@ -1,6 +1,6 @@
 import { initI18n, toggleLang, getLang, applyTranslations } from "./i18n.js";
 import { renderDynamicContent } from "./render.js";
-import { initTheme, initGlobalEffects, refreshEffects } from "./effects.js";
+import { initTheme, initGlobalEffects, refreshEffects } from "./effects.js?v=20261010-1";
 import { initHeroTyping } from "./hero.js";
 import { initProjects, refreshProjects } from "./projects.js";
 import { initAI, refreshAI } from "./ai.js";
