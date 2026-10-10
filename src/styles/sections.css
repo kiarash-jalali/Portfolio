@@ -506,6 +506,51 @@ html[dir="rtl"] .tl-card:hover {
   overflow: hidden;
 }
 
+.ai-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .22em .42em;
+}
+
+.ai-title-note {
+  display: inline-block;
+  font-size: .34em;
+  font-weight: 520;
+  letter-spacing: .01em;
+  color: var(--acc2);
+  white-space: nowrap;
+  transform-origin: center;
+  animation: aiTitleNote 2.8s ease-in-out infinite;
+}
+
+@keyframes aiTitleNote {
+  0%, 100% {
+    opacity: .34;
+    transform: translateY(0) rotate(-1deg);
+    filter: blur(.25px);
+  }
+
+  42% {
+    opacity: 1;
+    transform: translateY(-2px) rotate(.6deg);
+    filter: blur(0);
+  }
+
+  48% {
+    transform: translate(1px,-1px) rotate(-.5deg);
+  }
+
+  54% {
+    transform: translate(-1px,-2px) rotate(.35deg);
+  }
+
+  66% {
+    opacity: .72;
+    transform: translateY(-1px) rotate(0);
+  }
+}
+
 .ai-section::before {
   content: "AI";
   position: absolute;
