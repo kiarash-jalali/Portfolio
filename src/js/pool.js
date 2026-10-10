@@ -44,21 +44,21 @@ function initLivingPool(canvas) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const perViewport = reducedMotion
-      ? Math.max(5, Math.round(width / 240))
+      ? Math.max(3, Math.round(width / 420))
       : width < 620
-        ? 9
+        ? 5
         : width < 1050
-          ? 12
-          : 15;
+          ? 6
+          : 8;
 
     const viewportCount = Math.max(1, worldHeight / height);
     const desired = Math.min(
-      reducedMotion ? 40 : 90,
+      reducedMotion ? 22 : 48,
       Math.max(perViewport, Math.round(perViewport * viewportCount))
     );
 
     while (creatures.length < desired) {
-      creatures.push(createCreature(creatures.length));
+      creatures.push(createCreature(creatures.length, desired));
     }
 
     if (creatures.length > desired) {
@@ -66,7 +66,7 @@ function initLivingPool(canvas) {
     }
   }
 
-  function createCreature(index = 0) {
+  function createCreature(index = 0, total = 1) {
     const personality = personalityCycle[index % personalityCycle.length];
     const angle = random(0, Math.PI * 2);
     const speed = random(22, 42);
@@ -74,7 +74,11 @@ function initLivingPool(canvas) {
     return {
       personality,
       x: random(24, Math.max(25, width - 24)),
-      y: random(24, Math.max(25, worldHeight - 24)),
+      y: clamp(
+        ((index + random(.18, .82)) / Math.max(1, total)) * worldHeight,
+        24,
+        Math.max(25, worldHeight - 24)
+      ),
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       angle,
