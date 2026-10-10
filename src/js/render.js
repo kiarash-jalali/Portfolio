@@ -1,8 +1,8 @@
 import {
   facts, services, education, interests, skillGroups, tools,
   projects, aiSteps, contactLinks, marqueeStack
-} from "./content.js";
-import { getLang, localized, t } from "./i18n.js";
+} from "./content.js?v=20261010-4";
+import { getLang, localized, t } from "./i18n.js?v=20261010-4";
 
 const esc = (value) => String(value ?? "").replace(/[&<>'"]/g, (ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));
 
