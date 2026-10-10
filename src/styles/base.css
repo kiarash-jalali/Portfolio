@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "BNazanin";
-  src: url("/public/fonts/BNazanin.woff") format("woff");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -30,9 +22,8 @@ body {
   transition: background .5s var(--ease), color .5s var(--ease);
 }
 
-html[lang="fa"] body,
-html[lang="fa"] body * {
-  font-family: "BNazanin", Tahoma, sans-serif !important;
+html[lang="fa"] body {
+  font-family: var(--font-fa-body);
 }
 
 img {
@@ -70,8 +61,33 @@ html[lang="fa"] h1,
 html[lang="fa"] h2,
 html[lang="fa"] h3,
 html[lang="fa"] h4 {
-  font-family: "BNazanin", Tahoma, sans-serif !important;
+  font-family: var(--font-fa-display);
   letter-spacing: 0;
+}
+
+html[lang="fa"] :where(
+  [data-i18n],
+  [data-i18n-html],
+  .fact span,
+  .tl-year,
+  .bar-top em,
+  .lab-num,
+  .contact-link small,
+  .prompt-label,
+  .ai-step-detail b,
+  .footer-note,
+  .scroll-cue,
+  .mq-item
+) {
+  font-family: var(--font-fa-body);
+}
+
+html[lang="fa"] :where(
+  .lab-section .shead h2,
+  .skills-offscreen .shead h2,
+  .ai-title-note
+) {
+  font-family: var(--font-fa-accent);
 }
 
 p {
