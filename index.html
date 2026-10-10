@@ -16,8 +16,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk/index.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter/index.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/index.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn/index.css" />
-  <link rel="stylesheet" href="/src/styles/app.css?v=20261003-3" />
+  <link rel="stylesheet" href="/src/styles/app.css?v=20261010-1" />
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
@@ -32,8 +31,6 @@
   </div>
 
   <div class="progress" id="prog" aria-hidden="true"></div>
-  <div class="cur" id="cursorDot" aria-hidden="true"></div>
-  <div class="cur-ring" id="cursorRing" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
     <div class="wrap">
@@ -44,7 +41,6 @@
 
       <nav class="nav-links" id="navlinks" aria-label="Primary navigation">
         <a href="#about" data-i18n="nav.about">About</a>
-        <a href="#education" data-i18n="nav.education">Education</a>
         <a href="#skills" data-i18n="nav.skills">Skills</a>
         <a href="#projects" data-i18n="nav.work">Work</a>
         <a href="#ai" data-i18n="nav.ai">AI</a>
@@ -68,12 +64,11 @@
   <div class="drawer" id="drawer" aria-hidden="true">
     <button class="icobtn dclose" id="dclose" type="button" aria-label="Close menu">✕</button>
     <a href="#about"><span data-i18n="nav.about">About</span><i>01</i></a>
-    <a href="#education"><span data-i18n="nav.education">Education</span><i>02</i></a>
-    <a href="#skills"><span data-i18n="nav.skills">Skills</span><i>03</i></a>
-    <a href="#projects"><span data-i18n="nav.work">Work</span><i>04</i></a>
-    <a href="#ai"><span data-i18n="nav.ai">AI</span><i>05</i></a>
-    <a href="#lab"><span data-i18n="nav.lab">Lab</span><i>06</i></a>
-    <a href="#contact"><span data-i18n="nav.contact">Contact</span><i>07</i></a>
+    <a href="#skills"><span data-i18n="nav.skills">Skills</span><i>02</i></a>
+    <a href="#projects"><span data-i18n="nav.work">Work</span><i>03</i></a>
+    <a href="#ai"><span data-i18n="nav.ai">AI</span><i>04</i></a>
+    <a href="#lab"><span data-i18n="nav.lab">Lab</span><i>05</i></a>
+    <a href="#contact"><span data-i18n="nav.contact">Contact</span><i>06</i></a>
   </div>
 
   <main id="main">
@@ -135,30 +130,18 @@
             <div class="services" id="services"></div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="education" class="section-alt">
-      <div class="wrap">
+        <div class="about-education" id="education">
         <header class="shead rv">
           <span class="kicker"><span data-i18n="education.kicker">PATH</span></span>
           <h2 data-i18n="education.title">A slightly unusual route into software.</h2>
           <p data-i18n="education.subtitle">Engineering first, web development next, Computer Engineering now. The path changed; the habit of figuring things out stayed.</p>
         </header>
         <div class="tl rv" id="timeline"></div>
+        </div>
       </div>
     </section>
 
-    <section id="interests">
-      <div class="wrap">
-        <header class="shead rv">
-          <span class="kicker"><span data-i18n="interests.kicker">OFF-SCREEN</span></span>
-          <h2 data-i18n="interests.title">There is life outside the editor.</h2>
-          <p data-i18n="interests.subtitle">A few things that keep the tabs in my brain from multiplying forever.</p>
-        </header>
-        <div class="int-grid" id="interestGrid"></div>
-      </div>
-    </section>
+
 
     <section id="skills" class="section-alt">
       <div class="wrap">
@@ -174,6 +157,14 @@
             <div class="tool-grid" id="toolGrid"></div>
             <div class="nowlearn"><b data-i18n="skills.currently">CURRENTLY EXPANDING</b><p data-i18n="skills.learning">React patterns · TypeScript · Next.js architecture · Supabase · accessibility · better motion and product thinking.</p></div>
           </div>
+        </div>
+        <div class="skills-offscreen" id="interests">
+        <header class="shead rv">
+          <span class="kicker"><span data-i18n="interests.kicker">OFF-SCREEN</span></span>
+          <h2 data-i18n="interests.title">There is life outside the editor.</h2>
+          <p data-i18n="interests.subtitle">A few things that keep the tabs in my brain from multiplying forever.</p>
+        </header>
+        <div class="int-grid" id="interestGrid"></div>
         </div>
       </div>
     </section>
@@ -308,7 +299,7 @@
     </div>
   </dialog>
 
-  <script type="module" src="/src/js/pool.js?v=20261003-7"></script>
-  <script type="module" src="/src/js/main.js?v=20261003-1"></script>
+  <script type="module" src="/src/js/pool.js?v=20261010-1"></script>
+  <script type="module" src="/src/js/main.js?v=20261010-1"></script>
 </body>
 </html>
