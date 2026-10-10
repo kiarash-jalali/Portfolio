@@ -2,9 +2,9 @@
   --font-display: "Space Grotesk", "Vazirmatn", system-ui, sans-serif;
   --font-body: "Inter", "Vazirmatn", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
-  --font-fa-body: "IRAN", "Vazirmatn", Tahoma, sans-serif;
-  --font-fa-display: "IRANSharp", "IRAN", "Vazirmatn", Tahoma, sans-serif;
-  --font-fa-accent: "IranMarker", "IRANSharp", "Vazirmatn", Tahoma, sans-serif;
+  --font-fa-body: "Vazirmatn", Tahoma, sans-serif;
+  --font-fa-display: "Vazirmatn", Tahoma, sans-serif;
+  --font-fa-accent: "Vazirmatn", Tahoma, sans-serif;
   --r-xs: 8px;
   --r-sm: 10px;
   --r-md: 16px;
