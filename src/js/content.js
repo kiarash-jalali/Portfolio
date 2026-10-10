@@ -312,7 +312,7 @@ export const projects = [
       fa: "این پروژه مجبورم کرد درباره state، معماری، حریم خصوصی، جریان داده و مصالحه‌های محصول فکر کنم؛ نه فقط ظاهر یک لندینگ پیج."
     },
     live: "https://routine-nine.vercel.app/login",
-    preview: "https://routine-nine.vercel.app/portfolio-demo",
+    preview: "https://routine-nine.vercel.app/portfolio-demo?embed=20261010-1",
     repo: "https://github.com/kiarash-jalali/routine"
   },
   {
